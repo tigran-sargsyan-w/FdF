@@ -14,13 +14,7 @@ LD_FLAGS    = -Wl,--allow-multiple-definition
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 MATH_FLAGS  = -lm
 INC_FLAGS   = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
-
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Darwin)
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
-else
-	MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
-endif
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
 
 # -------------------------------
 #   Directories
