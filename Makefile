@@ -44,7 +44,8 @@ BONUS_SRCS  = $(SRC_DIR)/bonus.c
 # -------------------------------
 HEADERS     = $(INC_DIR)/fdf.h \
 			  $(INC_DIR)/events.h \
-			  $(INC_DIR)/event_masks.h 
+			  $(INC_DIR)/event_masks.h \
+			  $(INC_DIR)/keys.h
 
 # -------------------------------
 #   Object Files (Mandatory + Bonus)

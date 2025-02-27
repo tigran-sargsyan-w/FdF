@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 19:14:46 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:32:44 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "event_masks.h"
 # include "events.h"
+# include "keys.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "libft.h"

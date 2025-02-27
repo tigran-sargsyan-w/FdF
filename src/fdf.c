@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 19:19:41 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/27 19:33:49 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,9 +223,13 @@ void	draw_filled_circle(t_data *data, int xc, int yc, int radius, int color)
 	}
 }
 
-int	close_window(int keycode, t_vars *vars)
+int	handle_key_press(int keycode, t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -249,7 +253,7 @@ int	main(void)
 	draw_filled_circle(&img, 200, 200, 50, red);
 	
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
-	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, close_window, &vars);
+	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key_press, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
