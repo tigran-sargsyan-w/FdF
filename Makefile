@@ -9,7 +9,7 @@ NAME_BONUS  = fdf_bonus
 #   Compiler and Flags
 # -------------------------------
 CC          = cc
-C_FLAGS     = -Wall -Wextra -Werror
+# C_FLAGS     = -Wall -Wextra -Werror
 LD_FLAGS    = -Wl,--allow-multiple-definition
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 MATH_FLAGS  = -lm
@@ -40,13 +40,17 @@ MLX         = $(MLX_DIR)/libmlx.a
 # -------------------------------
 #   All Source Files (Mandatory + Bonus)
 # -------------------------------
-SRCS        = $(SRC_DIR)/fdf.c
+SRCS        = $(SRC_DIR)/fdf.c \
+			  $(SRC_DIR)/color_utils.c
+
 BONUS_SRCS  = $(SRC_DIR)/bonus.c
 
 # -------------------------------
 #   Header Files
 # -------------------------------
-HEADERS     = $(INC_DIR)/fdf.h
+HEADERS     = $(INC_DIR)/fdf.h \
+			  $(INC_DIR)/events.h \
+			  $(INC_DIR)/event_masks.h 
 
 # -------------------------------
 #   Object Files (Mandatory + Bonus)
