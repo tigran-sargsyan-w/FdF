@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 19:32:44 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:17:49 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,17 @@ typedef struct s_point
 	int		z;
 }			t_point;
 
+typedef struct s_win {
+    int width;
+    int height;
+    int resized_flag;
+}   t_win;
+
 typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
+	t_win	win_info;
 }			t_vars;
 
 typedef struct s_data

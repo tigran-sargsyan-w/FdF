@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 19:33:49 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:53:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,13 +223,36 @@ void	draw_filled_circle(t_data *data, int xc, int yc, int radius, int color)
 	}
 }
 
+int	handle_close(t_vars *vars)
+{
+	printf("Window closed!\n");
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+	return (0);
+}
+
 int	handle_key_press(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
+		handle_close(vars);
+	return (0);
+}
+
+int	handle_resize(t_vars *vars)
+{
+	printf("Window resized!\n");
+	return (0);
+}
+
+int	mouse_enter(t_vars *vars)
+{
+	printf("Mouse entered window!\n");
+	return (0);
+}
+
+int	mouse_leave(t_vars *vars)
+{
+	printf("Mouse left window!\n");
 	return (0);
 }
 
@@ -246,14 +269,18 @@ int	main(void)
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
 	red = create_argb(0, 255, 0, 0);
-	
 	// draw_grid(&img, 50, 50, 10, 10, 50, 0x00FFFFFF);
 	// draw_iso_cube(&img, 100, 100, 50, 30, 0xFF0000);
 	// draw_circle(&img, 200, 200, 50, 0x00FF00FF);
 	draw_filled_circle(&img, 200, 200, 50, red);
-	
 	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	
+	// mlx_hook(vars.win, ON_CONFIGURE_NOTIFY,STRUCTURE_NOTIFY_MASK,handle_resize, &vars);
 	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key_press, &vars);
+	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
+	mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
+	mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
+	
 	mlx_loop(vars.mlx);
 	return (0);
 }
