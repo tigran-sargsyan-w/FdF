@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 20:53:21 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/27 21:03:29 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,13 @@ int	mouse_leave(t_vars *vars)
 	return (0);
 }
 
+int mouse_move(int x, int y, t_vars *vars)
+{
+    (void)vars; // Если не используем vars, чтобы не было warning'ов
+    printf("Mouse position: X = %d, Y = %d\n", x, y);
+    return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
@@ -280,6 +287,7 @@ int	main(void)
 	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
 	mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
 	mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
+	mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
 	
 	mlx_loop(vars.mlx);
 	return (0);
