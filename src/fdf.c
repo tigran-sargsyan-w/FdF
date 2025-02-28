@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/28 20:26:06 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/28 20:54:04 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,10 +281,15 @@ int	main(void)
 	t_vars	vars;
 	int		red;
 
+	char	*relative_path = "./photo.xpm";
+	int		img_width;
+	int		img_height;
+
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"Testing!");
-	vars.data.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// vars.data.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars.data.img = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_width, &img_height);
 	vars.data.addr = mlx_get_data_addr(vars.data.img, &vars.data.bits_per_pixel, &vars.data.line_length,
 			&vars.data.endian);
 	red = create_argb(0, 255, 0, 0);
@@ -302,7 +307,7 @@ int	main(void)
 	mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
 	mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
 	// mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	// mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 	
 	mlx_loop(vars.mlx);
 	return (0);
