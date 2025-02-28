@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 20:17:49 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/28 20:31:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 // Constants
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
+# define MOVE_SPEED 10
 
 typedef struct s_point
 {
@@ -34,18 +35,12 @@ typedef struct s_point
 	int		z;
 }			t_point;
 
-typedef struct s_win {
-    int width;
-    int height;
-    int resized_flag;
-}   t_win;
-
-typedef struct s_vars
+typedef struct s_win
 {
-	void	*mlx;
-	void	*win;
-	t_win	win_info;
-}			t_vars;
+	int		width;
+	int		height;
+	int		resized_flag;
+}			t_win;
 
 typedef struct s_data
 {
@@ -56,6 +51,17 @@ typedef struct s_data
 	int		endian;
 }			t_data;
 
+typedef struct s_vars
+{
+	void	*mlx;
+	void	*win;
+	int		obj_x;
+	int		obj_y;
+	t_win	win_info;
+	t_data	data;
+}			t_vars;
+
 int			create_argb(int a, int r, int g, int b);
+void		fill_screen(t_vars *vars, int color);
 
 #endif

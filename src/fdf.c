@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 21:03:29 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/02/28 20:26:06 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,31 +196,26 @@ void	draw_circle(t_data *data, int xc, int yc, int radius, int color)
 	}
 }
 
-void	draw_filled_circle(t_data *data, int xc, int yc, int radius, int color)
+void draw_filled_circle(t_vars *vars, int radius, int color)
 {
-	int	x;
-	int	y;
-	int	d;
+    int x = -radius;
+    int y;
 
-	x = 0;
-	y = radius;
-	d = 3 - (2 * radius);
-	while (x <= y)
-	{
-		// Рисуем горизонтальные линии, заполняя круг
-		bresenham_line(data, xc - x, yc + y, xc + x, yc + y, color);
-		bresenham_line(data, xc - x, yc - y, xc + x, yc - y, color);
-		bresenham_line(data, xc - y, yc + x, xc + y, yc + x, color);
-		bresenham_line(data, xc - y, yc - x, xc + y, yc - x, color);
-		if (d < 0)
-			d = d + (4 * x) + 6;
-		else
-		{
-			d = d + (4 * (x - y)) + 10;
-			y--;
-		}
-		x++;
-	}
+    while (x <= radius)
+    {
+        y = -radius;
+        while (y <= radius)
+        {
+            if (x * x + y * y <= radius * radius)
+            {
+                int pixel = ((vars->obj_y + y) * vars->data.line_length) + ((vars->obj_x + x) * (vars->data.bits_per_pixel / 8));
+                if (vars->obj_x + x >= 0 && vars->obj_x + x < WINDOW_WIDTH && vars->obj_y + y >= 0 && vars->obj_y + y < WINDOW_HEIGHT)
+                    *(int *)(vars->data.addr + pixel) = color;
+            }
+            y++;
+        }
+        x++;
+    }
 }
 
 int	handle_close(t_vars *vars)
@@ -233,6 +228,14 @@ int	handle_close(t_vars *vars)
 
 int	handle_key_press(int keycode, t_vars *vars)
 {
+	if (keycode == KEY_W && vars->obj_y - MOVE_SPEED > 0)
+        vars->obj_y -= MOVE_SPEED;
+    if (keycode == KEY_S && vars->obj_y + MOVE_SPEED < WINDOW_HEIGHT)
+        vars->obj_y += MOVE_SPEED;
+    if (keycode == KEY_A && vars->obj_x - MOVE_SPEED > 0)
+        vars->obj_x -= MOVE_SPEED;
+    if (keycode == KEY_D && vars->obj_x + MOVE_SPEED < WINDOW_WIDTH)
+        vars->obj_x += MOVE_SPEED;
 	if (keycode == KEY_ESC)
 		handle_close(vars);
 	return (0);
@@ -263,31 +266,43 @@ int mouse_move(int x, int y, t_vars *vars)
     return (0);
 }
 
+int render_next_frame(t_vars *vars)
+{
+	fill_screen(vars, 0x000000);
+    int red = create_argb(0, 255, 0, 0);
+    draw_filled_circle(vars,50, red);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
+
+    return (0);
+}
+
 int	main(void)
 {
 	t_vars	vars;
-	t_data	img;
 	int		red;
 
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
 			"Testing!");
-	img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
+	vars.data.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars.data.addr = mlx_get_data_addr(vars.data.img, &vars.data.bits_per_pixel, &vars.data.line_length,
+			&vars.data.endian);
 	red = create_argb(0, 255, 0, 0);
+	vars.obj_x = WINDOW_WIDTH / 2;
+	vars.obj_y = WINDOW_HEIGHT / 2;
 	// draw_grid(&img, 50, 50, 10, 10, 50, 0x00FFFFFF);
 	// draw_iso_cube(&img, 100, 100, 50, 30, 0xFF0000);
 	// draw_circle(&img, 200, 200, 50, 0x00FF00FF);
-	draw_filled_circle(&img, 200, 200, 50, red);
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	draw_filled_circle(&vars, 50, red);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.data.img, 0, 0);
 	
 	// mlx_hook(vars.win, ON_CONFIGURE_NOTIFY,STRUCTURE_NOTIFY_MASK,handle_resize, &vars);
 	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key_press, &vars);
 	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
 	mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
 	mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
-	mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
+	// mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
+	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 	
 	mlx_loop(vars.mlx);
 	return (0);
