@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 15:43:19 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:02:45 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -314,8 +314,13 @@ int	main(void)
 	if (map == NULL)
 		ft_printf("Map is NULL\n");
 	else
+	{
 		ft_printf("Map is not NULL\n");
-	
+		ft_printf("value: %d\n", map->values[0][0]);
+		ft_printf("value: %d\n", map->values[1][0]);
+		ft_printf("value: %d\n", map->values[0][1]);
+		ft_printf("value: %d\n", map->values[5][9]);
+	}	
 	// mlx_loop(vars.mlx);
 	return (0);
 }
