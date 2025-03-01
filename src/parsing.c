@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 14:32:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:42:48 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_list	*read_file_lines(const char *filename)
 			error_exit("ft_lstnew");
 		}
 		ft_lstadd_back(&lines, node);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (lines);

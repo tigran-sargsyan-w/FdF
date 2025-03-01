@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 15:15:30 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:43:19 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,7 @@ int	main(void)
 	// mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
 	// mlx_loop_hook(vars.mlx, render_next_frame, &vars);
 
-	map = parse_file("/home/t_sargsyan/Github/FdF/maps/42.fdf");
+	map = parse_file("/home/t_sargsyan/Github/FdF/maps/0.fdf");
 	if (map == NULL)
 		ft_printf("Map is NULL\n");
 	else
