@@ -35,7 +35,9 @@ MLX         = $(MLX_DIR)/libmlx.a
 #   All Source Files (Mandatory + Bonus)
 # -------------------------------
 SRCS        = $(SRC_DIR)/fdf.c \
-			  $(SRC_DIR)/color_utils.c
+			  $(SRC_DIR)/color_utils.c \
+			  $(SRC_DIR)/parsing.c \
+			  $(SRC_DIR)/error.c 
 
 BONUS_SRCS  = $(SRC_DIR)/bonus.c
 
@@ -45,7 +47,8 @@ BONUS_SRCS  = $(SRC_DIR)/bonus.c
 HEADERS     = $(INC_DIR)/fdf.h \
 			  $(INC_DIR)/events.h \
 			  $(INC_DIR)/event_masks.h \
-			  $(INC_DIR)/keys.h
+			  $(INC_DIR)/keys.h \
+			  $(INC_DIR)/parsing.h
 
 # -------------------------------
 #   Object Files (Mandatory + Bonus)

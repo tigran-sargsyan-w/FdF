@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/28 20:31:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:49:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include "event_masks.h"
 # include "events.h"
-# include "keys.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
+# include "keys.h"
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
+# include "parsing.h"
 # include <math.h>
 
 // Constants
@@ -63,5 +64,6 @@ typedef struct s_vars
 
 int			create_argb(int a, int r, int g, int b);
 void		fill_screen(t_vars *vars, int color);
+void		error_exit(char *msg);
 
 #endif
