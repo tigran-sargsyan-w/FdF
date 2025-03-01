@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 12:49:21 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 14:39:25 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ typedef struct s_vars
 int			create_argb(int a, int r, int g, int b);
 void		fill_screen(t_vars *vars, int color);
 void		error_exit(char *msg);
+t_map		*parse_file(const char *filename);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 14:30:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:15:30 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,35 +280,42 @@ int	main(void)
 {
 	t_vars	vars;
 	int		red;
+	t_map	*map;
 
-	char	*relative_path = "./photo.xpm";
-	int		img_width;
-	int		img_height;
+	// char	*relative_path = "./photo.xpm";
+	// int		img_width;
+	// int		img_height;
 
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
-			"Testing!");
+	// vars.mlx = mlx_init();
+	// vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT,
+	// 		"Testing!");
 	// vars.data.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	vars.data.img = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_width, &img_height);
-	vars.data.addr = mlx_get_data_addr(vars.data.img, &vars.data.bits_per_pixel, &vars.data.line_length,
-			&vars.data.endian);
-	red = create_argb(0, 255, 0, 0);
-	vars.obj_x = WINDOW_WIDTH / 2;
-	vars.obj_y = WINDOW_HEIGHT / 2;
+	// vars.data.img = mlx_xpm_file_to_image(vars.mlx, relative_path, &img_width, &img_height);
+	// vars.data.addr = mlx_get_data_addr(vars.data.img, &vars.data.bits_per_pixel, &vars.data.line_length,
+	// 		&vars.data.endian);
+	// red = create_argb(0, 255, 0, 0);
+	// vars.obj_x = WINDOW_WIDTH / 2;
+	// vars.obj_y = WINDOW_HEIGHT / 2;
 	// draw_grid(&img, 50, 50, 10, 10, 50, 0x00FFFFFF);
 	// draw_iso_cube(&img, 100, 100, 50, 30, 0xFF0000);
 	// draw_circle(&img, 200, 200, 50, 0x00FF00FF);
-	draw_filled_circle(&vars, 50, red);
-	mlx_put_image_to_window(vars.mlx, vars.win, vars.data.img, 0, 0);
+	// draw_filled_circle(&vars, 50, red);
+	// mlx_put_image_to_window(vars.mlx, vars.win, vars.data.img, 0, 0);
 	
 	// mlx_hook(vars.win, ON_CONFIGURE_NOTIFY,STRUCTURE_NOTIFY_MASK,handle_resize, &vars);
-	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key_press, &vars);
-	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
-	mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
-	mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
+	// mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key_press, &vars);
+	// mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
+	// mlx_hook(vars.win, ON_ENTER_NOTIFY, ENTER_WINDOW_MASK, mouse_enter, &vars);
+	// mlx_hook(vars.win, ON_LEAVE_NOTIFY, LEAVE_WINDOW_MASK, mouse_leave, &vars);
 	// mlx_hook(vars.win, ON_MOUSEMOVE, POINTER_MOTION_MASK, mouse_move, &vars);
-	mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+	// mlx_loop_hook(vars.mlx, render_next_frame, &vars);
+
+	map = parse_file("/home/t_sargsyan/Github/FdF/maps/42.fdf");
+	if (map == NULL)
+		ft_printf("Map is NULL\n");
+	else
+		ft_printf("Map is not NULL\n");
 	
-	mlx_loop(vars.mlx);
+	// mlx_loop(vars.mlx);
 	return (0);
 }

@@ -14,7 +14,8 @@ LD_FLAGS    = -Wl,--allow-multiple-definition
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 MATH_FLAGS  = -lm
 INC_FLAGS   = -I$(INC_DIR) -I$(MLX_DIR) -I$(LIBFT_DIR)
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11
+MLX_FLAGS   = -L$(MLX_DIR) -lmlx -lXext -lX11
+DEBUG_FLAGS = -g
 
 # -------------------------------
 #   Directories
@@ -64,14 +65,14 @@ all: $(NAME)
 	@echo "🚀 Executable $(NAME) created successfully!"
 
 $(NAME): $(LIBFT) $(MLX) $(OBJS)
-	@$(CC) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) -o $(NAME)
+	@$(CC) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) $(DEBUG_FLAGS) -o $(NAME)
 	@echo "✅ $(NAME) compiled."
 
 bonus: $(NAME_BONUS)
 	@echo "🎉 Bonus executable $(NAME_BONUS) compiled!"
 
 $(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS) $(BONUS_OBJS)
-	@$(CC) $(OBJS) $(BONUS_OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) -o $(NAME_BONUS)
+	@$(CC) $(OBJS) $(BONUS_OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) $(DEBUG_FLAGS) -o $(NAME_BONUS)
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
