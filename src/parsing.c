@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/01 15:42:48 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:01:42 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,22 +134,18 @@ t_map	*parse_file(const char *filename)
 {
 	t_list	*lines;
 	t_map	*map;
-	int		rows;
-	int		columns;
 
 	lines = read_file_lines(filename);
 	if (!lines)
 		error_exit("empty file");
-	get_map_dimensions(lines, &rows, &columns);
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 	{
 		free_line_list(lines);
 		error_exit("malloc");
 	}
-	map->rows = rows;
-	map->columns = columns;
-	map->values = fill_map_values(lines, rows, columns);
+	get_map_dimensions(lines, &map->rows, &map->columns);
+	map->values = fill_map_values(lines, map->rows, map->columns);
 	free_line_list(lines);
 	return (map);
 }
