@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/05 13:21:12 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/05 14:15:50 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,17 @@ int	main(void)
 		error_exit("parse_file");
 	mlx = mlx_init();
 	if (!mlx)
-		return (1);
+		error_exit("mlx_init");
 	win = mlx_new_window(mlx, 800, 600, "FdF");
 	if (!win)
-		return (1);
+		error_exit("mlx_new_window");
 	img.img = mlx_new_image(mlx, 800, 600);
 	if (!img.img)
-		return (1);
+		error_exit("mlx_new_image");
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	ft_printf("bits_per_pixel: %d\n", img.bits_per_pixel);
-	ft_printf("line_length: %d\n", img.line_length);
-	ft_printf("endian: %d\n", img.endian);
+	if (!img.addr)
+		error_exit("mlx_get_data_addr");
 	start = iso_projection(pt0, ISO_ANGLE);
 	end = iso_projection(pt1, ISO_ANGLE);
 	draw_line(&img, start, end, line_color);
