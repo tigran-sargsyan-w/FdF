@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 18:18:05 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/28 20:02:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:06:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void fill_screen(t_vars *vars, int color)
         x = 0;
         while (x < WINDOW_WIDTH)
         {
-            int pixel = (y * vars->data.line_length) + (x * (vars->data.bits_per_pixel / 8));
-            *(int *)(vars->data.addr + pixel) = color;
+            // int pixel = (y * vars->data.line_length) + (x * (vars->data.bits_per_pixel / 8));
+            // *(int *)(vars->data.addr + pixel) = color;
             x++;
         }
         y++;
