@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:52:21 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/05 12:22:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/05 22:05:59 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,12 @@ typedef struct s_line
 	t_point2d	start;
 	t_point2d	end;
 }				t_line;
+
+// Structure for bounding box
+typedef struct s_bbox
+{
+	int			min_x;
+	int			max_x;
+	int			min_y;
+	int			max_y;
+}				t_bbox;
