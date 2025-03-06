@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 15:12:04 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:42:57 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,18 +221,18 @@ static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
 }
 
 // Основная функция отрисовки сетки.
-void	draw_grid(t_data *img, t_map *map, int line_color)
+void	draw_grid(t_vars vars, int line_color)
 {
 	t_draw_context	ctx;
 	int				i;
 	int				j;
 
-	ctx = create_draw_context(img, map, line_color);
+	ctx = create_draw_context(&vars.img, vars.map, line_color);
 	i = 0;
-	while (i < map->rows)
+	while (i < vars.map->rows)
 	{
 		j = 0;
-		while (j < map->columns)
+		while (j < vars.map->columns)
 		{
 			draw_cell_lines(i, j, &ctx);
 			j++;

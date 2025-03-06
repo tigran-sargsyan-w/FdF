@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 16:22:06 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:34:23 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ int	main(void)
 	if (!vars.img.addr)
 		error_exit("mlx_get_data_addr");
 	adjust_scale(vars.map);
-	draw_grid(&vars.img, vars.map, line_color);
+	
+	// draw_grid(&vars.img, vars.map, line_color);
+	draw_grid(vars, line_color);
 	
 	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key, &vars);
 	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
