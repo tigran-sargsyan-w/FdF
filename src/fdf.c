@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 19:18:06 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 20:50:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,20 @@ int	handle_key(int keycode, t_vars *vars)
 		exit(0);
 	}
 	if (keycode == KEY_W)
-		vars->map->rot_x -= 5;
+		vars->map->trans_y -= 10;
 	if (keycode == KEY_S)
-		vars->map->rot_x += 5;
+		vars->map->trans_y += 10;
 	if (keycode == KEY_A)
-		vars->map->rot_y -= 5;
+		vars->map->trans_x -= 10;
 	if (keycode == KEY_D)
+		vars->map->trans_x += 10;
+	if (keycode == KEY_ARROW_UP)
+		vars->map->rot_x -= 5;
+	if (keycode == KEY_ARROW_DOWN)
+		vars->map->rot_x += 5;
+	if (keycode == KEY_ARROW_LEFT)
+		vars->map->rot_y -= 5;
+	if (keycode == KEY_ARROW_RIGHT)
 		vars->map->rot_y += 5;
 	if (keycode == KEY_Q)
 		vars->map->rot_z -= 5;

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 20:02:01 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 20:47:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,6 +187,14 @@ static t_draw_context	create_draw_context(t_data *img, t_map *map,
 	return (ctx);
 }
 
+// Function to translate 2D point after projection
+static t_point2d	translate_point(t_point2d p, t_map *map)
+{
+	p.x += map->trans_x;
+	p.y += map->trans_y;
+	return (p);
+}
+
 // Function to project a 3D point with an offset
 static t_point2d	project_point(t_point point, t_map *map, int x_offset,
 		int y_offset)
@@ -198,7 +206,7 @@ static t_point2d	project_point(t_point point, t_map *map, int x_offset,
 	projected = iso_projection(rotated);
 	projected.x += x_offset;
 	projected.y += y_offset;
-	return (projected);
+	return (translate_point(projected, map));
 }
 
 // Function to get projected point
