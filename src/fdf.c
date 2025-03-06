@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/05 19:36:07 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:28:49 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	free_map(t_map *map)
 	}
 	free(map->values);
 }
+
+
 
 int	main(void)
 {
@@ -50,6 +52,7 @@ int	main(void)
 			&img.endian);
 	if (!img.addr)
 		error_exit("mlx_get_data_addr");
+	adjust_scale(map);
 	draw_grid(&img, map, line_color);
 	mlx_put_image_to_window(mlx, win, img.img, 0, 0);
 	mlx_loop(mlx);

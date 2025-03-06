@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/05 22:11:08 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:27:39 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static void	draw_line_loop(t_data *img, t_line line, t_line_params lp,
 }
 
 // Draw line between two points with a specified color
-void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
+static void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
 {
 	t_line_params	lp;
 	t_line			line;
@@ -95,7 +95,7 @@ void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
 	draw_line_loop(img, line, lp, color);
 }
 
-void	compute_bounding_box(t_map *map, t_bbox *box)
+static void	compute_bounding_box(t_map *map, t_bbox *box)
 {
 	int			i;
 	int			j;
@@ -112,8 +112,8 @@ void	compute_bounding_box(t_map *map, t_bbox *box)
 		j = 0;
 		while (j < map->columns)
 		{
-			current.x = j * SCALE;
-			current.y = i * SCALE;
+			current.x = j * map->scale;
+			current.y = i * map->scale;
 			current.z = map->values[i][j];
 			proj = iso_projection(current);
 			if (proj.x < box->min_x)
@@ -128,6 +128,22 @@ void	compute_bounding_box(t_map *map, t_bbox *box)
 		}
 		i++;
 	}
+}
+
+void	adjust_scale(t_map *map)
+{
+	int		max_width;
+	int		max_height;
+	float	scale_x;
+	float	scale_y;
+	float	factor;
+
+	factor = 0.5;
+	max_width = WINDOW_WIDTH * factor;
+	max_height = WINDOW_HEIGHT * factor;
+	scale_x = (float)max_width / map->columns;
+	scale_y = (float)max_height / map->rows;
+	map->scale = fmin(scale_x, scale_y);
 }
 
 void	draw_grid(t_data *img, t_map *map, int line_color)
@@ -155,8 +171,8 @@ void	draw_grid(t_data *img, t_map *map, int line_color)
 		j = 0;
 		while (j < map->columns)
 		{
-			current.x = j * SCALE;
-			current.y = i * SCALE;
+			current.x = j * map->scale;
+			current.y = i * map->scale;
 			current.z = map->values[i][j];
 			proj_current = iso_projection(current);
 			proj_current.x += x_offset;
@@ -164,8 +180,8 @@ void	draw_grid(t_data *img, t_map *map, int line_color)
 			// Если есть сосед справа, отрисовываем горизонтальную линию
 			if (j < map->columns - 1)
 			{
-				next.x = (j + 1) * SCALE;
-				next.y = i * SCALE;
+				next.x = (j + 1) * map->scale;
+				next.y = i * map->scale;
 				next.z = map->values[i][j + 1];
 				proj_next = iso_projection(next);
 				proj_next.x += x_offset;
@@ -175,8 +191,8 @@ void	draw_grid(t_data *img, t_map *map, int line_color)
 			// Если существует сосед снизу, отрисовываем вертикальную линию
 			if (i < map->rows - 1)
 			{
-				next.x = j * SCALE;
-				next.y = (i + 1) * SCALE;
+				next.x = j * map->scale;
+				next.y = (i + 1) * map->scale;
 				next.z = map->values[i + 1][j];
 				proj_next = iso_projection(next);
 				proj_next.x += x_offset;
