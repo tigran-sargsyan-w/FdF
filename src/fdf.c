@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 16:34:23 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:18:06 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,24 @@ int	handle_key(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
+	if (keycode == KEY_W)
+		vars->map->rot_x -= 5;
+	if (keycode == KEY_S)
+		vars->map->rot_x += 5;
+	if (keycode == KEY_A)
+		vars->map->rot_y -= 5;
+	if (keycode == KEY_D)
+		vars->map->rot_y += 5;
+	if (keycode == KEY_Q)
+		vars->map->rot_z -= 5;
+	if (keycode == KEY_E)
+		vars->map->rot_z += 5;
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
+			&vars->img.line_length, &vars->img.endian);
+	draw_grid(*vars, create_argb(0, 255, 255, 255));
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	return (0);
 }
 
@@ -60,18 +78,14 @@ int	main(void)
 	vars.img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!vars.img.img)
 		error_exit("mlx_new_image");
-	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_length,
-			&vars.img.endian);
+	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel,
+			&vars.img.line_length, &vars.img.endian);
 	if (!vars.img.addr)
 		error_exit("mlx_get_data_addr");
 	adjust_scale(vars.map);
-	
-	// draw_grid(&vars.img, vars.map, line_color);
 	draw_grid(vars, line_color);
-	
 	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key, &vars);
 	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
-
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 	mlx_loop(vars.mlx);
 	free_map(vars.map);

@@ -38,7 +38,8 @@ SRCS        = $(SRC_DIR)/fdf.c \
 			  $(SRC_DIR)/color_utils.c \
 			  $(SRC_DIR)/parsing.c \
 			  $(SRC_DIR)/error.c \
-			  $(SRC_DIR)/rendering.c 
+			  $(SRC_DIR)/rendering.c \
+			  $(SRC_DIR)/rotate.c
 
 BONUS_SRCS  = $(SRC_DIR)/bonus.c
 

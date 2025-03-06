@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 17:41:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:04:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 # define MOVE_SPEED 10
-# define ISO_ANGLE 0.523599
 # define Z_FACTOR 1.0
+# define M_PI 3.14159265358979323846
 
 // Structure to hold image data
 typedef struct s_data
@@ -69,5 +69,7 @@ void		error_exit(char *msg);
 t_map		*parse_file(const char *filename);
 void		draw_grid(t_vars vars, int line_color);
 void		adjust_scale(t_map *map);
+t_point		rotate_point(t_point p, t_map *map);
+float		deg_to_rad(float angle);
 
 #endif

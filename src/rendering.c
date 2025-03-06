@@ -6,19 +6,26 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 16:42:57 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:04:07 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+float	deg_to_rad(float angle)
+{
+	return (angle * M_PI / 180.0);
+}
+
 // Function to compute isometric projection for a 3D point
 static t_point2d	iso_projection(t_point pt)
 {
 	t_point2d	proj;
+	float		iso_angle;
 
-	proj.x = (int)round((pt.x - pt.y) * cos(ISO_ANGLE));
-	proj.y = (int)round((pt.x + pt.y) * sin(ISO_ANGLE) - (pt.z / Z_FACTOR));
+	iso_angle = deg_to_rad(30);
+	proj.x = (int)round((pt.x - pt.y) * cos(iso_angle));
+	proj.y = (int)round((pt.x + pt.y) * sin(iso_angle) - (pt.z / Z_FACTOR));
 	return (proj);
 }
 
@@ -180,11 +187,14 @@ static t_draw_context	create_draw_context(t_data *img, t_map *map,
 }
 
 // Function to project a 3D point with an offset
-static t_point2d	project_point(t_point point, int x_offset, int y_offset)
+static t_point2d	project_point(t_point point, t_map *map, int x_offset,
+		int y_offset)
 {
+	t_point		rotated;
 	t_point2d	projected;
 
-	projected = iso_projection(point);
+	rotated = rotate_point(point, map);
+	projected = iso_projection(rotated);
 	projected.x += x_offset;
 	projected.y += y_offset;
 	return (projected);
@@ -201,13 +211,14 @@ static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
 	current.x = j * ctx->map->scale;
 	current.y = i * ctx->map->scale;
 	current.z = ctx->map->values[i][j];
-	proj_current = project_point(current, ctx->x_offset, ctx->y_offset);
+	proj_current = project_point(current, ctx->map, ctx->x_offset,
+			ctx->y_offset);
 	if (j < ctx->map->columns - 1)
 	{
 		next.x = (j + 1) * ctx->map->scale;
 		next.y = i * ctx->map->scale;
 		next.z = ctx->map->values[i][j + 1];
-		proj_next = project_point(next, ctx->x_offset, ctx->y_offset);
+		proj_next = project_point(next, ctx->map, ctx->x_offset, ctx->y_offset);
 		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
 	}
 	if (i < ctx->map->rows - 1)
@@ -215,7 +226,7 @@ static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
 		next.x = j * ctx->map->scale;
 		next.y = (i + 1) * ctx->map->scale;
 		next.z = ctx->map->values[i + 1][j];
-		proj_next = project_point(next, ctx->x_offset, ctx->y_offset);
+		proj_next = project_point(next, ctx->map, ctx->x_offset, ctx->y_offset);
 		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
 	}
 }
