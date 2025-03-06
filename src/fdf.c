@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 16:20:25 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:22:06 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	handle_close(t_vars *vars)
 int	main(void)
 {
 	t_vars	vars;
-	t_data	img;
 	int		line_color;
 
 	line_color = create_argb(0, 255, 255, 255);
@@ -58,20 +57,20 @@ int	main(void)
 	vars.win = mlx_new_window(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
 	if (!vars.win)
 		error_exit("mlx_new_window");
-	img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (!img.img)
+	vars.img.img = mlx_new_image(vars.mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!vars.img.img)
 		error_exit("mlx_new_image");
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
-	if (!img.addr)
+	vars.img.addr = mlx_get_data_addr(vars.img.img, &vars.img.bits_per_pixel, &vars.img.line_length,
+			&vars.img.endian);
+	if (!vars.img.addr)
 		error_exit("mlx_get_data_addr");
 	adjust_scale(vars.map);
-	draw_grid(&img, vars.map, line_color);
+	draw_grid(&vars.img, vars.map, line_color);
 	
 	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key, &vars);
 	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
 
-	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 	mlx_loop(vars.mlx);
 	free_map(vars.map);
 	return (0);
