@@ -6,12 +6,13 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 19:04:07 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 20:02:01 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+// Function to transfer degrees to radians
 float	deg_to_rad(float angle)
 {
 	return (angle * M_PI / 180.0);
@@ -200,38 +201,55 @@ static t_point2d	project_point(t_point point, t_map *map, int x_offset,
 	return (projected);
 }
 
-// Function to draw lines for cell (i, j)
-static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
+// Function to get projected point
+static t_point2d	get_projected_point(int x, int y, int z,
+		t_draw_context *ctx)
 {
-	t_point		current;
-	t_point2d	proj_current;
-	t_point		next;
+	t_point	point;
+
+	point = (t_point){x * ctx->map->scale, y * ctx->map->scale, z};
+	return (project_point(point, ctx->map, ctx->x_offset, ctx->y_offset));
+}
+
+// Function to draw a horizontal line
+static void	draw_horizontal_line(int i, int j, t_draw_context *ctx,
+		t_point2d proj_current)
+{
 	t_point2d	proj_next;
 
-	current.x = j * ctx->map->scale;
-	current.y = i * ctx->map->scale;
-	current.z = ctx->map->values[i][j];
-	proj_current = project_point(current, ctx->map, ctx->x_offset,
-			ctx->y_offset);
 	if (j < ctx->map->columns - 1)
 	{
-		next.x = (j + 1) * ctx->map->scale;
-		next.y = i * ctx->map->scale;
-		next.z = ctx->map->values[i][j + 1];
-		proj_next = project_point(next, ctx->map, ctx->x_offset, ctx->y_offset);
-		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
-	}
-	if (i < ctx->map->rows - 1)
-	{
-		next.x = j * ctx->map->scale;
-		next.y = (i + 1) * ctx->map->scale;
-		next.z = ctx->map->values[i + 1][j];
-		proj_next = project_point(next, ctx->map, ctx->x_offset, ctx->y_offset);
+		proj_next = get_projected_point(j + 1, i, ctx->map->values[i][j + 1],
+				ctx);
 		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
 	}
 }
 
-// Основная функция отрисовки сетки.
+// Function to draw a vertical line
+static void	draw_vertical_line(int i, int j, t_draw_context *ctx,
+		t_point2d proj_current)
+{
+	t_point2d	proj_next;
+
+	if (i < ctx->map->rows - 1)
+	{
+		proj_next = get_projected_point(j, i + 1, ctx->map->values[i + 1][j],
+				ctx);
+		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
+	}
+}
+
+// Function to draw cell lines
+static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
+{
+	t_point2d	proj_current;
+
+	proj_current = get_projected_point(j, i, ctx->map->values[i][j], ctx);
+	draw_horizontal_line(i, j, ctx, proj_current);
+	draw_vertical_line(i, j, ctx, proj_current);
+}
+
+// Function to draw grid
 void	draw_grid(t_vars vars, int line_color)
 {
 	t_draw_context	ctx;
