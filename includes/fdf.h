@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 12:54:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:10:23 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdlib.h>
 
 // Constants
-# define WINDOW_WIDTH 1280 
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 800 
+# define WINDOW_HEIGHT 600
 # define MOVE_SPEED 10
 # define ISO_ANGLE 0.523599
 # define Z_FACTOR 1.0
@@ -50,6 +50,15 @@ typedef struct s_data
 	int		line_length;
 	int		endian;
 }			t_data;
+
+typedef struct s_draw_context
+{
+	t_data		*img;
+	t_map		*map;
+	int			x_offset;
+	int			y_offset;
+	int			line_color;
+}				t_draw_context;
 
 int			create_argb(int a, int r, int g, int b);
 void		fill_screen(t_vars *vars, int color);

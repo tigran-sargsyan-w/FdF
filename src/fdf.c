@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 12:47:59 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:57:16 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_map(t_map *map)
 	}
 	free(map->values);
 }
-
-
 
 int	main(void)
 {

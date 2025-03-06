@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 14:24:26 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:12:04 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,29 @@ static void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
 	draw_line_loop(img, line, lp, color);
 }
 
+// Function to create border box for the map
+static void	init_bbox(t_bbox *box)
+{
+	box->min_x = INT_MAX;
+	box->max_x = INT_MIN;
+	box->min_y = INT_MAX;
+	box->max_y = INT_MIN;
+}
+
+// Function to update bounding box with a new point
+static void	update_bbox(t_bbox *box, t_point2d proj)
+{
+	if (proj.x < box->min_x)
+		box->min_x = proj.x;
+	if (proj.x > box->max_x)
+		box->max_x = proj.x;
+	if (proj.y < box->min_y)
+		box->min_y = proj.y;
+	if (proj.y > box->max_y)
+		box->max_y = proj.y;
+}
+
+// Function to compute bounding box for the map
 static void	compute_bounding_box(t_map *map, t_bbox *box)
 {
 	int			i;
@@ -102,34 +125,24 @@ static void	compute_bounding_box(t_map *map, t_bbox *box)
 	t_point		current;
 	t_point2d	proj;
 
-	box->min_x = INT_MAX;
-	box->max_x = INT_MIN;
-	box->min_y = INT_MAX;
-	box->max_y = INT_MIN;
 	i = 0;
+	init_bbox(box);
 	while (i < map->rows)
 	{
 		j = 0;
 		while (j < map->columns)
 		{
-			current.x = j * map->scale;
-			current.y = i * map->scale;
-			current.z = map->values[i][j];
+			current = (t_point){j * map->scale, i * map->scale,
+				map->values[i][j]};
 			proj = iso_projection(current);
-			if (proj.x < box->min_x)
-				box->min_x = proj.x;
-			if (proj.x > box->max_x)
-				box->max_x = proj.x;
-			if (proj.y < box->min_y)
-				box->min_y = proj.y;
-			if (proj.y > box->max_y)
-				box->max_y = proj.y;
+			update_bbox(box, proj);
 			j++;
 		}
 		i++;
 	}
 }
 
+// Function to adjust scale of the map to fit the window
 void	adjust_scale(t_map *map)
 {
 	int		max_width;
@@ -146,20 +159,28 @@ void	adjust_scale(t_map *map)
 	map->scale = fmin(scale_x, scale_y);
 }
 
-void	compute_offsets(t_map *map, int *x_offset, int *y_offset)
+// Function to create draw context for the grid
+static t_draw_context	create_draw_context(t_data *img, t_map *map,
+		int line_color)
 {
-	t_bbox	box;
-	int		img_width;
-	int		img_height;
+	t_draw_context	ctx;
+	t_bbox			box;
+	int				img_width;
+	int				img_height;
 
 	compute_bounding_box(map, &box);
 	img_width = box.max_x - box.min_x;
 	img_height = box.max_y - box.min_y;
-	*x_offset = (WINDOW_WIDTH - img_width) / 2 - box.min_x;
-	*y_offset = (WINDOW_HEIGHT - img_height) / 2 - box.min_y;
+	ctx.x_offset = (WINDOW_WIDTH - img_width) / 2 - box.min_x;
+	ctx.y_offset = (WINDOW_HEIGHT - img_height) / 2 - box.min_y;
+	ctx.img = img;
+	ctx.map = map;
+	ctx.line_color = line_color;
+	return (ctx);
 }
 
-t_point2d	project_point(t_point point, int x_offset, int y_offset)
+// Function to project a 3D point with an offset
+static t_point2d	project_point(t_point point, int x_offset, int y_offset)
 {
 	t_point2d	projected;
 
@@ -169,51 +190,51 @@ t_point2d	project_point(t_point point, int x_offset, int y_offset)
 	return (projected);
 }
 
-void	draw_grid_lines(t_data *img, t_map *map, t_point2d proj_current, int i,
-		int j, int x_offset, int y_offset, int line_color)
-{
-	t_point		next;
-	t_point2d	proj_next;
-
-	if (j < map->columns - 1)
-	{
-		next.x = (j + 1) * map->scale;
-		next.y = i * map->scale;
-		next.z = map->values[i][j + 1];
-		proj_next = project_point(next, x_offset, y_offset);
-		draw_line(img, proj_current, proj_next, line_color);
-	}
-	if (i < map->rows - 1)
-	{
-		next.x = j * map->scale;
-		next.y = (i + 1) * map->scale;
-		next.z = map->values[i + 1][j];
-		proj_next = project_point(next, x_offset, y_offset);
-		draw_line(img, proj_current, proj_next, line_color);
-	}
-}
-
-void	draw_grid(t_data *img, t_map *map, int line_color)
+// Function to draw lines for cell (i, j)
+static void	draw_cell_lines(int i, int j, t_draw_context *ctx)
 {
 	t_point		current;
 	t_point2d	proj_current;
-	int			i;
-	int			j;
-	int			x_offset;
-	int			y_offset;
+	t_point		next;
+	t_point2d	proj_next;
 
-	compute_offsets(map, &x_offset, &y_offset);
+	current.x = j * ctx->map->scale;
+	current.y = i * ctx->map->scale;
+	current.z = ctx->map->values[i][j];
+	proj_current = project_point(current, ctx->x_offset, ctx->y_offset);
+	if (j < ctx->map->columns - 1)
+	{
+		next.x = (j + 1) * ctx->map->scale;
+		next.y = i * ctx->map->scale;
+		next.z = ctx->map->values[i][j + 1];
+		proj_next = project_point(next, ctx->x_offset, ctx->y_offset);
+		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
+	}
+	if (i < ctx->map->rows - 1)
+	{
+		next.x = j * ctx->map->scale;
+		next.y = (i + 1) * ctx->map->scale;
+		next.z = ctx->map->values[i + 1][j];
+		proj_next = project_point(next, ctx->x_offset, ctx->y_offset);
+		draw_line(ctx->img, proj_current, proj_next, ctx->line_color);
+	}
+}
+
+// Основная функция отрисовки сетки.
+void	draw_grid(t_data *img, t_map *map, int line_color)
+{
+	t_draw_context	ctx;
+	int				i;
+	int				j;
+
+	ctx = create_draw_context(img, map, line_color);
 	i = 0;
 	while (i < map->rows)
 	{
 		j = 0;
 		while (j < map->columns)
 		{
-			current = (t_point){j * map->scale, i * map->scale,
-				map->values[i][j]};
-			proj_current = project_point(current, x_offset, y_offset);
-			draw_grid_lines(img, map, proj_current, i, j, x_offset, y_offset,
-					line_color);
+			draw_cell_lines(i, j, &ctx);
 			j++;
 		}
 		i++;

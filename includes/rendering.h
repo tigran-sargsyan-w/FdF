@@ -6,9 +6,12 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:52:21 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/05 22:05:59 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:39:33 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#ifndef RENDERING_H
+# define RENDERING_H
 
 typedef struct s_point
 {
@@ -48,3 +51,5 @@ typedef struct s_bbox
 	int			min_y;
 	int			max_y;
 }				t_bbox;
+
+#endif
