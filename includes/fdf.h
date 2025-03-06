@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 12:28:35 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:54:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@
 # include <stdlib.h>
 
 // Constants
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1280 
+# define WINDOW_HEIGHT 720
 # define MOVE_SPEED 10
 # define ISO_ANGLE 0.523599
 # define Z_FACTOR 1.0
