@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 20:50:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:21:06 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ void	free_map(t_map *map)
 		i++;
 	}
 	free(map->values);
+}
+
+void	apply_zoom(t_map *map, float factor)
+{
+	map->zoom_factor *= factor;
+	if (map->zoom_factor < MIN_ZOOM)
+		map->zoom_factor = MIN_ZOOM;
+	if (map->zoom_factor > MAX_ZOOM)
+		map->zoom_factor = MAX_ZOOM;
 }
 
 int	handle_key(int keycode, t_vars *vars)
@@ -52,6 +61,10 @@ int	handle_key(int keycode, t_vars *vars)
 		vars->map->rot_z -= 5;
 	if (keycode == KEY_E)
 		vars->map->rot_z += 5;
+	if (keycode == KEY_NUM_PLUS)
+		apply_zoom(vars->map, 1.1);
+	if (keycode == KEY_NUM_MINUS)
+		apply_zoom(vars->map, 0.9);
 	mlx_destroy_image(vars->mlx, vars->img.img);
 	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,

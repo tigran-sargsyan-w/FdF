@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 19:04:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:22:26 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 # define MOVE_SPEED 10
 # define Z_FACTOR 1.0
 # define M_PI 3.14159265358979323846
+# define MIN_ZOOM 0.3
+# define MAX_ZOOM 7.0
 
 // Structure to hold image data
 typedef struct s_data

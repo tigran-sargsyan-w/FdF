@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 20:47:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:17:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ void	adjust_scale(t_map *map)
 	scale_x = (float)max_width / map->columns;
 	scale_y = (float)max_height / map->rows;
 	map->scale = fmin(scale_x, scale_y);
+	map->zoom_factor = 1.0;
 }
 
 // Function to create draw context for the grid
@@ -203,6 +204,9 @@ static t_point2d	project_point(t_point point, t_map *map, int x_offset,
 	t_point2d	projected;
 
 	rotated = rotate_point(point, map);
+	rotated.x *= map->zoom_factor;
+	rotated.y *= map->zoom_factor;
+	rotated.z *= map->zoom_factor;
 	projected = iso_projection(rotated);
 	projected.x += x_offset;
 	projected.y += y_offset;
