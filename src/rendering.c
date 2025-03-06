@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 12:27:39 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:24:26 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,59 +146,74 @@ void	adjust_scale(t_map *map)
 	map->scale = fmin(scale_x, scale_y);
 }
 
-void	draw_grid(t_data *img, t_map *map, int line_color)
+void	compute_offsets(t_map *map, int *x_offset, int *y_offset)
 {
-	int			i;
-	int			j;
-	int			img_width;
-	int			img_height;
-	int			x_offset;
-	int			y_offset;
-	t_bbox		box;
-	t_point		current;
-	t_point		next;
-	t_point2d	proj_current;
-	t_point2d	proj_next;
+	t_bbox	box;
+	int		img_width;
+	int		img_height;
 
 	compute_bounding_box(map, &box);
 	img_width = box.max_x - box.min_x;
 	img_height = box.max_y - box.min_y;
-	x_offset = (WINDOW_WIDTH - img_width) / 2 - box.min_x;
-	y_offset = (WINDOW_HEIGHT - img_height) / 2 - box.min_y;
+	*x_offset = (WINDOW_WIDTH - img_width) / 2 - box.min_x;
+	*y_offset = (WINDOW_HEIGHT - img_height) / 2 - box.min_y;
+}
+
+t_point2d	project_point(t_point point, int x_offset, int y_offset)
+{
+	t_point2d	projected;
+
+	projected = iso_projection(point);
+	projected.x += x_offset;
+	projected.y += y_offset;
+	return (projected);
+}
+
+void	draw_grid_lines(t_data *img, t_map *map, t_point2d proj_current, int i,
+		int j, int x_offset, int y_offset, int line_color)
+{
+	t_point		next;
+	t_point2d	proj_next;
+
+	if (j < map->columns - 1)
+	{
+		next.x = (j + 1) * map->scale;
+		next.y = i * map->scale;
+		next.z = map->values[i][j + 1];
+		proj_next = project_point(next, x_offset, y_offset);
+		draw_line(img, proj_current, proj_next, line_color);
+	}
+	if (i < map->rows - 1)
+	{
+		next.x = j * map->scale;
+		next.y = (i + 1) * map->scale;
+		next.z = map->values[i + 1][j];
+		proj_next = project_point(next, x_offset, y_offset);
+		draw_line(img, proj_current, proj_next, line_color);
+	}
+}
+
+void	draw_grid(t_data *img, t_map *map, int line_color)
+{
+	t_point		current;
+	t_point2d	proj_current;
+	int			i;
+	int			j;
+	int			x_offset;
+	int			y_offset;
+
+	compute_offsets(map, &x_offset, &y_offset);
 	i = 0;
 	while (i < map->rows)
 	{
 		j = 0;
 		while (j < map->columns)
 		{
-			current.x = j * map->scale;
-			current.y = i * map->scale;
-			current.z = map->values[i][j];
-			proj_current = iso_projection(current);
-			proj_current.x += x_offset;
-			proj_current.y += y_offset;
-			// Если есть сосед справа, отрисовываем горизонтальную линию
-			if (j < map->columns - 1)
-			{
-				next.x = (j + 1) * map->scale;
-				next.y = i * map->scale;
-				next.z = map->values[i][j + 1];
-				proj_next = iso_projection(next);
-				proj_next.x += x_offset;
-				proj_next.y += y_offset;
-				draw_line(img, proj_current, proj_next, line_color);
-			}
-			// Если существует сосед снизу, отрисовываем вертикальную линию
-			if (i < map->rows - 1)
-			{
-				next.x = j * map->scale;
-				next.y = (i + 1) * map->scale;
-				next.z = map->values[i + 1][j];
-				proj_next = iso_projection(next);
-				proj_next.x += x_offset;
-				proj_next.y += y_offset;
-				draw_line(img, proj_current, proj_next, line_color);
-			}
+			current = (t_point){j * map->scale, i * map->scale,
+				map->values[i][j]};
+			proj_current = project_point(current, x_offset, y_offset);
+			draw_grid_lines(img, map, proj_current, i, j, x_offset, y_offset,
+					line_color);
 			j++;
 		}
 		i++;
