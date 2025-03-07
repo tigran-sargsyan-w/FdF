@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:19:29 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:38:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ void	adjust_scale(t_map *map)
 }
 
 // Function to create draw context for the grid
-t_draw_context	create_draw_context(t_data *img, t_map *map, int line_color)
+t_draw_context	create_draw_context(t_vars *vars, int line_color)
 {
 	t_draw_context	ctx;
 	t_bbox			box;
 	int				img_width;
 	int				img_height;
 
-	compute_bounding_box(map, &box);
+	compute_bounding_box(vars->map, &box);
 	img_width = box.max_x - box.min_x;
 	img_height = box.max_y - box.min_y;
 	ctx.x_offset = (WINDOW_WIDTH - img_width) / 2 - box.min_x;
 	ctx.y_offset = (WINDOW_HEIGHT - img_height) / 2 - box.min_y;
-	ctx.img = img;
-	ctx.map = map;
+	ctx.img = &vars->img;
+	ctx.map = vars->map;
 	ctx.line_color = line_color;
 	return (ctx);
 }

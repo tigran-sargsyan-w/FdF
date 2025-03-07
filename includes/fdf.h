@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:18:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:37:33 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			draw_line(t_data *img, t_point2d start, t_point2d end,
 					int color);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_point2d		get_projected_point(int x, int y, int z, t_draw_context *ctx);
-t_draw_context	create_draw_context(t_data *img, t_map *map, int line_color);
+t_draw_context	create_draw_context(t_vars *vars, int line_color);
 t_point			get_center(t_map *map);
 t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);

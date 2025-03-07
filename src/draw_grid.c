@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:08:20 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:37:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	draw_grid(t_vars vars, int line_color)
 	int				i;
 	int				j;
 
-	ctx = create_draw_context(&vars.img, vars.map, line_color);
+	ctx = create_draw_context(&vars, line_color);
 	i = 0;
 	while (i < vars.map->rows)
 	{
