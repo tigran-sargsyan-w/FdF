@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 15:46:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:38:10 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,16 @@ t_draw_context	create_draw_context(t_vars *vars, int line_color);
 t_point			get_center(t_map *map);
 t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);
+void			subscribe_to_events(t_vars *vars);
+
+// Event handling
+void			handle_zoom(t_vars *vars, int keycode);
+void			handle_rotation(t_vars *vars, int keycode);
+void			handle_translation(t_vars *vars, int keycode);
+void			handle_exit(t_vars *vars, int keycode);
+
+// Event handling utils
+void			update_image(t_vars *vars);
+void			apply_zoom(t_map *map, float factor);
 
 #endif

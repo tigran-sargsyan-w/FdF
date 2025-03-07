@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 15:46:15 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 16:40:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,62 +23,6 @@ void	free_map(t_map *map)
 		i++;
 	}
 	free(map->values);
-}
-
-void	apply_zoom(t_map *map, float factor)
-{
-	map->zoom_factor *= factor;
-	if (map->zoom_factor < MIN_ZOOM)
-		map->zoom_factor = MIN_ZOOM;
-	if (map->zoom_factor > MAX_ZOOM)
-		map->zoom_factor = MAX_ZOOM;
-}
-
-int	handle_key(int keycode, t_vars *vars)
-{
-	if (keycode == KEY_ESC)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		exit(0);
-	}
-	if (keycode == KEY_W)
-		vars->map->trans_y -= 10;
-	if (keycode == KEY_S)
-		vars->map->trans_y += 10;
-	if (keycode == KEY_A)
-		vars->map->trans_x -= 10;
-	if (keycode == KEY_D)
-		vars->map->trans_x += 10;
-	if (keycode == KEY_ARROW_UP)
-		vars->map->rot_x -= 5;
-	if (keycode == KEY_ARROW_DOWN)
-		vars->map->rot_x += 5;
-	if (keycode == KEY_ARROW_LEFT)
-		vars->map->rot_y -= 5;
-	if (keycode == KEY_ARROW_RIGHT)
-		vars->map->rot_y += 5;
-	if (keycode == KEY_Q)
-		vars->map->rot_z -= 5;
-	if (keycode == KEY_E)
-		vars->map->rot_z += 5;
-	if (keycode == KEY_NUM_PLUS)
-		apply_zoom(vars->map, 1.1);
-	if (keycode == KEY_NUM_MINUS)
-		apply_zoom(vars->map, 0.9);
-	mlx_destroy_image(vars->mlx, vars->img.img);
-	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
-	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
-			&vars->img.line_length, &vars->img.endian);
-	draw_grid(*vars, create_argb(0, 255, 255, 255));
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-	return (0);
-}
-
-int	handle_close(t_vars *vars)
-{
-	mlx_destroy_window(vars->mlx, vars->win);
-	exit(0);
-	return (0);
 }
 
 int	main(void)
@@ -105,8 +49,7 @@ int	main(void)
 		error_exit("mlx_get_data_addr");
 	adjust_initial_scale(vars.map);
 	draw_grid(vars, line_color);
-	mlx_hook(vars.win, ON_KEYDOWN, KEY_PRESS_MASK, handle_key, &vars);
-	mlx_hook(vars.win, ON_DESTROY_NOTIFY, NO_EVENT_MASK, handle_close, &vars);
+	subscribe_to_events(&vars);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.img.img, 0, 0);
 	mlx_loop(vars.mlx);
 	free_map(vars.map);

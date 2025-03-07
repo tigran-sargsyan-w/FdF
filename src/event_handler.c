@@ -1,0 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
+/*   Updated: 2025/03/07 16:39:24 by tsargsya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+void	handle_zoom(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_NUM_PLUS)
+		apply_zoom(vars->map, 1.1);
+	else if (keycode == KEY_NUM_MINUS)
+		apply_zoom(vars->map, 0.9);
+}
+
+void	handle_rotation(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_ARROW_UP)
+		vars->map->rot_x -= 5;
+	else if (keycode == KEY_ARROW_DOWN)
+		vars->map->rot_x += 5;
+	else if (keycode == KEY_ARROW_LEFT)
+		vars->map->rot_y -= 5;
+	else if (keycode == KEY_ARROW_RIGHT)
+		vars->map->rot_y += 5;
+	else if (keycode == KEY_Q)
+		vars->map->rot_z -= 5;
+	else if (keycode == KEY_E)
+		vars->map->rot_z += 5;
+}
+
+void	handle_translation(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_W)
+		vars->map->trans_y -= 10;
+	else if (keycode == KEY_S)
+		vars->map->trans_y += 10;
+	else if (keycode == KEY_A)
+		vars->map->trans_x -= 10;
+	else if (keycode == KEY_D)
+		vars->map->trans_x += 10;
+}
+
+void	handle_exit(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_ESC)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
+	}
+}
