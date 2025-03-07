@@ -6,7 +6,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/fdf",
             "args": [
-                "${workspaceFolder}/maps/42.fdf",
+                "${workspaceFolder}/maps/0.fdf",
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",

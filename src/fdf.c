@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 18:26:53 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:44:07 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ static void	init_vars(t_vars *vars)
 	vars->win = mlx_new_window(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
 	if (!vars->win)
 		error_exit("mlx_new_window");
-}
-
-static void	init_image(t_vars *vars)
-{
 	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
 	if (!vars->img.img)
 		error_exit("mlx_new_image");
@@ -76,9 +72,8 @@ int	main(int argc, char **argv)
 
 	line_color = create_argb(0, 255, 255, 255);
 	check_args(argc, argv);
-	load_map(&vars, argv[1]);
 	init_vars(&vars);
-	init_image(&vars);
+	load_map(&vars, argv[1]);
 	render_scene(&vars, line_color);
 	subscribe_to_events(&vars);
 	mlx_loop(vars.mlx);
