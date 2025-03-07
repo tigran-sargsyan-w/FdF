@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:37:33 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:46:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,14 +65,12 @@ typedef struct s_draw_context
 	int			line_color;
 }				t_draw_context;
 
-int				create_argb(int a, int r, int g, int b);
-void			fill_screen(t_vars *vars, int color);
-void			error_exit(char *msg);
-t_map			*parse_file(const char *filename);
-void			draw_grid(t_vars vars, int line_color);
-void			adjust_scale(t_map *map);
-
 // Reordering
+void			adjust_initial_scale(t_map *map);
+void			error_exit(char *msg);
+int				create_argb(int a, int r, int g, int b);
+void			draw_grid(t_vars vars, int line_color);
+t_map			*parse_file(const char *filename);
 float			deg_to_rad(float angle);
 t_point2d		iso_projection(t_point pt);
 void			compute_bounding_box(t_map *map, t_bbox *box);

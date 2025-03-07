@@ -6,25 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 15:23:03 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:43:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Function to count tokens in an array of strings
-static int	count_tokens(char **tokens)
-{
-	int	count;
-
-	count = 0;
-	while (tokens[count] != NULL)
-		count++;
-	return (count);
-}
-
 // Read file and return linked list of lines
-t_list	*read_file_lines(const char *filename)
+static t_list	*read_file_lines(const char *filename)
 {
 	int		fd;
 	char	*line;
@@ -62,7 +51,7 @@ static void	get_map_dimensions(t_list *lines, int *rows, int *columns)
 	tokens = ft_split((char *)lines->content, ' ');
 	if (!tokens)
 		error_exit("ft_split");
-	*columns = count_tokens(tokens);
+	*columns = ft_count_tokens(tokens);
 	col = 0;
 	while (tokens[col])
 	{

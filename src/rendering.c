@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:38:13 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:46:15 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 }
 
 // Function to adjust scale of the map to fit the window
-void	adjust_scale(t_map *map)
+void	adjust_initial_scale(t_map *map)
 {
 	int		max_width;
 	int		max_height;
