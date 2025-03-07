@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 18:17:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:26:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static void	render_scene(t_vars *vars, int line_color)
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }
 
-void check_args(int argc, char **argv)
+void	check_args(int argc, char **argv)
 {
 	if (argc != 2)
 	{
@@ -73,8 +73,9 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		line_color;
-	check_args(argc, argv);
+
 	line_color = create_argb(0, 255, 255, 255);
+	check_args(argc, argv);
 	load_map(&vars, argv[1]);
 	init_vars(&vars);
 	init_image(&vars);

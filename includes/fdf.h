@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 16:38:10 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:39:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 600
 # define MOVE_SPEED 10
+# define ROTATION_SPEED 5
+# define ZOOM_IN_FACTOR 1.1f
+# define ZOOM_OUT_FACTOR 0.9f
 # define Z_FACTOR 1.0
 # define M_PI 3.14159265358979323846
 # define MIN_ZOOM 0.3
