@@ -6,25 +6,11 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/03 13:01:42 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:23:03 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// Function to free the linked list of lines
-static void	free_line_list(t_list *lines)
-{
-	t_list	*tmp;
-
-	while (lines != NULL)
-	{
-		tmp = lines->next;
-		free(lines->content);
-		free(lines);
-		lines = tmp;
-	}
-}
 
 // Function to count tokens in an array of strings
 static int	count_tokens(char **tokens)
@@ -141,11 +127,11 @@ t_map	*parse_file(const char *filename)
 	map = (t_map *)malloc(sizeof(t_map));
 	if (!map)
 	{
-		free_line_list(lines);
+		ft_lstclear(&lines, free);
 		error_exit("malloc");
 	}
 	get_map_dimensions(lines, &map->rows, &map->columns);
 	map->values = fill_map_values(lines, map->rows, map->columns);
-	free_line_list(lines);
+	ft_lstclear(&lines, free);
 	return (map);
 }
