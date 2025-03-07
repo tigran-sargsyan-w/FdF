@@ -6,22 +6,11 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:00:30 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 19:16:13 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:19:43 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-// Function to compute the center of the grid
-static t_point	get_center(t_map *map)
-{
-	t_point	center;
-
-	center.x = (map->columns - 1) * map->scale / 2;
-	center.y = (map->rows - 1) * map->scale / 2;
-	center.z = 0;
-	return (center);
-}
 
 // Function to rotate a point around the X axis
 static t_point	rotate_x(t_point p, float angle)
@@ -89,5 +78,13 @@ t_point	rotate_point(t_point point, t_map *map)
 	point.x += center.x;
 	point.y += center.y;
 	point.z += center.z;
+	return (point);
+}
+
+// Function to translate 2D point after projection
+t_point2d	translate_point(t_point2d point, t_map *map)
+{
+	point.x += map->trans_x;
+	point.y += map->trans_y;
 	return (point);
 }

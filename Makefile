@@ -35,11 +35,15 @@ MLX         = $(MLX_DIR)/libmlx.a
 #   All Source Files (Mandatory + Bonus)
 # -------------------------------
 SRCS        = $(SRC_DIR)/fdf.c \
+			  $(SRC_DIR)/bbox_utils.c \
 			  $(SRC_DIR)/color_utils.c \
-			  $(SRC_DIR)/parsing.c \
+			  $(SRC_DIR)/draw_grid.c \
+			  $(SRC_DIR)/draw_line.c \
 			  $(SRC_DIR)/error.c \
+			  $(SRC_DIR)/math_utils.c \
+			  $(SRC_DIR)/parsing.c \
 			  $(SRC_DIR)/rendering.c \
-			  $(SRC_DIR)/rotate.c
+			  $(SRC_DIR)/transform_utils.c
 
 BONUS_SRCS  = $(SRC_DIR)/bonus.c
 

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 21:22:26 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/07 12:18:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,39 +39,50 @@
 // Structure to hold image data
 typedef struct s_data
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}			t_data;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
 
 typedef struct s_vars
 {
-	void	*mlx;
-	void	*win;
-	t_data	img;
-	t_map	*map;
-	double	zoom;
-	double	rotation;
-}			t_vars;
+	void		*mlx;
+	void		*win;
+	t_data		img;
+	t_map		*map;
+	double		zoom;
+	double		rotation;
+}				t_vars;
 
 typedef struct s_draw_context
 {
-	t_data	*img;
-	t_map	*map;
-	int		x_offset;
-	int		y_offset;
-	int		line_color;
-}			t_draw_context;
+	t_data		*img;
+	t_map		*map;
+	int			x_offset;
+	int			y_offset;
+	int			line_color;
+}				t_draw_context;
 
-int			create_argb(int a, int r, int g, int b);
-void		fill_screen(t_vars *vars, int color);
-void		error_exit(char *msg);
-t_map		*parse_file(const char *filename);
-void		draw_grid(t_vars vars, int line_color);
-void		adjust_scale(t_map *map);
-t_point		rotate_point(t_point p, t_map *map);
-float		deg_to_rad(float angle);
+int				create_argb(int a, int r, int g, int b);
+void			fill_screen(t_vars *vars, int color);
+void			error_exit(char *msg);
+t_map			*parse_file(const char *filename);
+void			draw_grid(t_vars vars, int line_color);
+void			adjust_scale(t_map *map);
+
+// Reordering
+float			deg_to_rad(float angle);
+t_point2d		iso_projection(t_point pt);
+void			compute_bounding_box(t_map *map, t_bbox *box);
+void			draw_line(t_data *img, t_point2d start, t_point2d end,
+					int color);
+void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+t_point2d		get_projected_point(int x, int y, int z, t_draw_context *ctx);
+t_draw_context	create_draw_context(t_data *img, t_map *map, int line_color);
+t_point			get_center(t_map *map);
+t_point2d		translate_point(t_point2d point, t_map *map);
+t_point			rotate_point(t_point p, t_map *map);
 
 #endif
