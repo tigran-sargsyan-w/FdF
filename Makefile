@@ -39,10 +39,10 @@ SRCS        = $(SRC_DIR)/fdf.c \
 			  $(SRC_DIR)/color_utils.c \
 			  $(SRC_DIR)/draw_grid.c \
 			  $(SRC_DIR)/draw_line.c \
-			  $(SRC_DIR)/error.c \
-			  $(SRC_DIR)/event_system.c \
-			  $(SRC_DIR)/event_handler.c \
 			  $(SRC_DIR)/event_handler_utils.c \
+			  $(SRC_DIR)/event_handler.c \
+			  $(SRC_DIR)/event_system.c \
+			  $(SRC_DIR)/exit_utils.c \
 			  $(SRC_DIR)/math_utils.c \
 			  $(SRC_DIR)/parsing.c \
 			  $(SRC_DIR)/rendering.c \
