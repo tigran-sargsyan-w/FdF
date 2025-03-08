@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 15:43:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/08 13:30:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,11 @@ t_map	*parse_file(const char *filename)
 	}
 	get_map_dimensions(lines, &map->rows, &map->columns);
 	map->values = fill_map_values(lines, map->rows, map->columns);
+	map->rot_x = 0;
+	map->rot_y = 0;
+	map->rot_z = 0;
+	map->trans_x = 0;
+	map->trans_y = 0;
 	ft_lstclear(&lines, free);
 	return (map);
 }
