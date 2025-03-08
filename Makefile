@@ -9,7 +9,7 @@ NAME_BONUS  = fdf_bonus
 #   Compiler and Flags
 # -------------------------------
 CC          = cc -g
-# C_FLAGS     = -Wall -Wextra -Werror
+C_FLAGS     = -Wall -Wextra -Werror
 LD_FLAGS    = -Wl,--allow-multiple-definition
 LIBFT_FLAGS = -L$(LIBFT_DIR) -lft
 MATH_FLAGS  = -lm
