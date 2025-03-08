@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 16:39:57 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:01:20 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	on_keydown(int keycode, t_vars *vars)
 
 int	on_close_window(t_vars *vars)
 {
-	mlx_destroy_window(vars->mlx, vars->win);
+	cleanup_and_exit(vars);
 	exit(0);
 	return (0);
 }

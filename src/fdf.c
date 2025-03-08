@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 18:44:07 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:01:41 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,18 @@ void	free_map(t_map *map)
 	int	i;
 
 	i = 0;
-	while (i < map->rows)
+	if (!map)
+		return ;
+	if (map->values)
 	{
-		free(map->values[i]);
-		i++;
+		while (i < map->rows)
+		{
+			free(map->values[i]);
+			i++;
+		}
+		free(map->values);
 	}
-	free(map->values);
+	free(map);
 }
 
 static void	init_vars(t_vars *vars)
@@ -65,6 +71,19 @@ void	check_args(int argc, char **argv)
 	}
 }
 
+void	cleanup_and_exit(t_vars *vars)
+{
+	if (!vars || !vars->mlx)
+		return ;
+	if (vars->img.img)
+		mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	free_map(vars->map);
+}
+
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
@@ -77,6 +96,6 @@ int	main(int argc, char **argv)
 	render_scene(&vars, line_color);
 	subscribe_to_events(&vars);
 	mlx_loop(vars.mlx);
-	free_map(vars.map);
+	cleanup_and_exit(&vars);
 	return (0);
 }
