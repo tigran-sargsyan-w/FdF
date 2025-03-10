@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/08 14:26:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 18:56:34 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	load_map(t_vars *vars, char *filename)
 
 static void	render_scene(t_vars *vars, int line_color)
 {
+	update_projected_points(vars->map);
 	draw_grid(*vars, line_color);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 }

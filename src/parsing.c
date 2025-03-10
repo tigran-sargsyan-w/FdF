@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/08 13:30:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:28:12 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ t_map	*parse_file(const char *filename)
 {
 	t_list	*lines;
 	t_map	*map;
+	int		i;
 
+	i = 0;
 	lines = read_file_lines(filename);
 	if (!lines)
 		error_exit("empty file");
@@ -126,6 +128,16 @@ t_map	*parse_file(const char *filename)
 	map->rot_z = 0;
 	map->trans_x = 0;
 	map->trans_y = 0;
+	map->projected_points = malloc(map->rows * sizeof(t_point2d *));
+	if (!map->projected_points)
+		error_exit("malloc failed");
+	while (i < map->rows)
+	{
+		map->projected_points[i] = malloc(map->columns * sizeof(t_point2d));
+		if (!map->projected_points[i])
+			error_exit("malloc failed");
+		i++;
+	}
 	ft_lstclear(&lines, free);
 	return (map);
 }

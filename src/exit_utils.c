@@ -6,28 +6,25 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/08 14:27:26 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:10:08 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	free_map(t_map *map)
+void	free_map(t_map *map)
 {
 	int	i;
 
 	i = 0;
-	if (!map)
-		return ;
-	if (map->values)
+	while (i < map->rows)
 	{
-		while (i < map->rows)
-		{
-			free(map->values[i]);
-			i++;
-		}
-		free(map->values);
+		free(map->values[i]);
+		free(map->projected_points[i]);
+		i++;
 	}
+	free(map->values);
+	free(map->projected_points);
 	free(map);
 }
 
