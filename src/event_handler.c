@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 20:07:30 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 20:42:19 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	update_projected_points(t_map *map)
 			rotated.y *= map->zoom_factor;
 			rotated.z *= map->zoom_factor;
 			map->projected_points[i][j] = iso_projection(rotated);
-			map->projected_points[i][j].x += x_offset;
-			map->projected_points[i][j].y += y_offset;
+			map->projected_points[i][j].x += x_offset + map->trans_x;
+			map->projected_points[i][j].y += y_offset + map->trans_y;
 			j++;
 		}
 		i++;
@@ -80,6 +80,7 @@ void	handle_translation(t_vars *vars, int keycode)
 		vars->map->trans_x -= MOVE_SPEED;
 	else if (keycode == KEY_D)
 		vars->map->trans_x += MOVE_SPEED;
+	update_projected_points(vars->map);
 }
 
 void	handle_exit(t_vars *vars, int keycode)
