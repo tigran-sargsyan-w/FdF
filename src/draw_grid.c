@@ -6,11 +6,12 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:37:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:43:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <time.h> // delete
 
 // Function to draw a horizontal line
 static void	draw_horizontal_line(int i, int j, t_draw_context *ctx,
@@ -57,6 +58,9 @@ void	draw_grid(t_vars vars, int line_color)
 	int				i;
 	int				j;
 
+	clock_t start, end; // delete
+	double time_used; // delete
+	start = clock(); // delete
 	ctx = create_draw_context(&vars, line_color);
 	i = 0;
 	while (i < vars.map->rows)
@@ -69,4 +73,7 @@ void	draw_grid(t_vars vars, int line_color)
 		}
 		i++;
 	}
+	end = clock(); // delete
+	time_used = ((double)(end - start)) / CLOCKS_PER_SEC; // delete
+	printf("draw_grid execution time: %f sec\n", time_used); // delete
 }
