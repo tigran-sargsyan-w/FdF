@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 20:42:19 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 21:57:26 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	handle_zoom(t_vars *vars, int keycode)
 		apply_zoom(vars->map, ZOOM_IN_FACTOR);
 	else if (keycode == KEY_NUM_MINUS)
 		apply_zoom(vars->map, ZOOM_OUT_FACTOR);
+	update_projected_points(vars->map);
 }
 
 void	handle_rotation(t_vars *vars, int keycode)
