@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 18:56:34 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:03:26 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,16 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 	int		line_color;
+	clock_t start, end;
 
+	start = clock();
 	line_color = create_argb(0, 255, 255, 255);
 	check_args(argc, argv);
 	init_vars(&vars);
 	load_map(&vars, argv[1]);
 	render_scene(&vars, line_color);
+	end = clock();
+	printf("Time taken: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
 	subscribe_to_events(&vars);
 	mlx_loop(vars.mlx);
 	cleanup_and_exit(&vars);

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 20:28:12 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 14:50:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,26 @@ static void	get_map_dimensions(t_list *lines, int *rows, int *columns)
 static int	*process_line(char *line, int columns)
 {
 	int		*row_values;
-	int		col;
-	char	**tokens;
+	int		column_index;
+	char	*current_char;
 
-	tokens = ft_split(line, ' ');
-	if (!tokens)
-		error_exit("ft_split");
 	row_values = (int *)malloc(columns * sizeof(int));
 	if (!row_values)
 		error_exit("malloc");
-	col = 0;
-	while (tokens[col])
+	column_index = 0;
+	current_char = line;
+	while (*current_char && column_index < columns)
 	{
-		row_values[col] = ft_atoi(tokens[col]);
-		free(tokens[col]);
-		col++;
+		while (*current_char == ' ')
+			current_char++;
+		if (*current_char)
+		{
+			row_values[column_index] = atoi(current_char);
+			column_index++;
+		}
+		while (*current_char && *current_char != ' ')
+			current_char++;
 	}
-	free(tokens);
 	return (row_values);
 }
 
