@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 20:15:52 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:07:52 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <limits.h>
 # include <math.h>
 # include <stdlib.h>
+# include <time.h> // delete
 
 // Constants
 # define WINDOW_WIDTH 800
