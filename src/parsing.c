@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 14:50:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:52:43 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,12 @@ static void	get_map_dimensions(t_list *lines, int *rows, int *columns)
 }
 
 // Process one line: split and convert to integer array
-static int	*process_line(char *line, int columns)
+static void	process_line(char *line, int *row_values, int *row_colors,
+		int columns)
 {
-	int		*row_values;
 	int		column_index;
 	char	*current_char;
 
-	row_values = (int *)malloc(columns * sizeof(int));
-	if (!row_values)
-		error_exit("malloc");
 	column_index = 0;
 	current_char = line;
 	while (*current_char && column_index < columns)
@@ -78,33 +75,46 @@ static int	*process_line(char *line, int columns)
 		while (*current_char == ' ')
 			current_char++;
 		if (*current_char)
-		{
-			row_values[column_index] = atoi(current_char);
-			column_index++;
-		}
-		while (*current_char && *current_char != ' ')
+			row_values[column_index] = ft_atoi(current_char);
+		row_colors[column_index] = DEFAULT_COLOR;
+		while (*current_char && *current_char != ' ' && *current_char != ',')
 			current_char++;
+		if (*current_char == ',')
+		{
+			current_char++;
+			row_colors[column_index] = ft_atoi_hex(current_char);
+			while (*current_char && *current_char != ' ')
+				current_char++;
+		}
+		column_index++;
 	}
-	return (row_values);
 }
 
 // Fill the 2D array with map values from the linked list
-static int	**fill_map_values(t_list *lines, int rows, int columns)
+static void	fill_map_values(t_list *lines, int rows, int columns, t_map *map)
 {
-	int	**values;
-	int	row;
+	int	row_index;
 
-	values = (int **)malloc(rows * sizeof(int *));
-	if (!values)
-		error_exit("malloc");
-	row = 0;
+	map->values = (int **)malloc(rows * sizeof(int *));
+	if (!map->values)
+		error_exit("malloc for values");
+	map->colors = (int **)malloc(rows * sizeof(int *));
+	if (!map->colors)
+		error_exit("malloc for colors");
+	row_index = 0;
 	while (lines)
 	{
-		values[row] = process_line((char *)lines->content, columns);
-		row++;
+		map->values[row_index] = (int *)malloc(columns * sizeof(int));
+		if (!map->values[row_index])
+			error_exit("malloc for row values");
+		map->colors[row_index] = (int *)malloc(columns * sizeof(int));
+		if (!map->colors[row_index])
+			error_exit("malloc for row colors");
+		process_line((char *)lines->content, map->values[row_index],
+			map->colors[row_index], columns);
+		row_index++;
 		lines = lines->next;
 	}
-	return (values);
 }
 
 // Main parse_file function that uses helper functions
@@ -125,7 +135,7 @@ t_map	*parse_file(const char *filename)
 		error_exit("malloc");
 	}
 	get_map_dimensions(lines, &map->rows, &map->columns);
-	map->values = fill_map_values(lines, map->rows, map->columns);
+	fill_map_values(lines, map->rows, map->columns, map);
 	map->rot_x = 0;
 	map->rot_y = 0;
 	map->rot_z = 0;

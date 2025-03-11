@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:14 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 18:53:57 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 18:08:35 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef struct s_map
 {
 	int			**values;
+	int			**colors;
 	float		scale;
 	int			columns;
 	int			rows;

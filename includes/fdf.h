@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 23:07:52 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 19:47:19 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define M_PI 3.14159265358979323846
 # define MIN_ZOOM 0.3
 # define MAX_ZOOM 7.0
+# define DEFAULT_COLOR 0xFFFFFF
 
 // Structure to hold image data
 typedef struct s_data
@@ -73,7 +74,7 @@ typedef struct s_draw_context
 void			adjust_initial_scale(t_map *map);
 void			error_exit(char *msg);
 int				create_argb(int a, int r, int g, int b);
-void			draw_grid(t_vars vars, int line_color);
+void			draw_grid(t_vars vars);
 t_map			*parse_file(const char *filename);
 float			deg_to_rad(float angle);
 t_point2d		iso_projection(t_point pt);
@@ -82,7 +83,7 @@ void			draw_line(t_data *img, t_point2d start, t_point2d end,
 					int color);
 void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
 t_point2d		get_projected_point(int x, int y, int z, t_draw_context *ctx);
-t_draw_context	create_draw_context(t_vars *vars, int line_color);
+t_draw_context	create_draw_context(t_vars *vars);
 t_point			get_center(t_map *map);
 t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);
