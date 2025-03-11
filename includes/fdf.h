@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 19:47:19 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/11 21:44:49 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@
 # define MIN_ZOOM 0.3
 # define MAX_ZOOM 7.0
 # define DEFAULT_COLOR 0xFFFFFF
+# define BG_COLOR 0x333333
+# define MENU_WIDTH 250
+# define MENU_BG_COLOR 0x222222
+# define TEXT_COLOR 0xFFFFFF
 
 // Structure to hold image data
 typedef struct s_data
@@ -89,6 +93,7 @@ t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);
 void			subscribe_to_events(t_vars *vars);
 void			update_projected_points(t_map *map);
+void			draw_background(t_vars *vars);
 
 // Event handling
 void			handle_zoom(t_vars *vars, int keycode);
@@ -102,5 +107,8 @@ void			apply_zoom(t_map *map, float factor);
 
 // Cleanup
 void			cleanup_and_exit(t_vars *vars);
+
+// Menu
+void			draw_menu(t_vars *vars);
 
 #endif
