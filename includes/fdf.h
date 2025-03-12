@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 21:44:49 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:31:17 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct s_vars
 	t_map		*map;
 	double		zoom;
 	double		rotation;
+	int			screen_width;
+	int			screen_height;
 }				t_vars;
 
 typedef struct s_draw_context

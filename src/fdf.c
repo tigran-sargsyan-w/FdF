@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 21:47:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 14:33:45 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static void	init_vars(t_vars *vars)
 			&vars->img.line_length, &vars->img.endian);
 	if (!vars->img.addr)
 		error_exit("mlx_get_data_addr");
+	mlx_get_screen_size(vars->mlx, &vars->screen_width, &vars->screen_height);
 }
 
 static void	load_map(t_vars *vars, char *filename)
