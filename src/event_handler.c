@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:29:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,17 @@ void	update_projected_points(t_map *map)
 			rotated.x *= map->zoom_factor;
 			rotated.y *= map->zoom_factor;
 			rotated.z *= map->zoom_factor;
-			map->projected_points[i][j] = iso_projection(rotated,
-					map->flatten_factor);
+			if (map->projection_mode == PROJ_ISO)
+				map->projected_points[i][j] = iso_projection(rotated,
+						map->flatten_factor);
+			else if (map->projection_mode == PROJ_PARALLEL)
+				map->projected_points[i][j] = parallel_projection(rotated,
+						map->parallel_factor);
+			else if (map->projection_mode == PROJ_ORTHO)
+				map->projected_points[i][j] = ortho_projection(rotated, map);
+			else
+				map->projected_points[i][j] = iso_projection(rotated,
+						map->flatten_factor);
 			map->projected_points[i][j].x += x_offset + map->trans_x;
 			map->projected_points[i][j].y += y_offset + map->trans_y;
 			j++;
@@ -92,6 +101,45 @@ void	handle_translation(t_vars *vars, int keycode)
 	else if (keycode == KEY_D)
 		vars->map->trans_x += MOVE_SPEED;
 	update_projected_points(vars->map);
+}
+
+void	handle_projection_mode(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_P)
+	{
+		if (vars->map->projection_mode == PROJ_ISO)
+		{
+			vars->map->projection_mode = PROJ_ORTHO;
+			printf("Switch projection mode to ORTHO\n");
+		}
+		else if (vars->map->projection_mode == PROJ_ORTHO)
+		{
+			vars->map->projection_mode = PROJ_PARALLEL;
+			printf("Switch projection mode to PARALLEL\n");
+		}
+		else
+		{
+			vars->map->projection_mode = PROJ_ISO;
+			printf("Switch projection mode to ISO\n");
+		}
+	}
+	update_projected_points(vars->map);
+}
+
+void	handle_reset(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_R)
+	{
+		vars->map->rot_x = 0;
+		vars->map->rot_y = 0;
+		vars->map->rot_z = 0;
+		vars->map->projection_mode = PROJ_ISO;
+		vars->map->flatten_factor = 1.0;
+		vars->map->zoom_factor = 1.0;
+		vars->map->trans_x = 0;
+		vars->map->trans_y = 0;
+		update_projected_points(vars->map);
+	}
 }
 
 void	handle_exit(t_vars *vars, int keycode)

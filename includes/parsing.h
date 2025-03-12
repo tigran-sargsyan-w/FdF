@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:14 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:26:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "fdf.h"
 # include "rendering.h"
+
+typedef enum e_projection_mode {
+	PROJ_ISO,
+	PROJ_PARALLEL,
+	PROJ_ORTHO
+} t_projection_mode;
 
 typedef struct s_map
 {
@@ -25,12 +31,14 @@ typedef struct s_map
 	int			rows;
 	float		zoom_factor;
 	float		flatten_factor;
+	float		parallel_factor;
 	float		rot_x;
 	float		rot_y;
 	float		rot_z;
 	float		trans_x;
 	float		trans_y;
 	t_point2d	**projected_points;
+	t_projection_mode projection_mode;
 }				t_map;
 
 #endif

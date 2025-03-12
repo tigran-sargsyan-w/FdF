@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 18:49:03 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 20:24:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void			draw_grid(t_vars vars);
 t_map			*parse_file(const char *filename);
 float			deg_to_rad(float angle);
 t_point2d		iso_projection(t_point pt, float flattern_factor);
+t_point2d		ortho_projection(t_point pt, t_map *map);
+t_point2d		parallel_projection(t_point pt, float depth_factor);
 void			compute_bounding_box(t_map *map, t_bbox *box);
 void			draw_line(t_data *img, t_point2d start, t_point2d end,
 					int color);
@@ -106,6 +108,8 @@ void			handle_rotation(t_vars *vars, int keycode);
 void			handle_translation(t_vars *vars, int keycode);
 void			handle_exit(t_vars *vars, int keycode);
 void			handle_flatten(t_vars *vars, int keycode);
+void			handle_projection_mode(t_vars *vars, int keycode);
+void			handle_reset(t_vars *vars, int keycode);
 
 // Event handling utils
 void			update_image(t_vars *vars);
