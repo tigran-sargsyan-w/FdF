@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:53:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 18:58:16 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:08:31 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_point2d	iso_projection(t_point pt, float flatten_factor)
 
 	iso_angle = deg_to_rad(30);
 	proj.x = (int)round((pt.x - pt.y) * cos(iso_angle));
-	proj.y = (int)round((pt.x + pt.y) * sin(iso_angle) - (pt.z / flatten_factor));
+	proj.y = (int)round((pt.x + pt.y) * sin(iso_angle) - (pt.z
+				/ flatten_factor));
 	return (proj);
 }
