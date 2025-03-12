@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 19:07:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static t_point2d	project_point(t_point point, t_map *map, int x_offset,
 	rotated.x *= map->zoom_factor;
 	rotated.y *= map->zoom_factor;
 	rotated.z *= map->zoom_factor;
-	projected = iso_projection(rotated);
+	projected = iso_projection(rotated, map->flatten_factor);
 	projected.x += x_offset;
 	projected.y += y_offset;
 	return (translate_point(projected, map));

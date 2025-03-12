@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:14 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 18:08:35 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_map
 	int			columns;
 	int			rows;
 	float		zoom_factor;
+	float		flatten_factor;
 	float		rot_x;
 	float		rot_y;
 	float		rot_z;

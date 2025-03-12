@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/10 21:57:26 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	update_projected_points(t_map *map)
 			rotated.x *= map->zoom_factor;
 			rotated.y *= map->zoom_factor;
 			rotated.z *= map->zoom_factor;
-			map->projected_points[i][j] = iso_projection(rotated);
+			map->projected_points[i][j] = iso_projection(rotated,
+					map->flatten_factor);
 			map->projected_points[i][j].x += x_offset + map->trans_x;
 			map->projected_points[i][j].y += y_offset + map->trans_y;
 			j++;
@@ -51,6 +52,15 @@ void	handle_zoom(t_vars *vars, int keycode)
 		apply_zoom(vars->map, ZOOM_IN_FACTOR);
 	else if (keycode == KEY_NUM_MINUS)
 		apply_zoom(vars->map, ZOOM_OUT_FACTOR);
+	update_projected_points(vars->map);
+}
+
+void	handle_flatten(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_PAGE_UP)
+		apply_flatten(vars->map, FLATTEN_DECREMENT);
+	else if (keycode == KEY_PAGE_DOWN)
+		apply_flatten(vars->map, FLATTEN_INCREMENT);
 	update_projected_points(vars->map);
 }
 

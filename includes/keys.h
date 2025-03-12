@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:26:26 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/02/27 19:32:27 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:41:04 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ typedef enum e_arrow_keys
 	KEY_ARROW_UP = 65362,
 	KEY_ARROW_DOWN = 65364,
 	KEY_ARROW_LEFT = 65361,
-	KEY_ARROW_RIGHT = 65363
+	KEY_ARROW_RIGHT = 65363,
+	KEY_PAGE_UP = 65365,
+	KEY_PAGE_DOWN = 65366
 }	t_arrow_keys;
 
 typedef enum e_number_keys

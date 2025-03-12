@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 14:31:17 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:49:03 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@
 # define ROTATION_SPEED 5
 # define ZOOM_IN_FACTOR 1.1f
 # define ZOOM_OUT_FACTOR 0.9f
-# define Z_FACTOR 1.0
 # define M_PI 3.14159265358979323846
 # define MIN_ZOOM 0.3
 # define MAX_ZOOM 7.0
+# define FLATTEN_INCREMENT 1.1
+# define FLATTEN_DECREMENT 0.9
+# define MIN_FLATTEN 0.3
+# define MAX_FLATTEN 7.0
 # define DEFAULT_COLOR 0xFFFFFF
 # define BG_COLOR 0x333333
 # define MENU_WIDTH 250
@@ -83,7 +86,7 @@ int				create_argb(int a, int r, int g, int b);
 void			draw_grid(t_vars vars);
 t_map			*parse_file(const char *filename);
 float			deg_to_rad(float angle);
-t_point2d		iso_projection(t_point pt);
+t_point2d		iso_projection(t_point pt, float flattern_factor);
 void			compute_bounding_box(t_map *map, t_bbox *box);
 void			draw_line(t_data *img, t_point2d start, t_point2d end,
 					int color);
@@ -102,10 +105,12 @@ void			handle_zoom(t_vars *vars, int keycode);
 void			handle_rotation(t_vars *vars, int keycode);
 void			handle_translation(t_vars *vars, int keycode);
 void			handle_exit(t_vars *vars, int keycode);
+void			handle_flatten(t_vars *vars, int keycode);
 
 // Event handling utils
 void			update_image(t_vars *vars);
 void			apply_zoom(t_map *map, float factor);
+void			apply_flatten(t_map *map, float factor);
 
 // Cleanup
 void			cleanup_and_exit(t_vars *vars);

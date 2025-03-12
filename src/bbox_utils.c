@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:15:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	compute_bounding_box(t_map *map, t_bbox *box)
 		{
 			current = (t_point){j * map->scale, i * map->scale,
 				map->values[i][j]};
-			proj = iso_projection(current);
+			proj = iso_projection(current, map->flatten_factor);
 			update_bbox(box, proj);
 			j++;
 		}
