@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 10:46:33 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:02:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,20 +108,11 @@ void	handle_projection_mode(t_vars *vars, int keycode)
 	if (keycode == KEY_P)
 	{
 		if (vars->map->projection_mode == ISO)
-		{
 			vars->map->projection_mode = ORTHO;
-			printf("Switch projection mode to ORTHO\n");
-		}
 		else if (vars->map->projection_mode == ORTHO)
-		{
 			vars->map->projection_mode = PARALLEL;
-			printf("Switch projection mode to PARALLEL\n");
-		}
 		else
-		{
 			vars->map->projection_mode = ISO;
-			printf("Switch projection mode to ISO\n");
-		}
 	}
 	update_projected_points(vars->map);
 }
