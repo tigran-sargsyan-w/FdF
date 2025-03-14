@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:10:20 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:41:58 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,30 +41,4 @@ void	adjust_initial_scale(t_map *map)
 	scale_y = (float)max_height / map->rows;
 	map->scale = fmin(scale_x, scale_y);
 	map->zoom_factor = 1.0;
-}
-
-// Function to project a 3D point with an offset
-static t_point2d	project_point(t_point point, t_map *map, int x_offset,
-		int y_offset)
-{
-	t_point		rotated;
-	t_point2d	projected;
-
-	rotated = rotate_point(point, map);
-	rotated.x *= map->zoom_factor;
-	rotated.y *= map->zoom_factor;
-	rotated.z *= map->zoom_factor;
-	projected = iso_projection(rotated, map->flatten_factor);
-	projected.x += x_offset;
-	projected.y += y_offset;
-	return (translate_point(projected, map));
-}
-
-// Function to get projected point
-t_point2d	get_projected_point(int x, int y, int z, t_draw_context *ctx)
-{
-	t_point	point;
-
-	point = (t_point){x * ctx->map->scale, y * ctx->map->scale, z};
-	return (project_point(point, ctx->map, ctx->x_offset, ctx->y_offset));
 }
