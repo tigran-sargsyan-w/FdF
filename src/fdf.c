@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 20:05:54 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 23:00:50 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,21 @@ static void	init_vars(t_vars *vars)
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
 		error_exit("mlx_init");
-	vars->win = mlx_new_window(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "FdF");
+	mlx_get_screen_size(vars->mlx, &vars->screen_width, &vars->screen_height);
+	// vars->screen_width = WINDOW_WIDTH;
+	// vars->screen_height = WINDOW_HEIGHT;
+	vars->win = mlx_new_window(vars->mlx, vars->screen_width,
+			vars->screen_height, "FdF");
 	if (!vars->win)
 		error_exit("mlx_new_window");
-	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars->img.img = mlx_new_image(vars->mlx, vars->screen_width,
+			vars->screen_height);
 	if (!vars->img.img)
 		error_exit("mlx_new_image");
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
 			&vars->img.line_length, &vars->img.endian);
 	if (!vars->img.addr)
 		error_exit("mlx_get_data_addr");
-	mlx_get_screen_size(vars->mlx, &vars->screen_width, &vars->screen_height);
 	vars->shift_pressed = 0;
 }
 
@@ -36,13 +40,13 @@ static void	load_map(t_vars *vars, char *filename)
 	vars->map = parse_file(filename);
 	if (!vars->map)
 		error_exit("parse_file");
-	adjust_initial_scale(vars->map);
+	adjust_initial_scale(vars);
 }
 
 static void	render_scene(t_vars *vars)
 {
 	draw_background(vars);
-	update_projected_points(vars->map);
+	update_projected_points(vars);
 	draw_grid(*vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 	draw_menu(vars);

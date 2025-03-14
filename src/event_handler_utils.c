@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:37:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:45:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	update_image(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->img.img);
-	vars->img.img = mlx_new_image(vars->mlx, WINDOW_WIDTH, WINDOW_HEIGHT);
+	vars->img.img = mlx_new_image(vars->mlx, vars->screen_width, vars->screen_height);
 	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
 			&vars->img.line_length, &vars->img.endian);
 	draw_background(vars);

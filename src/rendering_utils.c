@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:44:13 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:00:09 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:48:27 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	draw_background(t_vars *vars)
 
 	bg_color = BG_COLOR;
 	y = 0;
-	while (y < WINDOW_HEIGHT)
+	while (y < vars->screen_height)
 	{
 		x = 0;
-		while (x < WINDOW_WIDTH)
+		while (x < vars->screen_width)
 		{
 			if (x < MENU_WIDTH)
 				bg_color = MENU_BG_COLOR;

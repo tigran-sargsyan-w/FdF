@@ -6,14 +6,15 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 19:56:39 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:53:09 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	update_projected_points(t_map *map)
+void	update_projected_points(t_vars *vars)
 {
+	t_map	*map;
 	t_bbox	box;
 	t_point	rotated;
 	int		x_offset;
@@ -21,9 +22,10 @@ void	update_projected_points(t_map *map)
 	int		i;
 	int		j;
 
+	map = vars->map;
 	compute_bounding_box(map, &box);
-	x_offset = (WINDOW_WIDTH - (box.max_x - box.min_x)) / 2 - box.min_x;
-	y_offset = (WINDOW_HEIGHT - (box.max_y - box.min_y)) / 2 - box.min_y;
+	x_offset = (vars->screen_width - (box.max_x - box.min_x)) / 2 - box.min_x;
+	y_offset = (vars->screen_height - (box.max_y - box.min_y)) / 2 - box.min_y;
 	i = 0;
 	while (i < map->rows)
 	{

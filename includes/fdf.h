@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:28:11 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:51:50 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_draw_context
 }				t_draw_context;
 
 // Reordering
-void			adjust_initial_scale(t_map *map);
+void			adjust_initial_scale(t_vars *vars);
 void			error_exit(char *msg);
 int				create_argb(int a, int r, int g, int b);
 void			draw_grid(t_vars vars);
@@ -98,7 +98,7 @@ t_point			get_center(t_map *map);
 t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);
 void			subscribe_to_events(t_vars *vars);
-void			update_projected_points(t_map *map);
+void			update_projected_points(t_vars *vars);
 void			draw_background(t_vars *vars);
 
 // Event handling
