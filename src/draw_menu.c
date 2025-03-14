@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 11:46:21 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:08:30 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,5 @@ void	draw_menu(t_vars *vars)
 	print_string(vars, &start, &offset, "Projection:");
 	offset.x = 20;
 	print_string(vars, &start, &offset,
-			get_projection_name(vars->map->projection_mode));
+		get_projection_name(vars->map->projection_mode));
 }

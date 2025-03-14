@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 18:35:54 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 19:56:39 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,33 +74,37 @@ void	handle_flatten(t_vars *vars, int keycode)
 void	handle_rotation(t_vars *vars, int keycode)
 {
 	if (keycode == KEY_ARROW_UP)
-		vars->map->rot_x -= ROTATION_SPEED;
+		handle_rotation_left(vars, &vars->map->rot_x);
 	else if (keycode == KEY_ARROW_DOWN)
-		vars->map->rot_x += ROTATION_SPEED;
+		handle_rotation_right(vars, &vars->map->rot_x);
 	else if (keycode == KEY_ARROW_LEFT)
-		vars->map->rot_y -= ROTATION_SPEED;
+		handle_rotation_left(vars, &vars->map->rot_y);
 	else if (keycode == KEY_ARROW_RIGHT)
-		vars->map->rot_y += ROTATION_SPEED;
+		handle_rotation_right(vars, &vars->map->rot_y);
 	else if (keycode == KEY_Q)
-		vars->map->rot_z -= ROTATION_SPEED;
+		handle_rotation_left(vars, &vars->map->rot_z);
 	else if (keycode == KEY_E)
-		vars->map->rot_z += ROTATION_SPEED;
+		handle_rotation_right(vars, &vars->map->rot_z);
 }
 
-void	handle_big_rotation(t_vars *vars, int keycode)
+void	handle_rotation_left(t_vars *vars, float *axis)
 {
-	if (keycode == KEY_Z)
-	{
-		vars->map->rot_z -= 90;
-		if (vars->map->rot_z <= -360)
-			vars->map->rot_z = 0;
-	}
-	else if (keycode == KEY_X)
-	{
-		vars->map->rot_z += 90;
-		if (vars->map->rot_z >= 360)
-			vars->map->rot_z = 0;
-	}
+	if (vars->shift_pressed)
+		*axis -= 90;
+	else
+		*axis -= ROTATION_SPEED;
+	if (*axis <= -360)
+		*axis = 0;
+}
+
+void	handle_rotation_right(t_vars *vars, float *axis)
+{
+	if (vars->shift_pressed)
+		*axis += 90;
+	else
+		*axis += ROTATION_SPEED;
+	if (*axis >= 360)
+		*axis = 0;
 }
 
 void	handle_translation(t_vars *vars, int keycode)
