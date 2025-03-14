@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 22:28:27 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:50:39 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,13 @@ void	draw_menu(t_vars *vars)
 	print_string(vars, &start, &offset, "Q/E (Z)");
 	print_string(vars, &start, &offset, "Zoom: +/-");
 	print_string(vars, &start, &offset, "Flatten: PgUp/PgDn");
+	print_string(vars, &start, &offset, "Projection: P");
 	print_string(vars, &start, &offset, "Reset: R");
 	print_string(vars, &start, &offset, "Exit: ESC");
+	print_string(vars, &start, &offset, "");
+	print_string(vars, &start, &offset, "");
+	print_string(vars, &start, &offset, "Projection: P");
+	offset.x = 20;
+	print_string(vars, &start, &offset, "Projection:");
+	print_string(vars, &start, &offset, "NAME");
 }

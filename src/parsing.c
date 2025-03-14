@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 20:26:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 10:46:16 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ t_map	*parse_file(const char *filename)
 	map->trans_x = 0;
 	map->trans_y = 0;
 	map->flatten_factor = 1.0;
-	map->projection_mode = PROJ_ISO;
+	map->projection_mode = ISO;
 	map->parallel_factor = 0.5;
 	map->projected_points = malloc(map->rows * sizeof(t_point2d *));
 	if (!map->projected_points)
