@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 20:17:35 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 20:19:47 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	draw_menu(t_vars *vars)
 	print_string(vars, &start, &offset, "ArrLt/ArrRt (Y)");
 	offset.x = 20;
 	print_string(vars, &start, &offset, "Q/E (Z)");
-
 	print_string(vars, &start, &offset, "Rotate: 90 degrees");
 	offset.x = 20;
 	print_string(vars, &start, &offset, "Shift + ArrUp/ArrDn (X)");
@@ -65,7 +64,6 @@ void	draw_menu(t_vars *vars)
 	print_string(vars, &start, &offset, "Shift + ArrLt/ArrRt (Y)");
 	offset.x = 20;
 	print_string(vars, &start, &offset, "Shift + Q/E (Z)");
-	
 	print_string(vars, &start, &offset, "Zoom: +/-");
 	print_string(vars, &start, &offset, "Flatten: PgUp/PgDn");
 	print_string(vars, &start, &offset, "Projection: P");
