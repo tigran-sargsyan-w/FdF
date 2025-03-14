@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 18:05:23 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:29:48 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	on_keydown(int keycode, t_vars *vars)
 	handle_exit(vars, keycode);
 	handle_translation(vars, keycode);
 	handle_rotation(vars, keycode);
+	handle_big_rotation(vars, keycode);
 	handle_zoom(vars, keycode);
 	handle_flatten(vars, keycode);
 	handle_projection_mode(vars, keycode);

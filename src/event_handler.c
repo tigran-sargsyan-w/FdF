@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 18:03:03 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:35:54 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,22 @@ void	handle_rotation(t_vars *vars, int keycode)
 		vars->map->rot_z -= ROTATION_SPEED;
 	else if (keycode == KEY_E)
 		vars->map->rot_z += ROTATION_SPEED;
+}
+
+void	handle_big_rotation(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_Z)
+	{
+		vars->map->rot_z -= 90;
+		if (vars->map->rot_z <= -360)
+			vars->map->rot_z = 0;
+	}
+	else if (keycode == KEY_X)
+	{
+		vars->map->rot_z += 90;
+		if (vars->map->rot_z >= 360)
+			vars->map->rot_z = 0;
+	}
 }
 
 void	handle_translation(t_vars *vars, int keycode)
