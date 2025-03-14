@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 10:50:39 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 11:46:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@ static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
 	mlx_string_put(vars->mlx, vars->win, start->x, start->y, TEXT_COLOR, str);
 	start->x -= offset->x;
 	offset->x = 0;
+}
+
+char	*get_projection_name(t_projection_mode mode)
+{
+	char	*names[3];
+
+	names[0] = "ISO";
+	names[1] = "PARALLEL";
+	names[2] = "ORTHO";
+	if (mode < ISO || mode > ORTHO)
+		return ("UNKNOWN");
+	return (names[mode]);
 }
 
 void	draw_menu(t_vars *vars)
@@ -52,8 +64,8 @@ void	draw_menu(t_vars *vars)
 	print_string(vars, &start, &offset, "Exit: ESC");
 	print_string(vars, &start, &offset, "");
 	print_string(vars, &start, &offset, "");
-	print_string(vars, &start, &offset, "Projection: P");
-	offset.x = 20;
 	print_string(vars, &start, &offset, "Projection:");
-	print_string(vars, &start, &offset, "NAME");
+	offset.x = 20;
+	print_string(vars, &start, &offset,
+			get_projection_name(vars->map->projection_mode));
 }
