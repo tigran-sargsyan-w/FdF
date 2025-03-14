@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 19:01:04 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:09:42 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,10 @@ t_point2d		iso_projection(t_point pt, float flattern_factor);
 t_point2d		ortho_projection(t_point pt, t_map *map);
 t_point2d		parallel_projection(t_point pt, float depth_factor);
 void			compute_bounding_box(t_map *map, t_bbox *box);
-void			draw_line(t_data *img, t_point2d start, t_point2d end,
+void			draw_line(t_vars *vars, t_point2d start, t_point2d end,
 					int color);
-void			my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void			my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 t_point2d		get_projected_point(int x, int y, int z, t_draw_context *ctx);
-t_draw_context	create_draw_context(t_vars *vars);
 t_point			get_center(t_map *map);
 t_point2d		translate_point(t_point2d point, t_map *map);
 t_point			rotate_point(t_point p, t_map *map);

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:44:13 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/11 21:47:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:00:09 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	draw_background(t_vars *vars)
 				bg_color = MENU_BG_COLOR;
 			else
 				bg_color = BG_COLOR;
-			my_mlx_pixel_put(&vars->img, x, y, bg_color);
+			my_mlx_pixel_put(vars, x, y, bg_color);
 			x++;
 		}
 		y++;

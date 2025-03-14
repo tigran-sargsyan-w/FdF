@@ -6,21 +6,21 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 22:10:20 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Custom pixel put function: writes color to (x, y) in image buffer
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
 
 	if (x >= 0 && x < WINDOW_WIDTH && y >= 0 && y < WINDOW_HEIGHT)
 	{
-		dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel
-					/ 8));
+		dst = vars->img.addr + (y * vars->img.line_length + x
+				* (vars->img.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -41,16 +41,6 @@ void	adjust_initial_scale(t_map *map)
 	scale_y = (float)max_height / map->rows;
 	map->scale = fmin(scale_x, scale_y);
 	map->zoom_factor = 1.0;
-}
-
-// Function to create draw context for the grid
-t_draw_context	create_draw_context(t_vars *vars)
-{
-	t_draw_context	ctx;
-
-	ctx.img = &vars->img;
-	ctx.map = vars->map;
-	return (ctx);
 }
 
 // Function to project a 3D point with an offset

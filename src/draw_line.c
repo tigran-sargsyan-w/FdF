@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:57:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:08:24 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 21:57:17 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_line_params	init_line_params(t_point2d start, t_point2d end)
 }
 
 // Draw line loop using precomputed parameters and a specified color
-static void	draw_line_loop(t_data *img, t_line line, t_line_params lp,
+static void	draw_line_loop(t_vars *vars, t_line line, t_line_params lp,
 		int color)
 {
 	int			double_error;
@@ -43,7 +43,7 @@ static void	draw_line_loop(t_data *img, t_line line, t_line_params lp,
 	end = line.end;
 	while (1)
 	{
-		my_mlx_pixel_put(img, start.x, start.y, color);
+		my_mlx_pixel_put(vars, start.x, start.y, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		double_error = 2 * lp.error;
@@ -61,7 +61,7 @@ static void	draw_line_loop(t_data *img, t_line line, t_line_params lp,
 }
 
 // Draw line between two points with a specified color
-void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
+void	draw_line(t_vars *vars, t_point2d start, t_point2d end, int color)
 {
 	t_line_params	lp;
 	t_line			line;
@@ -69,5 +69,5 @@ void	draw_line(t_data *img, t_point2d start, t_point2d end, int color)
 	line.start = start;
 	line.end = end;
 	lp = init_line_params(start, end);
-	draw_line_loop(img, line, lp, color);
+	draw_line_loop(vars, line, lp, color);
 }
