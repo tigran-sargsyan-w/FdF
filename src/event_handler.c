@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 13:02:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 18:03:03 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	handle_zoom(t_vars *vars, int keycode)
 		apply_zoom(vars->map, ZOOM_IN_FACTOR);
 	else if (keycode == KEY_NUM_MINUS)
 		apply_zoom(vars->map, ZOOM_OUT_FACTOR);
-	update_projected_points(vars->map);
 }
 
 void	handle_flatten(t_vars *vars, int keycode)
@@ -70,7 +69,6 @@ void	handle_flatten(t_vars *vars, int keycode)
 		apply_flatten(vars->map, FLATTEN_DECREMENT);
 	else if (keycode == KEY_PAGE_DOWN)
 		apply_flatten(vars->map, FLATTEN_INCREMENT);
-	update_projected_points(vars->map);
 }
 
 void	handle_rotation(t_vars *vars, int keycode)
@@ -87,7 +85,6 @@ void	handle_rotation(t_vars *vars, int keycode)
 		vars->map->rot_z -= ROTATION_SPEED;
 	else if (keycode == KEY_E)
 		vars->map->rot_z += ROTATION_SPEED;
-	update_projected_points(vars->map);
 }
 
 void	handle_translation(t_vars *vars, int keycode)
@@ -100,7 +97,6 @@ void	handle_translation(t_vars *vars, int keycode)
 		vars->map->trans_x -= MOVE_SPEED;
 	else if (keycode == KEY_D)
 		vars->map->trans_x += MOVE_SPEED;
-	update_projected_points(vars->map);
 }
 
 void	handle_projection_mode(t_vars *vars, int keycode)
@@ -114,7 +110,6 @@ void	handle_projection_mode(t_vars *vars, int keycode)
 		else
 			vars->map->projection_mode = ISO;
 	}
-	update_projected_points(vars->map);
 }
 
 void	handle_reset(t_vars *vars, int keycode)
@@ -129,15 +124,19 @@ void	handle_reset(t_vars *vars, int keycode)
 		vars->map->zoom_factor = 1.0;
 		vars->map->trans_x = 0;
 		vars->map->trans_y = 0;
-		update_projected_points(vars->map);
 	}
+}
+
+void	handle_mouse_zoom(t_vars *vars, int button)
+{
+	if (button == MOUSE_SCROLL_UP)
+		apply_zoom(vars->map, ZOOM_IN_FACTOR);
+	else if (button == MOUSE_SCROLL_DOWN)
+		apply_zoom(vars->map, ZOOM_OUT_FACTOR);
 }
 
 void	handle_exit(t_vars *vars, int keycode)
 {
 	if (keycode == KEY_ESC)
-	{
 		cleanup_and_exit(vars);
-		exit(0);
-	}
 }

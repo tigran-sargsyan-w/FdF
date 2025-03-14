@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:26:26 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 18:41:04 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/14 17:15:16 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,5 +120,14 @@ typedef enum e_numpad_keys
 	KEY_NUM_ENTER = 65421,
 	KEY_NUM_DOT = 65439
 }	t_numpad_keys;
+
+typedef enum e_mouse_buttons
+{
+	MOUSE_LEFT = 1,
+	MOUSE_MIDDLE = 2,
+	MOUSE_RIGHT = 3,
+	MOUSE_SCROLL_UP = 4,
+	MOUSE_SCROLL_DOWN = 5
+}	t_mouse_buttons;
 
 #endif
