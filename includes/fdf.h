@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 13:01:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:24:12 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_vars
 // Reordering
 void		adjust_initial_scale(t_vars *vars);
 void		error_exit(char *msg);
-void		draw_grid(t_vars vars);
+void		draw_grid(t_vars *vars);
 t_map		*parse_file(const char *filename);
 float		deg_to_rad(float angle);
 t_point2d	iso_projection(t_point pt, float flattern_factor);

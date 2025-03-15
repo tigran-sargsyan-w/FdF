@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:25:18 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	render_scene(t_vars *vars)
 {
 	draw_background(vars);
 	update_projected_points(vars);
-	draw_grid(*vars);
+	draw_grid(vars);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	draw_menu(vars);
 }

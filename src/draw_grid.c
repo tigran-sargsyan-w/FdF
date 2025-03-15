@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 15:17:47 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 15:24:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,21 @@ static void	draw_vertical_line(int i, int j, t_vars *vars, t_point2d current)
 }
 
 // Function to draw grid
-void	draw_grid(t_vars vars)
+void	draw_grid(t_vars *vars)
 {
 	int			i;
 	int			j;
 	t_point2d	point;
 
 	i = 0;
-	while (i < vars.map->rows)
+	while (i < vars->map->rows)
 	{
 		j = 0;
-		while (j < vars.map->columns)
+		while (j < vars->map->columns)
 		{
-			point = vars.map->projected_points[i][j];
-			draw_horizontal_line(i, j, &vars, point);
-			draw_vertical_line(i, j, &vars, point);
+			point = vars->map->projected_points[i][j];
+			draw_horizontal_line(i, j, vars, point);
+			draw_vertical_line(i, j, vars, point);
 			j++;
 		}
 		i++;
