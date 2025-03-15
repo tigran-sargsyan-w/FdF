@@ -6,31 +6,54 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:44:13 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:58:08 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:56:57 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_background(t_vars *vars)
+void	update_projected_points(t_vars *vars)
 {
-	t_point2d	pt;
-	int			bg_color;
+	t_point	rotated;
+	int		x_offset;
+	int		y_offset;
+	int		i;
+	int		j;
 
-	bg_color = BG_COLOR;
-	pt.y = 0;
-	while (pt.y < vars->screen_height)
+	compute_bounding_box(vars);
+	x_offset = ((vars->screen_width + MENU_WIDTH) - (vars->box.max_x
+				- vars->box.min_x)) / 2 - vars->box.min_x;
+	y_offset = (vars->screen_height - (vars->box.max_y - vars->box.min_y)) / 2
+		- vars->box.min_y;
+	i = 0;
+	while (i < vars->map->rows)
 	{
-		pt.x = 0;
-		while (pt.x < vars->screen_width)
+		j = 0;
+		while (j < vars->map->columns)
 		{
-			if (pt.x < MENU_WIDTH)
-				bg_color = MENU_BG_COLOR;
+			rotated = (t_point){j * vars->map->scale, i * vars->map->scale,
+				vars->map->values[i][j]};
+			rotated = rotate_point(rotated, vars->map);
+			rotated.x *= vars->map->zoom_factor;
+			rotated.y *= vars->map->zoom_factor;
+			rotated.z *= vars->map->zoom_factor;
+			if (vars->map->projection_mode == ISO)
+				vars->map->projected_points[i][j] = iso_projection(rotated,
+						vars->map->flatten_factor);
+			else if (vars->map->projection_mode == PARALLEL)
+				vars->map->projected_points[i][j] = parallel_projection(rotated,
+						vars->map->parallel_factor);
+			else if (vars->map->projection_mode == ORTHO)
+				vars->map->projected_points[i][j] = ortho_projection(rotated);
 			else
-				bg_color = BG_COLOR;
-			my_mlx_pixel_put(vars, pt, bg_color);
-			pt.x++;
+				vars->map->projected_points[i][j] = iso_projection(rotated,
+						vars->map->flatten_factor);
+			vars->map->projected_points[i][j].x += x_offset
+				+ vars->map->trans_x;
+			vars->map->projected_points[i][j].y += y_offset
+				+ vars->map->trans_y;
+			j++;
 		}
-		pt.y++;
+		i++;
 	}
 }

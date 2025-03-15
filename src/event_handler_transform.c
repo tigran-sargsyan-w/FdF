@@ -1,0 +1,61 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_handler_transform.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/15 16:49:55 by tsargsya          #+#    #+#             */
+/*   Updated: 2025/03/15 16:51:23 by tsargsya         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fdf.h"
+
+static void	handle_rotation_left(t_vars *vars, float *axis)
+{
+	if (vars->shift_pressed)
+		*axis -= 90;
+	else
+		*axis -= ROTATION_SPEED;
+	if (*axis <= -360)
+		*axis = 0;
+}
+
+static void	handle_rotation_right(t_vars *vars, float *axis)
+{
+	if (vars->shift_pressed)
+		*axis += 90;
+	else
+		*axis += ROTATION_SPEED;
+	if (*axis >= 360)
+		*axis = 0;
+}
+
+void	handle_translation(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_W)
+		vars->map->trans_y -= MOVE_SPEED;
+	else if (keycode == KEY_S)
+		vars->map->trans_y += MOVE_SPEED;
+	else if (keycode == KEY_A)
+		vars->map->trans_x -= MOVE_SPEED;
+	else if (keycode == KEY_D)
+		vars->map->trans_x += MOVE_SPEED;
+}
+
+void	handle_rotation(t_vars *vars, int keycode)
+{
+	if (keycode == KEY_ARROW_UP)
+		handle_rotation_left(vars, &vars->map->rot_x);
+	else if (keycode == KEY_ARROW_DOWN)
+		handle_rotation_right(vars, &vars->map->rot_x);
+	else if (keycode == KEY_ARROW_LEFT)
+		handle_rotation_left(vars, &vars->map->rot_y);
+	else if (keycode == KEY_ARROW_RIGHT)
+		handle_rotation_right(vars, &vars->map->rot_y);
+	else if (keycode == KEY_Q)
+		handle_rotation_left(vars, &vars->map->rot_z);
+	else if (keycode == KEY_E)
+		handle_rotation_right(vars, &vars->map->rot_z);
+}

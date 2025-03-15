@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 15:25:18 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:58:30 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,9 @@ static void	init_vars(t_vars *vars)
 			vars->screen_height);
 	if (!vars->data.img)
 		error_exit("mlx_new_image");
-	vars->data.addr = mlx_get_data_addr(vars->data.img, &vars->data.bits_per_pixel,
-			&vars->data.line_length, &vars->data.endian);
+	vars->data.addr = mlx_get_data_addr(vars->data.img,
+			&vars->data.bits_per_pixel, &vars->data.line_length,
+			&vars->data.endian);
 	if (!vars->data.addr)
 		error_exit("mlx_get_data_addr");
 	vars->shift_pressed = 0;
@@ -72,7 +73,8 @@ void	check_args(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	clock_t	start, end;
+	clock_t	start;
+	clock_t	end;
 
 	start = clock();
 	check_args(argc, argv);

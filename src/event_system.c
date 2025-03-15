@@ -6,13 +6,13 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:52:10 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:47:40 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	on_keydown(int keycode, t_vars *vars)
+static int	on_keydown(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_SHIFT_L)
 		vars->shift_pressed = 1;
@@ -28,24 +28,24 @@ int	on_keydown(int keycode, t_vars *vars)
 	return (0);
 }
 
-int	on_keyup(int keycode, t_vars *vars)
+static int	on_keyup(int keycode, t_vars *vars)
 {
 	if (keycode == KEY_SHIFT_L)
 		vars->shift_pressed = 0;
 	return (0);
 }
 
-int	on_mousedown(int button, int x, int y, t_vars *vars)
+static int	on_mousedown(int button, int x, int y, t_vars *vars)
 {
 	(void)x;
 	(void)y;
-	handle_mouse_zoom(vars, button);
+	handle_zoom(vars, button);
 	update_projected_points(vars);
 	update_image(vars);
 	return (0);
 }
 
-int	on_close_window(t_vars *vars)
+static int	on_close_window(t_vars *vars)
 {
 	cleanup_and_exit(vars);
 	return (0);

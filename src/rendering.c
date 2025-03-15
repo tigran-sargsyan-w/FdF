@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 13:00:53 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:55:08 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,29 @@ void	my_mlx_pixel_put(t_vars *vars, t_point2d point, int color)
 		dst = vars->data.addr + (point.y * vars->data.line_length + point.x
 				* (vars->data.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
+	}
+}
+
+void	draw_background(t_vars *vars)
+{
+	t_point2d	pt;
+	int			bg_color;
+
+	bg_color = BG_COLOR;
+	pt.y = 0;
+	while (pt.y < vars->screen_height)
+	{
+		pt.x = 0;
+		while (pt.x < vars->screen_width)
+		{
+			if (pt.x < MENU_WIDTH)
+				bg_color = MENU_BG_COLOR;
+			else
+				bg_color = BG_COLOR;
+			my_mlx_pixel_put(vars, pt, bg_color);
+			pt.x++;
+		}
+		pt.y++;
 	}
 }
 
