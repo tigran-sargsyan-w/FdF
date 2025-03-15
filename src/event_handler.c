@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:25:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:17:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	update_projected_points(t_vars *vars)
 	int		j;
 
 	compute_bounding_box(vars);
-	x_offset = (vars->screen_width - (vars->box.max_x - vars->box.min_x)) / 2
-		- vars->box.min_x;
+	x_offset = ((vars->screen_width + MENU_WIDTH) - (vars->box.max_x
+				- vars->box.min_x)) / 2 - vars->box.min_x;
 	y_offset = (vars->screen_height - (vars->box.max_y - vars->box.min_y)) / 2
 		- vars->box.min_y;
 	i = 0;
