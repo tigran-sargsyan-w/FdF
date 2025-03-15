@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 13:13:11 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:47:44 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,13 @@ void	compute_bounding_box(t_vars *vars)
 			current = (t_point){j * vars->map->scale, i * vars->map->scale,
 				vars->map->values[i][j]};
 			if (vars->map->projection_mode == ISO)
-				proj = iso_projection(current, vars->map->flatten_factor);
+				proj = to_isometric(current, vars->map->flatten_factor);
 			else if (vars->map->projection_mode == PARALLEL)
-				proj = parallel_projection(current, vars->map->parallel_factor);
+				proj = to_parallel(current);
 			else if (vars->map->projection_mode == ORTHO)
-				proj = ortho_projection(current);
+				proj = to_orthographic(current);
 			else
-				proj = iso_projection(current, vars->map->flatten_factor);
+				proj = to_isometric(current, vars->map->flatten_factor);
 			update_bbox(&vars->box, proj);
 			j++;
 		}

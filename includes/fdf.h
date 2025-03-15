@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 16:52:06 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:47:44 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void		error_exit(char *msg);
 void		draw_grid(t_vars *vars);
 t_map		*parse_file(const char *filename);
 float		deg_to_rad(float angle);
-t_point2d	iso_projection(t_point pt, float flattern_factor);
-t_point2d	ortho_projection(t_point pt);
-t_point2d	parallel_projection(t_point pt, float depth_factor);
+t_point2d	to_isometric(t_point pt, float flattern_factor);
+t_point2d	to_orthographic(t_point pt);
+t_point2d	to_parallel(t_point pt);
 void		compute_bounding_box(t_vars *vars);
 void		my_mlx_pixel_put(t_vars *vars, t_point2d point, int color);
 t_point		get_center(t_map *map);

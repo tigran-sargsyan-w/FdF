@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:53:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:58:45 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 17:47:44 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float	deg_to_rad(float angle)
 }
 
 // Function to compute isometric projection for a 3D point
-t_point2d	iso_projection(t_point pt, float flatten_factor)
+t_point2d	to_isometric(t_point pt, float flatten_factor)
 {
 	t_point2d	proj;
 	float		iso_angle;
@@ -34,7 +34,7 @@ t_point2d	iso_projection(t_point pt, float flatten_factor)
 	return (proj);
 }
 
-t_point2d	ortho_projection(t_point pt)
+t_point2d	to_orthographic(t_point pt)
 {
 	t_point2d	proj;
 
@@ -43,11 +43,13 @@ t_point2d	ortho_projection(t_point pt)
 	return (proj);
 }
 
-t_point2d	parallel_projection(t_point pt, float depth_factor)
+t_point2d	to_parallel(t_point pt)
 {
 	t_point2d	proj;
 	float		angle;
+	float		depth_factor;
 
+	depth_factor = 0.5;
 	angle = deg_to_rad(45);
 	proj.x = pt.x + depth_factor * pt.z * cos(angle);
 	proj.y = pt.y + depth_factor * pt.z * sin(angle);
