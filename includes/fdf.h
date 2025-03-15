@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:47:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ typedef struct s_vars
 // Reordering
 void		adjust_initial_scale(t_vars *vars);
 void		error_exit(char *msg);
-int			create_argb(int a, int r, int g, int b);
 void		draw_grid(t_vars vars);
 t_map		*parse_file(const char *filename);
 float		deg_to_rad(float angle);

@@ -36,7 +36,6 @@ MLX         = $(MLX_DIR)/libmlx.a
 # -------------------------------
 SRCS        = $(SRC_DIR)/fdf.c \
 			  $(SRC_DIR)/bbox_utils.c \
-			  $(SRC_DIR)/color_utils.c \
 			  $(SRC_DIR)/draw_grid.c \
 			  $(SRC_DIR)/draw_line.c \
 			  $(SRC_DIR)/draw_menu.c \
