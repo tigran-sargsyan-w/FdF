@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 16:21:40 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:45:48 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static char	*get_projection_name(t_projection_mode mode)
 	return (names[mode]);
 }
 
-static void	print_transform_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
+static void	print_transform_menu(t_vars *vars, t_point2d *start,
+		t_point2d *offset)
 {
 	print_string(vars, start, offset, "");
 	print_string(vars, start, offset, "Move:");
@@ -63,7 +64,11 @@ static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
 	char	*projection_name;
 
 	projection_name = get_projection_name(vars->map->projection_mode);
-	print_string(vars, start, offset, "Zoom: +/-");
+	print_string(vars, start, offset, "Zoom:");
+	offset->x = 20;
+	print_string(vars, start, offset, "+/-");
+	offset->x = 20;
+	print_string(vars, start, offset, "ScrUp/ScrDn");
 	print_string(vars, start, offset, "Flatten: PgUp/PgDn");
 	print_string(vars, start, offset, "Projection: P");
 	print_string(vars, start, offset, "Reset: R");
