@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 20:19:47 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 16:21:40 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
 	offset->x = 0;
 }
 
-char	*get_projection_name(t_projection_mode mode)
+static char	*get_projection_name(t_projection_mode mode)
 {
 	char	*names[3];
 
@@ -32,6 +32,47 @@ char	*get_projection_name(t_projection_mode mode)
 	if (mode < ISO || mode > ORTHO)
 		return ("UNKNOWN");
 	return (names[mode]);
+}
+
+static void	print_transform_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
+{
+	print_string(vars, start, offset, "");
+	print_string(vars, start, offset, "Move:");
+	offset->x = 20;
+	print_string(vars, start, offset, "A/D (X)");
+	offset->x = 20;
+	print_string(vars, start, offset, "W/S (Y)");
+	print_string(vars, start, offset, "Rotate: smooth");
+	offset->x = 20;
+	print_string(vars, start, offset, "ArrUp/ArrDn (X)");
+	offset->x = 20;
+	print_string(vars, start, offset, "ArrLt/ArrRt (Y)");
+	offset->x = 20;
+	print_string(vars, start, offset, "Q/E (Z)");
+	print_string(vars, start, offset, "Rotate: 90 degrees");
+	offset->x = 20;
+	print_string(vars, start, offset, "Shift + ArrUp/ArrDn (X)");
+	offset->x = 20;
+	print_string(vars, start, offset, "Shift + ArrLt/ArrRt (Y)");
+	offset->x = 20;
+	print_string(vars, start, offset, "Shift + Q/E (Z)");
+}
+
+static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
+{
+	char	*projection_name;
+
+	projection_name = get_projection_name(vars->map->projection_mode);
+	print_string(vars, start, offset, "Zoom: +/-");
+	print_string(vars, start, offset, "Flatten: PgUp/PgDn");
+	print_string(vars, start, offset, "Projection: P");
+	print_string(vars, start, offset, "Reset: R");
+	print_string(vars, start, offset, "");
+	print_string(vars, start, offset, "Exit: ESC");
+	print_string(vars, start, offset, "");
+	print_string(vars, start, offset, "Projection:");
+	offset->x = 20;
+	print_string(vars, start, offset, projection_name);
 }
 
 void	draw_menu(t_vars *vars)
@@ -44,35 +85,6 @@ void	draw_menu(t_vars *vars)
 	offset.x = 70;
 	offset.y = 20;
 	print_string(vars, &start, &offset, "HOW TO USE:");
-	print_string(vars, &start, &offset, "");
-	print_string(vars, &start, &offset, "Move:");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "A/D (X)");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "W/S (Y)");
-	print_string(vars, &start, &offset, "Rotate: smooth");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "ArrUp/ArrDn (X)");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "ArrLt/ArrRt (Y)");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "Q/E (Z)");
-	print_string(vars, &start, &offset, "Rotate: 90 degrees");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "Shift + ArrUp/ArrDn (X)");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "Shift + ArrLt/ArrRt (Y)");
-	offset.x = 20;
-	print_string(vars, &start, &offset, "Shift + Q/E (Z)");
-	print_string(vars, &start, &offset, "Zoom: +/-");
-	print_string(vars, &start, &offset, "Flatten: PgUp/PgDn");
-	print_string(vars, &start, &offset, "Projection: P");
-	print_string(vars, &start, &offset, "Reset: R");
-	print_string(vars, &start, &offset, "Exit: ESC");
-	print_string(vars, &start, &offset, "");
-	print_string(vars, &start, &offset, "");
-	print_string(vars, &start, &offset, "Projection:");
-	offset.x = 20;
-	print_string(vars, &start, &offset,
-		get_projection_name(vars->map->projection_mode));
+	print_transform_menu(vars, &start, &offset);
+	print_misc_menu(vars, &start, &offset);
 }
