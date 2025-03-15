@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:58:56 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:33:12 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,68 +50,67 @@
 // Structure to hold image data
 typedef struct s_data
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_data;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_data;
 
 typedef struct s_vars
 {
-	void		*mlx;
-	void		*win;
-	t_data		img;
-	t_map		*map;
-	double		zoom;
-	double		rotation;
-	int			screen_width;
-	int			screen_height;
-	int			shift_pressed;
-}				t_vars;
+	void	*mlx;
+	void	*win;
+	t_data	img;
+	t_map	*map;
+	t_bbox	box;
+	double	scale;
+	int		screen_width;
+	int		screen_height;
+	int		shift_pressed;
+}			t_vars;
 
 // Reordering
-void			adjust_initial_scale(t_vars *vars);
-void			error_exit(char *msg);
-int				create_argb(int a, int r, int g, int b);
-void			draw_grid(t_vars vars);
-t_map			*parse_file(const char *filename);
-float			deg_to_rad(float angle);
-t_point2d		iso_projection(t_point pt, float flattern_factor);
-t_point2d		ortho_projection(t_point pt);
-t_point2d		parallel_projection(t_point pt, float depth_factor);
-void			compute_bounding_box(t_map *map, t_bbox *box);
-void			draw_line(t_vars *vars, t_point2d start, t_point2d end,
-					int color);
-void			my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-t_point			get_center(t_map *map);
-t_point2d		translate_point(t_point2d point, t_map *map);
-t_point			rotate_point(t_point p, t_map *map);
-void			subscribe_to_events(t_vars *vars);
-void			update_projected_points(t_vars *vars);
-void			draw_background(t_vars *vars);
+void		adjust_initial_scale(t_vars *vars);
+void		error_exit(char *msg);
+int			create_argb(int a, int r, int g, int b);
+void		draw_grid(t_vars vars);
+t_map		*parse_file(const char *filename);
+float		deg_to_rad(float angle);
+t_point2d	iso_projection(t_point pt, float flattern_factor);
+t_point2d	ortho_projection(t_point pt);
+t_point2d	parallel_projection(t_point pt, float depth_factor);
+void		compute_bounding_box(t_vars *vars);
+void		draw_line(t_vars *vars, t_point2d start, t_point2d end, int color);
+void		my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
+t_point		get_center(t_map *map);
+t_point2d	translate_point(t_point2d point, t_map *map);
+t_point		rotate_point(t_point p, t_map *map);
+void		subscribe_to_events(t_vars *vars);
+void		update_projected_points(t_vars *vars);
+void		draw_background(t_vars *vars);
 
 // Event handling
-void			handle_zoom(t_vars *vars, int keycode);
-void			handle_rotation(t_vars *vars, int keycode);
-void			handle_rotation_left(t_vars *vars, float *axis);
-void			handle_rotation_right(t_vars *vars, float *axis);
-void			handle_translation(t_vars *vars, int keycode);
-void			handle_exit(t_vars *vars, int keycode);
-void			handle_flatten(t_vars *vars, int keycode);
-void			handle_projection_mode(t_vars *vars, int keycode);
-void			handle_reset(t_vars *vars, int keycode);
-void			handle_mouse_zoom(t_vars *vars, int button);
+void		handle_zoom(t_vars *vars, int keycode);
+void		handle_rotation(t_vars *vars, int keycode);
+void		handle_rotation_left(t_vars *vars, float *axis);
+void		handle_rotation_right(t_vars *vars, float *axis);
+void		handle_translation(t_vars *vars, int keycode);
+void		handle_exit(t_vars *vars, int keycode);
+void		handle_flatten(t_vars *vars, int keycode);
+void		handle_projection_mode(t_vars *vars, int keycode);
+void		handle_reset(t_vars *vars, int keycode);
+void		handle_mouse_zoom(t_vars *vars, int button);
 
 // Event handling utils
-void			update_image(t_vars *vars);
-void			apply_zoom(t_map *map, float factor);
-void			apply_flatten(t_map *map, float factor);
+void		update_image(t_vars *vars);
+void		apply_zoom(t_map *map, float factor);
+void		apply_flatten(t_map *map, float factor);
 
 // Cleanup
-void			cleanup_and_exit(t_vars *vars);
+void		cleanup_and_exit(t_vars *vars);
 
 // Menu
-void			draw_menu(t_vars *vars);
+void		draw_menu(t_vars *vars);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:59:16 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:25:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,44 @@
 
 void	update_projected_points(t_vars *vars)
 {
-	t_map	*map;
-	t_bbox	box;
 	t_point	rotated;
 	int		x_offset;
 	int		y_offset;
 	int		i;
 	int		j;
 
-	map = vars->map;
-	compute_bounding_box(map, &box);
-	x_offset = (vars->screen_width - (box.max_x - box.min_x)) / 2 - box.min_x;
-	y_offset = (vars->screen_height - (box.max_y - box.min_y)) / 2 - box.min_y;
+	compute_bounding_box(vars);
+	x_offset = (vars->screen_width - (vars->box.max_x - vars->box.min_x)) / 2
+		- vars->box.min_x;
+	y_offset = (vars->screen_height - (vars->box.max_y - vars->box.min_y)) / 2
+		- vars->box.min_y;
 	i = 0;
-	while (i < map->rows)
+	while (i < vars->map->rows)
 	{
 		j = 0;
-		while (j < map->columns)
+		while (j < vars->map->columns)
 		{
-			rotated = (t_point){j * map->scale, i * map->scale,
-				map->values[i][j]};
-			rotated = rotate_point(rotated, map);
-			rotated.x *= map->zoom_factor;
-			rotated.y *= map->zoom_factor;
-			rotated.z *= map->zoom_factor;
-			if (map->projection_mode == ISO)
-				map->projected_points[i][j] = iso_projection(rotated,
-						map->flatten_factor);
-			else if (map->projection_mode == PARALLEL)
-				map->projected_points[i][j] = parallel_projection(rotated,
-						map->parallel_factor);
-			else if (map->projection_mode == ORTHO)
-				map->projected_points[i][j] = ortho_projection(rotated);
+			rotated = (t_point){j * vars->map->scale, i * vars->map->scale,
+				vars->map->values[i][j]};
+			rotated = rotate_point(rotated, vars->map);
+			rotated.x *= vars->map->zoom_factor;
+			rotated.y *= vars->map->zoom_factor;
+			rotated.z *= vars->map->zoom_factor;
+			if (vars->map->projection_mode == ISO)
+				vars->map->projected_points[i][j] = iso_projection(rotated,
+						vars->map->flatten_factor);
+			else if (vars->map->projection_mode == PARALLEL)
+				vars->map->projected_points[i][j] = parallel_projection(rotated,
+						vars->map->parallel_factor);
+			else if (vars->map->projection_mode == ORTHO)
+				vars->map->projected_points[i][j] = ortho_projection(rotated);
 			else
-				map->projected_points[i][j] = iso_projection(rotated,
-						map->flatten_factor);
-			map->projected_points[i][j].x += x_offset + map->trans_x;
-			map->projected_points[i][j].y += y_offset + map->trans_y;
+				vars->map->projected_points[i][j] = iso_projection(rotated,
+						vars->map->flatten_factor);
+			vars->map->projected_points[i][j].x += x_offset
+				+ vars->map->trans_x;
+			vars->map->projected_points[i][j].y += y_offset
+				+ vars->map->trans_y;
 			j++;
 		}
 		i++;

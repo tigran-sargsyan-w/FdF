@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 19:02:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:25:28 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_point	get_center(t_map *map)
 }
 
 // Function to compute bounding box for the map
-void	compute_bounding_box(t_map *map, t_bbox *box)
+void	compute_bounding_box(t_vars *vars)
 {
 	int			i;
 	int			j;
@@ -54,16 +54,16 @@ void	compute_bounding_box(t_map *map, t_bbox *box)
 	t_point2d	proj;
 
 	i = 0;
-	init_bbox(box);
-	while (i < map->rows)
+	init_bbox(&vars->box);
+	while (i < vars->map->rows)
 	{
 		j = 0;
-		while (j < map->columns)
+		while (j < vars->map->columns)
 		{
-			current = (t_point){j * map->scale, i * map->scale,
-				map->values[i][j]};
-			proj = iso_projection(current, map->flatten_factor);
-			update_bbox(box, proj);
+			current = (t_point){j * vars->map->scale, i * vars->map->scale,
+				vars->map->values[i][j]};
+			proj = iso_projection(current, vars->map->flatten_factor);
+			update_bbox(&vars->box, proj);
 			j++;
 		}
 		i++;
