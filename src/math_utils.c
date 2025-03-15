@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:53:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:36:46 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:58:45 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ t_point2d	iso_projection(t_point pt, float flatten_factor)
 	return (proj);
 }
 
-t_point2d	ortho_projection(t_point pt, t_map *map)
+t_point2d	ortho_projection(t_point pt)
 {
 	t_point2d	proj;
 
-	(void)map;
 	proj.x = pt.x;
 	proj.y = pt.y;
 	return (proj);

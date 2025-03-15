@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:43:13 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:58:56 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,6 @@ typedef struct s_vars
 	int			shift_pressed;
 }				t_vars;
 
-typedef struct s_draw_context
-{
-	t_data		*img;
-	t_map		*map;
-	int			x_offset;
-	int			y_offset;
-	int			line_color;
-}				t_draw_context;
-
 // Reordering
 void			adjust_initial_scale(t_vars *vars);
 void			error_exit(char *msg);
@@ -87,7 +78,7 @@ void			draw_grid(t_vars vars);
 t_map			*parse_file(const char *filename);
 float			deg_to_rad(float angle);
 t_point2d		iso_projection(t_point pt, float flattern_factor);
-t_point2d		ortho_projection(t_point pt, t_map *map);
+t_point2d		ortho_projection(t_point pt);
 t_point2d		parallel_projection(t_point pt, float depth_factor);
 void			compute_bounding_box(t_map *map, t_bbox *box);
 void			draw_line(t_vars *vars, t_point2d start, t_point2d end,

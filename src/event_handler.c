@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:33:39 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:53:09 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:59:16 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	update_projected_points(t_vars *vars)
 				map->projected_points[i][j] = parallel_projection(rotated,
 						map->parallel_factor);
 			else if (map->projection_mode == ORTHO)
-				map->projected_points[i][j] = ortho_projection(rotated, map);
+				map->projected_points[i][j] = ortho_projection(rotated);
 			else
 				map->projected_points[i][j] = iso_projection(rotated,
 						map->flatten_factor);
