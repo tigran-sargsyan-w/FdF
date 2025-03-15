@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:51:50 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:37:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define ROTATION_SPEED 5
 # define ZOOM_IN_FACTOR 1.1f
 # define ZOOM_OUT_FACTOR 0.9f
-# define M_PI 3.14159265358979323846
 # define MIN_ZOOM 0.3
 # define MAX_ZOOM 7.0
 # define FLATTEN_INCREMENT 1.1

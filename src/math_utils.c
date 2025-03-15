@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:53:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/12 20:29:29 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:36:46 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 // Function to transfer degrees to radians
 float	deg_to_rad(float angle)
 {
-	return (angle * M_PI / 180.0);
+	float	math_pi;
+
+	math_pi = 3.14159265358979323846;
+	return (angle * math_pi / 180.0);
 }
 
 // Function to compute isometric projection for a 3D point
