@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:33:12 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ typedef struct s_vars
 {
 	void	*mlx;
 	void	*win;
-	t_data	img;
+	t_data	data;
 	t_map	*map;
 	t_bbox	box;
-	double	scale;
 	int		screen_width;
 	int		screen_height;
 	int		shift_pressed;

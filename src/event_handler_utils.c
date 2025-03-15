@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:37:35 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:45:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	update_image(t_vars *vars)
 {
-	mlx_destroy_image(vars->mlx, vars->img.img);
-	vars->img.img = mlx_new_image(vars->mlx, vars->screen_width, vars->screen_height);
-	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
-			&vars->img.line_length, &vars->img.endian);
+	mlx_destroy_image(vars->mlx, vars->data.img);
+	vars->data.img = mlx_new_image(vars->mlx, vars->screen_width, vars->screen_height);
+	vars->data.addr = mlx_get_data_addr(vars->data.img, &vars->data.bits_per_pixel,
+			&vars->data.line_length, &vars->data.endian);
 	draw_background(vars);
 	draw_grid(*vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	draw_menu(vars);
 }
 

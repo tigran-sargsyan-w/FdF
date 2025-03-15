@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 22:54:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 
 	if (x >= 0 && x < vars->screen_width && y >= 0 && y < vars->screen_height)
 	{
-		dst = vars->img.addr + (y * vars->img.line_length + x
-				* (vars->img.bits_per_pixel / 8));
+		dst = vars->data.addr + (y * vars->data.line_length + x
+				* (vars->data.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
 }

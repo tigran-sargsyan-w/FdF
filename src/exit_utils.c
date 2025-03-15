@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 17:56:18 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	cleanup_and_exit(t_vars *vars)
 {
 	if (!vars || !vars->mlx)
 		return ;
-	if (vars->img.img)
-		mlx_destroy_image(vars->mlx, vars->img.img);
+	if (vars->data.img)
+		mlx_destroy_image(vars->mlx, vars->data.img);
 	if (vars->win)
 		mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);

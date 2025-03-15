@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:39:39 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ static void	init_vars(t_vars *vars)
 			vars->screen_height, "FdF");
 	if (!vars->win)
 		error_exit("mlx_new_window");
-	vars->img.img = mlx_new_image(vars->mlx, vars->screen_width,
+	vars->data.img = mlx_new_image(vars->mlx, vars->screen_width,
 			vars->screen_height);
-	if (!vars->img.img)
+	if (!vars->data.img)
 		error_exit("mlx_new_image");
-	vars->img.addr = mlx_get_data_addr(vars->img.img, &vars->img.bits_per_pixel,
-			&vars->img.line_length, &vars->img.endian);
-	if (!vars->img.addr)
+	vars->data.addr = mlx_get_data_addr(vars->data.img, &vars->data.bits_per_pixel,
+			&vars->data.line_length, &vars->data.endian);
+	if (!vars->data.addr)
 		error_exit("mlx_get_data_addr");
 	vars->shift_pressed = 0;
 }
@@ -48,7 +48,7 @@ static void	render_scene(t_vars *vars)
 	draw_background(vars);
 	update_projected_points(vars);
 	draw_grid(*vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
 	draw_menu(vars);
 }
 
