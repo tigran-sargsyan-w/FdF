@@ -6,20 +6,21 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 13:00:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Custom pixel put function: writes color to (x, y) in image buffer
-void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
+void	my_mlx_pixel_put(t_vars *vars, t_point2d point, int color)
 {
 	char	*dst;
 
-	if (x >= 0 && x < vars->screen_width && y >= 0 && y < vars->screen_height)
+	if (point.x >= 0 && point.x < vars->screen_width && point.y >= 0
+		&& point.y < vars->screen_height)
 	{
-		dst = vars->data.addr + (y * vars->data.line_length + x
+		dst = vars->data.addr + (point.y * vars->data.line_length + point.x
 				* (vars->data.bits_per_pixel / 8));
 		*(unsigned int *)dst = color;
 	}
