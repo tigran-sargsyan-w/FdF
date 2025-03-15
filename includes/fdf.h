@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 11:37:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:43:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <time.h> // delete
 
 // Constants
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 # define MOVE_SPEED 10
 # define ROTATION_SPEED 5
 # define ZOOM_IN_FACTOR 1.1f

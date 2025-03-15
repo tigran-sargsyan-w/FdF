@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/14 23:00:50 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/15 11:39:39 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static void	init_vars(t_vars *vars)
 	if (!vars->mlx)
 		error_exit("mlx_init");
 	mlx_get_screen_size(vars->mlx, &vars->screen_width, &vars->screen_height);
-	// vars->screen_width = WINDOW_WIDTH;
-	// vars->screen_height = WINDOW_HEIGHT;
+	vars->screen_width = WINDOW_WIDTH;
+	vars->screen_height = WINDOW_HEIGHT;
 	vars->win = mlx_new_window(vars->mlx, vars->screen_width,
 			vars->screen_height, "FdF");
 	if (!vars->win)
