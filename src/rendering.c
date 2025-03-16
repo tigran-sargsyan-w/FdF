@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 13:45:32 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:52:40 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	my_mlx_pixel_put(t_vars *vars, t_point2d point, int color)
 	}
 }
 
-void	draw_background(t_vars *vars)
+static void	draw_background(t_vars *vars)
 {
 	t_point2d	pt;
 	int			bg_color;
@@ -70,7 +70,7 @@ void	draw_background(t_vars *vars)
 	}
 }
 
-void	update_projected_points(t_vars *vars)
+static void	update_projected_points(t_vars *vars)
 {
 	t_point2d	offset;
 	int			i;
@@ -92,4 +92,20 @@ void	update_projected_points(t_vars *vars)
 		}
 		i++;
 	}
+}
+
+void	update_scene(t_vars *vars)
+{
+	mlx_destroy_image(vars->mlx, vars->data.img);
+	vars->data.img = mlx_new_image(vars->mlx, vars->screen_width,
+			vars->screen_height);
+	vars->data.addr = mlx_get_data_addr(vars->data.img,
+			&vars->data.bits_per_pixel,
+			&vars->data.line_length,
+			&vars->data.endian);
+	draw_background(vars);
+	update_projected_points(vars);
+	draw_grid(vars);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
+	draw_menu(vars);
 }

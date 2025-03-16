@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 11:46:08 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:27:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	fill_map_values(t_list *lines, int rows, int columns, t_map *map)
 	}
 }
 
-void	init_map(t_map *map, t_list *lines)
+static void	init_map(t_map *map, t_list *lines)
 {
 	int	i;
 

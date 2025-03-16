@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 14:02:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:49:05 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,6 @@ static void	init_vars(t_vars *vars, char *filename)
 	adjust_initial_scale(vars);
 }
 
-static void	render_scene(t_vars *vars)
-{
-	draw_background(vars);
-	update_projected_points(vars);
-	draw_grid(vars);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
-	draw_menu(vars);
-}
-
 static void	check_args(int argc, char **argv)
 {
 	char	*file_extension;
@@ -93,7 +84,7 @@ int	main(int argc, char **argv)
 	start = clock();
 	check_args(argc, argv);
 	init_vars(&vars, argv[1]);
-	render_scene(&vars);
+	update_scene(&vars);
 	end = clock();
 	printf("Time taken: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
 	subscribe_to_events(&vars);

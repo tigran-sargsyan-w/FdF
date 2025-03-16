@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 13:45:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:52:50 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,6 @@ void		compute_bounding_box(t_vars *vars);
 void		my_mlx_pixel_put(t_vars *vars, t_point2d point, int color);
 t_point		rotate_point(t_point point, t_map *map);
 void		subscribe_to_events(t_vars *vars);
-void		update_projected_points(t_vars *vars);
-void		draw_background(t_vars *vars);
 
 // Event handling
 void		handle_zoom(t_vars *vars, int keycode);
@@ -96,7 +94,7 @@ void		handle_reset(t_vars *vars, int keycode);
 void		handle_mouse_zoom(t_vars *vars, int button);
 
 // Event handling utils
-void		update_image(t_vars *vars);
+void		update_scene(t_vars *vars);
 void		apply_zoom(t_map *map, float factor);
 void		apply_flatten(t_map *map, float factor);
 
