@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rotate.c                                           :+:      :+:    :+:   */
+/*   transform_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:00:30 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/07 12:19:43 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:36:20 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,9 @@ t_point	rotate_point(t_point point, t_map *map)
 	float	rad_y;
 	float	rad_z;
 
-	center = get_center(map);
+	center.x = (map->columns - 1) * map->scale / 2;
+	center.y = (map->rows - 1) * map->scale / 2;
+	center.z = 0;
 	rad_x = deg_to_rad(map->rot_x);
 	rad_y = deg_to_rad(map->rot_y);
 	rad_z = deg_to_rad(map->rot_z);
@@ -78,13 +80,5 @@ t_point	rotate_point(t_point point, t_map *map)
 	point.x += center.x;
 	point.y += center.y;
 	point.z += center.z;
-	return (point);
-}
-
-// Function to translate 2D point after projection
-t_point2d	translate_point(t_point2d point, t_map *map)
-{
-	point.x += map->trans_x;
-	point.y += map->trans_y;
 	return (point);
 }

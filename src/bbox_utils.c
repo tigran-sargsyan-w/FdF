@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 11:47:50 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:34:40 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,6 @@ static void	update_bbox(t_bbox *box, t_point2d proj)
 		box->min_y = proj.y;
 	if (proj.y > box->max_y)
 		box->max_y = proj.y;
-}
-
-// Function to compute the center of the grid
-t_point	get_center(t_map *map)
-{
-	t_point	center;
-
-	center.x = (map->columns - 1) * map->scale / 2;
-	center.y = (map->rows - 1) * map->scale / 2;
-	center.z = 0;
-	return (center);
 }
 
 // Function to compute bounding box for the map

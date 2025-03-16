@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 11:45:35 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:36:25 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,6 @@ t_point2d	to_orthographic(t_point pt);
 t_point2d	to_parallel(t_point pt);
 void		compute_bounding_box(t_vars *vars);
 void		my_mlx_pixel_put(t_vars *vars, t_point2d point, int color);
-t_point		get_center(t_map *map);
-t_point2d	translate_point(t_point2d point, t_map *map);
 t_point		rotate_point(t_point point, t_map *map);
 void		subscribe_to_events(t_vars *vars);
 void		update_projected_points(t_vars *vars);
