@@ -6,13 +6,30 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 13:45:56 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:02:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	init_vars(t_vars *vars)
+static void	adjust_initial_scale(t_vars *vars)
+{
+	int		max_width;
+	int		max_height;
+	float	scale_x;
+	float	scale_y;
+	float	factor;
+
+	factor = 0.8;
+	max_width = vars->screen_width * factor;
+	max_height = vars->screen_height * factor;
+	scale_x = (float)max_width / vars->map->columns;
+	scale_y = (float)max_height / vars->map->rows;
+	vars->map->scale = fmin(scale_x, scale_y);
+	vars->map->zoom_factor = 1.0;
+}
+
+static void	init_vars(t_vars *vars, char *filename)
 {
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
@@ -29,31 +46,16 @@ static void	init_vars(t_vars *vars)
 	if (!vars->data.img)
 		error_exit("mlx_new_image");
 	vars->data.addr = mlx_get_data_addr(vars->data.img,
-			&vars->data.bits_per_pixel, &vars->data.line_length,
+			&vars->data.bits_per_pixel,
+			&vars->data.line_length,
 			&vars->data.endian);
 	if (!vars->data.addr)
 		error_exit("mlx_get_data_addr");
 	vars->shift_pressed = 0;
-}
-
-static void	load_map(t_vars *vars, char *filename)
-{
-	int		max_width;
-	int		max_height;
-	float	scale_x;
-	float	scale_y;
-	float	factor;
-
 	vars->map = parse_file(filename);
 	if (!vars->map)
 		error_exit("parse_file");
-	factor = 0.8;
-	max_width = vars->screen_width * factor;
-	max_height = vars->screen_height * factor;
-	scale_x = (float)max_width / vars->map->columns;
-	scale_y = (float)max_height / vars->map->rows;
-	vars->map->scale = fmin(scale_x, scale_y);
-	vars->map->zoom_factor = 1.0;
+	adjust_initial_scale(vars);
 }
 
 static void	render_scene(t_vars *vars)
@@ -90,8 +92,7 @@ int	main(int argc, char **argv)
 
 	start = clock();
 	check_args(argc, argv);
-	init_vars(&vars);
-	load_map(&vars, argv[1]);
+	init_vars(&vars, argv[1]);
 	render_scene(&vars);
 	end = clock();
 	printf("Time taken: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
