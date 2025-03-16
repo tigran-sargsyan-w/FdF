@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 14:52:50 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 14:59:50 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void		handle_exit(t_vars *vars, int keycode);
 void		handle_flatten(t_vars *vars, int keycode);
 void		handle_projection_mode(t_vars *vars, int keycode);
 void		handle_reset(t_vars *vars, int keycode);
-void		handle_mouse_zoom(t_vars *vars, int button);
 
 // Event handling utils
 void		update_scene(t_vars *vars);
