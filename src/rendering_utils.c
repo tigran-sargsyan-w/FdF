@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:44:13 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 17:51:42 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 10:44:17 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 static void	compute_projected_point(t_map *map, int i, int j, t_point2d offset)
 {
-	t_point	pt;
+	t_point	point;
 
-	pt = (t_point){j * map->scale, i * map->scale, map->values[i][j]};
-	pt = rotate_point(pt, map);
-	pt.x *= map->zoom_factor;
-	pt.y *= map->zoom_factor;
-	pt.z *= map->zoom_factor;
+	point = (t_point){j * map->scale, i * map->scale, map->values[i][j]};
+	point = rotate_point(point, map);
+	point.x *= map->zoom_factor;
+	point.y *= map->zoom_factor;
+	point.z *= map->zoom_factor;
 	if (map->projection_mode == ISO)
-		map->projected_points[i][j] = to_isometric(pt, map->flatten_factor);
+		map->render_points[i][j] = to_isometric(point, map->flatten_factor);
 	else if (map->projection_mode == PARALLEL)
-		map->projected_points[i][j] = to_parallel(pt);
+		map->render_points[i][j] = to_parallel(point);
 	else if (map->projection_mode == ORTHO)
-		map->projected_points[i][j] = to_orthographic(pt);
+		map->render_points[i][j] = to_orthographic(point);
 	else
-		map->projected_points[i][j] = to_isometric(pt, map->flatten_factor);
-	map->projected_points[i][j].x += offset.x + map->trans_x;
-	map->projected_points[i][j].y += offset.y + map->trans_y;
+		map->render_points[i][j] = to_isometric(point, map->flatten_factor);
+	map->render_points[i][j].x += offset.x + map->trans_x;
+	map->render_points[i][j].y += offset.y + map->trans_y;
 }
 
 void	update_projected_points(t_vars *vars)

@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 12:42:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 10:37:52 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ void	free_map(t_map *map)
 	{
 		free(map->values[i]);
 		free(map->colors[i]);
-		free(map->projected_points[i]);
+		free(map->render_points[i]);
 		i++;
 	}
 	free(map->values);
 	free(map->colors);
-	free(map->projected_points);
+	free(map->render_points);
 	free(map);
 }
 
