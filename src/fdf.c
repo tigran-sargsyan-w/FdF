@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 11:14:27 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:45:56 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,22 @@ static void	init_vars(t_vars *vars)
 
 static void	load_map(t_vars *vars, char *filename)
 {
+	int		max_width;
+	int		max_height;
+	float	scale_x;
+	float	scale_y;
+	float	factor;
+
 	vars->map = parse_file(filename);
 	if (!vars->map)
 		error_exit("parse_file");
-	adjust_initial_scale(vars);
+	factor = 0.8;
+	max_width = vars->screen_width * factor;
+	max_height = vars->screen_height * factor;
+	scale_x = (float)max_width / vars->map->columns;
+	scale_y = (float)max_height / vars->map->rows;
+	vars->map->scale = fmin(scale_x, scale_y);
+	vars->map->zoom_factor = 1.0;
 }
 
 static void	render_scene(t_vars *vars)

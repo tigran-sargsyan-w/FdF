@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 16:45:48 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:20:58 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,6 @@ static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
 	mlx_string_put(vars->mlx, vars->win, start->x, start->y, TEXT_COLOR, str);
 	start->x -= offset->x;
 	offset->x = 0;
-}
-
-static char	*get_projection_name(t_projection_mode mode)
-{
-	char	*names[3];
-
-	names[0] = "ISO";
-	names[1] = "PARALLEL";
-	names[2] = "ORTHO";
-	if (mode < ISO || mode > ORTHO)
-		return ("UNKNOWN");
-	return (names[mode]);
 }
 
 static void	print_transform_menu(t_vars *vars, t_point2d *start,
@@ -61,9 +49,11 @@ static void	print_transform_menu(t_vars *vars, t_point2d *start,
 
 static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
 {
-	char	*projection_name;
+	char	*projection_name[3];
 
-	projection_name = get_projection_name(vars->map->projection_mode);
+	projection_name[0] = "ISO";
+	projection_name[1] = "PARALLEL";
+	projection_name[2] = "ORTHO";
 	print_string(vars, start, offset, "Zoom:");
 	offset->x = 20;
 	print_string(vars, start, offset, "+/-");
@@ -77,7 +67,8 @@ static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
 	print_string(vars, start, offset, "");
 	print_string(vars, start, offset, "Projection:");
 	offset->x = 20;
-	print_string(vars, start, offset, projection_name);
+	print_string(vars, start, offset,
+		projection_name[vars->map->projection_mode]);
 }
 
 void	draw_menu(t_vars *vars)

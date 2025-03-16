@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 12:16:04 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:45:32 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,24 +68,6 @@ void	draw_background(t_vars *vars)
 		}
 		pt.y++;
 	}
-}
-
-// Function to adjust scale of the map to fit the window
-void	adjust_initial_scale(t_vars *vars)
-{
-	int		max_width;
-	int		max_height;
-	float	scale_x;
-	float	scale_y;
-	float	factor;
-
-	factor = 0.8;
-	max_width = vars->screen_width * factor;
-	max_height = vars->screen_height * factor;
-	scale_x = (float)max_width / vars->map->columns;
-	scale_y = (float)max_height / vars->map->rows;
-	vars->map->scale = fmin(scale_x, scale_y);
-	vars->map->zoom_factor = 1.0;
 }
 
 void	update_projected_points(t_vars *vars)

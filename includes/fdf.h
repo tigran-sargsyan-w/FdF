@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 12:36:25 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:45:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_vars
 }			t_vars;
 
 // Reordering
-void		adjust_initial_scale(t_vars *vars);
 void		error_exit(char *msg);
 void		draw_grid(t_vars *vars);
 t_list		*read_file_lines(const char *filename);
