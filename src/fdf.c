@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 16:58:30 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/16 11:14:27 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,20 @@ static void	render_scene(t_vars *vars)
 	draw_menu(vars);
 }
 
-void	check_args(int argc, char **argv)
+static void	check_args(int argc, char **argv)
 {
 	char	*file_extension;
 
 	if (argc != 2)
 	{
 		ft_printf("Usage: %s <mapname>.fdf\n", argv[0]);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	file_extension = ft_strrchr(argv[1], '.');
 	if (!file_extension || ft_strcmp(file_extension, ".fdf") != 0)
 	{
 		ft_printf("File extension does not match requirements (.fdf)\n");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 }
 

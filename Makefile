@@ -44,6 +44,7 @@ SRCS        = $(SRC_DIR)/fdf.c \
 			  $(SRC_DIR)/event_system.c \
 			  $(SRC_DIR)/exit_utils.c \
 			  $(SRC_DIR)/math_utils.c \
+			  $(SRC_DIR)/parsing_utils.c \
 			  $(SRC_DIR)/parsing.c \
 			  $(SRC_DIR)/rendering_utils.c \
 			  $(SRC_DIR)/rendering.c \
