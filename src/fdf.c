@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 14:49:05 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:22:21 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	adjust_initial_scale(t_vars *vars)
 	float	scale_y;
 	float	factor;
 
-	factor = 0.8;
+	factor = 0.6;
 	max_width = vars->screen_width * factor;
 	max_height = vars->screen_height * factor;
 	scale_x = (float)max_width / vars->map->columns;
