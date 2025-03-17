@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/17 15:15:07 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:11:13 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "mlx_int.h"
 # include "parsing.h"
 # include "rendering.h"
+# include <X11/X.h>
 # include <limits.h>
 # include <math.h>
 # include <stdlib.h>
