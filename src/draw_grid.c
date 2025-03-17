@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 10:37:52 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:07 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	draw_line(t_vars *vars, t_point2d start, t_point2d end, int color)
 	lp = init_line_params(start, end);
 	while (1)
 	{
-		my_mlx_pixel_put(vars, start, color);
+		draw_pixel(vars, start, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
 		double_error = 2 * lp.error;

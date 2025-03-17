@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 14:52:40 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:07 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void	compute_projected_point(t_map *map, int i, int j, t_point2d offset)
 }
 
 // Custom pixel put function: writes color to (x, y) in image buffer
-void	my_mlx_pixel_put(t_vars *vars, t_point2d point, int color)
+void	draw_pixel(t_vars *vars, t_point2d point, int color)
 {
 	char	*dst;
 
@@ -63,7 +63,7 @@ static void	draw_background(t_vars *vars)
 				bg_color = MENU_BG_COLOR;
 			else
 				bg_color = BG_COLOR;
-			my_mlx_pixel_put(vars, pt, bg_color);
+			draw_pixel(vars, pt, bg_color);
 			pt.x++;
 		}
 		pt.y++;

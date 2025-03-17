@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 16:43:25 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/17 15:15:07 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_point2d	to_isometric(t_point pt, float flattern_factor);
 t_point2d	to_orthographic(t_point pt);
 t_point2d	to_parallel(t_point pt);
 void		compute_bounding_box(t_vars *vars);
-void		my_mlx_pixel_put(t_vars *vars, t_point2d point, int color);
+void		draw_pixel(t_vars *vars, t_point2d point, int color);
 t_point		rotate_point(t_point point, t_map *map);
 void		subscribe_to_events(t_vars *vars);
 
