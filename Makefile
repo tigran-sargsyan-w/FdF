@@ -55,8 +55,6 @@ BONUS_SRCS  = $(SRC_DIR)/bonus.c
 #   Header Files
 # -------------------------------
 HEADERS     = $(INC_DIR)/fdf.h \
-			  $(INC_DIR)/events.h \
-			  $(INC_DIR)/event_masks.h \
 			  $(INC_DIR)/keys.h \
 			  $(INC_DIR)/parsing.h \
 			  $(INC_DIR)/rendering.h 

@@ -6,15 +6,13 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 19:44:10 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 20:56:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "event_masks.h"
-# include "events.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 # include "keys.h"
@@ -24,6 +22,7 @@
 # include "parsing.h"
 # include "rendering.h"
 # include <X11/X.h>
+# include <X11/keysymdef.h>
 # include <limits.h>
 # include <math.h>
 # include <stdlib.h>
