@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 11:04:41 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:10:52 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ void	free_map(t_map *map)
 	i = 0;
 	while (i < map->rows)
 	{
-		free(map->values[i]);
-		free(map->colors[i]);
-		free(map->render_points[i]);
+		if (map->values && map->values[i])
+			free(map->values[i]);
+		if (map->colors && map->colors[i])
+			free(map->colors[i]);
+		if (map->render_points && map->render_points[i])
+			free(map->render_points[i]);
 		i++;
 	}
-	free(map->values);
-	free(map->colors);
-	free(map->render_points);
+	if (map->values)
+		free(map->values);
+	if (map->colors)
+		free(map->colors);
+	if (map->render_points)
+		free(map->render_points);
 	free(map);
 }
 
