@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/17 19:18:10 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 22:03:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	on_keydown(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_SHIFT_L)
+	if (keycode == XK_Shift_L)
 		vars->shift_pressed = 1;
 	handle_exit(vars, keycode);
 	handle_translation(vars, keycode);
@@ -29,7 +29,7 @@ static int	on_keydown(int keycode, t_vars *vars)
 
 static int	on_keyup(int keycode, t_vars *vars)
 {
-	if (keycode == KEY_SHIFT_L)
+	if (keycode == XK_Shift_L)
 		vars->shift_pressed = 0;
 	return (0);
 }

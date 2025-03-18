@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 20:56:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 22:05:34 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,9 @@
 
 # include "ft_printf.h"
 # include "get_next_line.h"
-# include "keys.h"
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
-# include "parsing.h"
 # include "rendering.h"
 # include <X11/X.h>
 # include <X11/keysymdef.h>
@@ -46,6 +44,9 @@
 # define MENU_WIDTH 250
 # define MENU_BG_COLOR 0x222222
 # define TEXT_COLOR 0xFFFFFF
+
+# define MOUSE_SCROLL_UP Button4
+# define MOUSE_SCROLL_DOWN Button5
 
 // Structure to hold image data
 typedef struct s_data

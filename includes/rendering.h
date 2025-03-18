@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 14:52:21 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/06 14:39:33 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 22:05:11 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,30 @@ typedef struct s_bbox
 	int			min_y;
 	int			max_y;
 }				t_bbox;
+
+typedef enum e_projection_mode
+{
+	ISO,
+	PARALLEL,
+	ORTHO
+}						t_projection_mode;
+
+typedef struct s_map
+{
+	int					**values;
+	int					**colors;
+	float				scale;
+	int					columns;
+	int					rows;
+	float				zoom_factor;
+	float				flatten_factor;
+	float				rot_x;
+	float				rot_y;
+	float				rot_z;
+	float				trans_x;
+	float				trans_y;
+	t_point2d			**render_points;
+	t_projection_mode	projection_mode;
+}						t_map;
 
 #endif

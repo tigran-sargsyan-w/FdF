@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:49:55 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/15 16:51:23 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 21:48:01 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,28 @@ static void	handle_rotation_right(t_vars *vars, float *axis)
 
 void	handle_translation(t_vars *vars, int keycode)
 {
-	if (keycode == KEY_W)
+	if (keycode == XK_w)
 		vars->map->trans_y -= MOVE_SPEED;
-	else if (keycode == KEY_S)
+	else if (keycode == XK_s)
 		vars->map->trans_y += MOVE_SPEED;
-	else if (keycode == KEY_A)
+	else if (keycode == XK_a)
 		vars->map->trans_x -= MOVE_SPEED;
-	else if (keycode == KEY_D)
+	else if (keycode == XK_d)
 		vars->map->trans_x += MOVE_SPEED;
 }
 
 void	handle_rotation(t_vars *vars, int keycode)
 {
-	if (keycode == KEY_ARROW_UP)
+	if (keycode == XK_Up)
 		handle_rotation_left(vars, &vars->map->rot_x);
-	else if (keycode == KEY_ARROW_DOWN)
+	else if (keycode == XK_Down)
 		handle_rotation_right(vars, &vars->map->rot_x);
-	else if (keycode == KEY_ARROW_LEFT)
+	else if (keycode == XK_Left)
 		handle_rotation_left(vars, &vars->map->rot_y);
-	else if (keycode == KEY_ARROW_RIGHT)
+	else if (keycode == XK_Right)
 		handle_rotation_right(vars, &vars->map->rot_y);
-	else if (keycode == KEY_Q)
+	else if (keycode == XK_q)
 		handle_rotation_left(vars, &vars->map->rot_z);
-	else if (keycode == KEY_E)
+	else if (keycode == XK_e)
 		handle_rotation_right(vars, &vars->map->rot_z);
 }
