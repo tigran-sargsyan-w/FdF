@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 15:49:42 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:57:43 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ static void	get_map_dimensions(t_list *lines, t_map *map)
 
 // Process one line: split and convert to integer array
 static void	process_line(char *line, int *row_values, int *row_colors,
-		int columns)
+		t_vars *vars)
 {
 	int		column_index;
 	char	*current_char;
 
 	column_index = 0;
 	current_char = line;
-	while (*current_char && column_index < columns)
+	while (*current_char && column_index < vars->map->columns)
 	{
 		while (*current_char == ' ')
 			current_char++;
@@ -49,7 +49,7 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 		{
 			if (!ft_isvalid_int(current_char))
 			{
-				error_exit("Invalid value");
+				cleanup_and_exit(vars);
 			}
 			row_values[column_index] = ft_atoi(current_char);
 		}
@@ -61,7 +61,7 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 			current_char++;
 			if (!ft_isvalid_hex(current_char))
 			{
-				error_exit("Invalid color");
+				cleanup_and_exit(vars);
 			}
 			row_colors[column_index] = ft_atoi_hex(current_char);
 			while (*current_char && *current_char != ' ')
@@ -72,10 +72,12 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 }
 
 // Fill the 2D array with map values from the linked list
-static void	fill_map_values(t_list *lines, t_map *map)
+static void	fill_map_values(t_list *lines, t_vars *vars)
 {
-	int	row_index;
+	t_map	*map;
+	int		row_index;
 
+	map = vars->map;
 	map->values = (int **)malloc(map->rows * sizeof(int *));
 	if (!map->values)
 		error_exit("malloc for values");
@@ -92,7 +94,7 @@ static void	fill_map_values(t_list *lines, t_map *map)
 		if (!map->colors[row_index])
 			error_exit("malloc for row colors");
 		process_line((char *)lines->content, map->values[row_index],
-			map->colors[row_index], map->columns);
+			map->colors[row_index], vars);
 		row_index++;
 		lines = lines->next;
 	}
@@ -106,7 +108,7 @@ void	init_map(t_vars *vars, t_list *lines)
 	map = vars->map;
 	i = 0;
 	get_map_dimensions(lines, map);
-	fill_map_values(lines, map);
+	fill_map_values(lines, vars);
 	map->rot_x = 0;
 	map->rot_y = 0;
 	map->rot_z = 0;
