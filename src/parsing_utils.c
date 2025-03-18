@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 16:11:33 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 19:53:36 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,36 +36,34 @@ static void	get_map_dimensions(t_list *lines, t_map *map)
 static void	process_line(char *line, int *row_values, int *row_colors,
 		t_vars *vars)
 {
-	int		column_index;
-	char	*current_char;
+	int	column_index;
 
 	column_index = 0;
-	current_char = line;
-	while (*current_char && column_index < vars->map->columns)
+	while (*line && column_index < vars->map->columns)
 	{
-		while (*current_char == ' ')
-			current_char++;
-		if (*current_char)
+		while (*line == ' ')
+			line++;
+		if (*line)
 		{
-			if (!ft_isvalid_int(current_char))
+			if (!ft_isvalid_int(line))
 			{
 				cleanup_and_exit(vars);
 			}
-			row_values[column_index] = ft_atoi(current_char);
+			row_values[column_index] = ft_atoi(line);
 		}
 		row_colors[column_index] = DEFAULT_COLOR;
-		while (*current_char && *current_char != ' ' && *current_char != ',')
-			current_char++;
-		if (*current_char == ',')
+		while (*line && *line != ' ' && *line != ',')
+			line++;
+		if (*line == ',')
 		{
-			current_char++;
-			if (!ft_isvalid_hex(current_char))
+			line++;
+			if (!ft_isvalid_hex(line))
 			{
 				cleanup_and_exit(vars);
 			}
-			row_colors[column_index] = ft_atoi_hex(current_char);
-			while (*current_char && *current_char != ' ')
-				current_char++;
+			row_colors[column_index] = ft_atoi_hex(line);
+			while (*line && *line != ' ')
+				line++;
 		}
 		column_index++;
 	}
@@ -100,15 +98,15 @@ static void	fill_map_values(t_list *lines, t_vars *vars)
 	}
 }
 
-void	init_map(t_vars *vars, t_list *lines)
+void	init_map(t_vars *vars)
 {
 	int		i;
 	t_map	*map;
 
 	map = vars->map;
 	i = 0;
-	get_map_dimensions(lines, map);
-	fill_map_values(lines, vars);
+	get_map_dimensions(vars->lines, map);
+	fill_map_values(vars->lines, vars);
 	map->rot_x = 0;
 	map->rot_y = 0;
 	map->rot_z = 0;
