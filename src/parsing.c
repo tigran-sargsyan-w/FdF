@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 16:14:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:16:33 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	parse_file(t_vars *vars, const char *filename)
 	lines = read_file_lines(filename);
 	if (!lines)
 		error_exit("empty file");
+	vars->lines = lines;
 	vars->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!vars->map)
 	{
@@ -57,4 +58,5 @@ void	parse_file(t_vars *vars, const char *filename)
 	}
 	init_map(vars, lines);
 	ft_lstclear(&lines, free);
+	vars->lines = NULL;
 }

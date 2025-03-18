@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 15:10:52 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 17:17:22 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	cleanup_and_exit(t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 	mlx_destroy_display(vars->mlx);
 	free(vars->mlx);
+	if (vars->lines)
+		ft_lstclear(&vars->lines, free);
 	free_map(vars->map);
 	exit(EXIT_SUCCESS);
 }
