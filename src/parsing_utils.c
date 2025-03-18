@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 16:48:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:47:15 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,23 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 		while (*current_char == ' ')
 			current_char++;
 		if (*current_char)
+		{
+			if (!ft_isvalid_int(current_char))
+			{
+				error_exit("Invalid value");
+			}
 			row_values[column_index] = ft_atoi(current_char);
+		}
 		row_colors[column_index] = DEFAULT_COLOR;
 		while (*current_char && *current_char != ' ' && *current_char != ',')
 			current_char++;
 		if (*current_char == ',')
 		{
 			current_char++;
+			if (!ft_isvalid_hex(current_char))
+			{
+				error_exit("Invalid color");
+			}
 			row_colors[column_index] = ft_atoi_hex(current_char);
 			while (*current_char && *current_char != ' ')
 				current_char++;
@@ -88,10 +98,12 @@ static void	fill_map_values(t_list *lines, int rows, int columns, t_map *map)
 	}
 }
 
-void	init_map(t_map *map, t_list *lines)
+void	init_map(t_vars *vars, t_list *lines)
 {
-	int	i;
+	int		i;
+	t_map	*map;
 
+	map = vars->map;
 	i = 0;
 	get_map_dimensions(lines, &map->rows, &map->columns);
 	fill_map_values(lines, map->rows, map->columns, map);

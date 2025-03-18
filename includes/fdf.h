@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/17 19:11:13 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:49:11 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ typedef struct s_vars
 // Reordering
 void		error_exit(char *msg);
 void		draw_grid(t_vars *vars);
-t_map		*parse_file(const char *filename);
-void		init_map(t_map *map, t_list *lines);
+void		parse_file(t_vars *vars, const char *filename);
+void		init_map(t_vars *vars, t_list *lines);
 float		deg_to_rad(float angle);
 t_point2d	to_isometric(t_point pt, float flattern_factor);
 t_point2d	to_orthographic(t_point pt);

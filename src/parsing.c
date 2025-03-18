@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 16:41:17 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:48:56 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,19 @@ static t_list	*read_file_lines(const char *filename)
 }
 
 // Main parse_file function that uses helper functions
-t_map	*parse_file(const char *filename)
+void	parse_file(t_vars *vars, const char *filename)
 {
 	t_list	*lines;
-	t_map	*map;
 
 	lines = read_file_lines(filename);
 	if (!lines)
 		error_exit("empty file");
-	map = (t_map *)malloc(sizeof(t_map));
-	if (!map)
+	vars->map = (t_map *)malloc(sizeof(t_map));
+	if (!vars->map)
 	{
 		ft_lstclear(&lines, free);
 		error_exit("malloc");
 	}
-	init_map(map, lines);
+	init_map(vars, lines);
 	ft_lstclear(&lines, free);
-	return (map);
 }

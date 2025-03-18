@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/17 16:22:21 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 11:49:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	init_vars(t_vars *vars, char *filename)
 	if (!vars->data.addr)
 		error_exit("mlx_get_data_addr");
 	vars->shift_pressed = 0;
-	vars->map = parse_file(filename);
+	parse_file(vars, filename);
 	if (!vars->map)
 		error_exit("parse_file");
 	adjust_initial_scale(vars);
