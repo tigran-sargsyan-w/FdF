@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 16:04:09 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:11:33 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,19 @@ static void	fill_map_values(t_list *lines, t_vars *vars)
 	int		row_index;
 
 	map = vars->map;
-	map->values = (int **)malloc(map->rows * sizeof(int *));
+	map->values = (int **)ft_calloc(map->rows, sizeof(int *));
 	if (!map->values)
 		error_exit("alloc for values");
-	map->colors = (int **)malloc(map->rows * sizeof(int *));
+	map->colors = (int **)ft_calloc(map->rows, sizeof(int *));
 	if (!map->colors)
 		error_exit("alloc for colors");
 	row_index = 0;
 	while (lines)
 	{
-		map->values[row_index] = (int *)malloc(map->columns * sizeof(int));
+		map->values[row_index] = (int *)ft_calloc(map->columns, sizeof(int));
 		if (!map->values[row_index])
 			error_exit("alloc for row values");
-		map->colors[row_index] = (int *)malloc(map->columns * sizeof(int));
+		map->colors[row_index] = (int *)ft_calloc(map->columns, sizeof(int));
 		if (!map->colors[row_index])
 			error_exit("alloc for row colors");
 		process_line((char *)lines->content, map->values[row_index],
@@ -116,12 +116,12 @@ void	init_map(t_vars *vars, t_list *lines)
 	map->trans_y = 0;
 	map->flatten_factor = 1.0;
 	map->projection_mode = ISO;
-	map->render_points = malloc(map->rows * sizeof(t_point2d *));
+	map->render_points = ft_calloc(map->rows, sizeof(t_point2d *));
 	if (!map->render_points)
 		error_exit("alloc failed");
 	while (i < map->rows)
 	{
-		map->render_points[i] = malloc(map->columns * sizeof(t_point2d));
+		map->render_points[i] = ft_calloc(map->columns, sizeof(t_point2d));
 		if (!map->render_points[i])
 			error_exit("alloc failed");
 		i++;
