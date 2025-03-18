@@ -6,23 +6,23 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 11:47:15 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 15:49:42 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Determine map dimensions from the first line of the list
-static void	get_map_dimensions(t_list *lines, int *rows, int *columns)
+static void	get_map_dimensions(t_list *lines, t_map *map)
 {
 	char	**tokens;
 	int		col;
 
-	*rows = ft_lstsize(lines);
+	map->rows = ft_lstsize(lines);
 	tokens = ft_split((char *)lines->content, ' ');
 	if (!tokens)
 		error_exit("ft_split");
-	*columns = ft_count_tokens(tokens);
+	map->columns = ft_count_tokens(tokens);
 	col = 0;
 	while (tokens[col])
 	{
@@ -72,27 +72,27 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 }
 
 // Fill the 2D array with map values from the linked list
-static void	fill_map_values(t_list *lines, int rows, int columns, t_map *map)
+static void	fill_map_values(t_list *lines, t_map *map)
 {
 	int	row_index;
 
-	map->values = (int **)malloc(rows * sizeof(int *));
+	map->values = (int **)malloc(map->rows * sizeof(int *));
 	if (!map->values)
 		error_exit("malloc for values");
-	map->colors = (int **)malloc(rows * sizeof(int *));
+	map->colors = (int **)malloc(map->rows * sizeof(int *));
 	if (!map->colors)
 		error_exit("malloc for colors");
 	row_index = 0;
 	while (lines)
 	{
-		map->values[row_index] = (int *)malloc(columns * sizeof(int));
+		map->values[row_index] = (int *)malloc(map->columns * sizeof(int));
 		if (!map->values[row_index])
 			error_exit("malloc for row values");
-		map->colors[row_index] = (int *)malloc(columns * sizeof(int));
+		map->colors[row_index] = (int *)malloc(map->columns * sizeof(int));
 		if (!map->colors[row_index])
 			error_exit("malloc for row colors");
 		process_line((char *)lines->content, map->values[row_index],
-			map->colors[row_index], columns);
+			map->colors[row_index], map->columns);
 		row_index++;
 		lines = lines->next;
 	}
@@ -105,8 +105,8 @@ void	init_map(t_vars *vars, t_list *lines)
 
 	map = vars->map;
 	i = 0;
-	get_map_dimensions(lines, &map->rows, &map->columns);
-	fill_map_values(lines, map->rows, map->columns, map);
+	get_map_dimensions(lines, map);
+	fill_map_values(lines, map);
 	map->rot_x = 0;
 	map->rot_y = 0;
 	map->rot_z = 0;
