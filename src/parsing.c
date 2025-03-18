@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 11:48:56 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/18 16:04:14 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	parse_file(t_vars *vars, const char *filename)
 	if (!vars->map)
 	{
 		ft_lstclear(&lines, free);
-		error_exit("malloc");
+		error_exit("alloc");
 	}
 	init_map(vars, lines);
 	ft_lstclear(&lines, free);
