@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 11:49:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:32:26 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,28 @@ static void	init_vars(t_vars *vars, char *filename)
 {
 	vars->mlx = mlx_init();
 	if (!vars->mlx)
-		error_exit("mlx_init");
+		cleanup_and_error_exit(vars, "mlx_init");
 	mlx_get_screen_size(vars->mlx, &vars->screen_width, &vars->screen_height);
 	vars->screen_width = WINDOW_WIDTH;
 	vars->screen_height = WINDOW_HEIGHT;
 	vars->win = mlx_new_window(vars->mlx, vars->screen_width,
 			vars->screen_height, "FdF");
 	if (!vars->win)
-		error_exit("mlx_new_window");
+		cleanup_and_error_exit(vars, "mlx_new_window");
 	vars->data.img = mlx_new_image(vars->mlx, vars->screen_width,
 			vars->screen_height);
 	if (!vars->data.img)
-		error_exit("mlx_new_image");
+		cleanup_and_error_exit(vars, "mlx_new_image");
 	vars->data.addr = mlx_get_data_addr(vars->data.img,
 			&vars->data.bits_per_pixel,
 			&vars->data.line_length,
 			&vars->data.endian);
 	if (!vars->data.addr)
-		error_exit("mlx_get_data_addr");
+		cleanup_and_error_exit(vars, "mlx_get_data_addr");
 	vars->shift_pressed = 0;
 	parse_file(vars, filename);
 	if (!vars->map)
-		error_exit("parse_file");
+		cleanup_and_error_exit(vars, "parse_file");
 	adjust_initial_scale(vars);
 }
 
