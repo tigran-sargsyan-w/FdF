@@ -55,7 +55,8 @@ BONUS_SRCS  = $(SRC_DIR)/bonus.c
 #   Header Files
 # -------------------------------
 HEADERS     = $(INC_DIR)/fdf.h \
-			  $(INC_DIR)/rendering.h 
+			  $(INC_DIR)/fdf_defs.h \
+			  $(INC_DIR)/fdf_types.h
 
 # -------------------------------
 #   Object Files (Mandatory + Bonus)
