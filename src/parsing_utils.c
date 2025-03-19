@@ -6,23 +6,23 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 20:54:04 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:37:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Determine map dimensions from the first line of the list
-static void	get_map_dimensions(t_list *lines, t_map *map)
+static void	get_map_dimensions(t_list *lines, t_vars *vars)
 {
 	char	**tokens;
 	int		col;
 
-	map->rows = ft_lstsize(lines);
+	vars->map->rows = ft_lstsize(lines);
 	tokens = ft_split((char *)lines->content, ' ');
 	if (!tokens)
-		error_exit("ft_split");
-	map->columns = ft_count_tokens(tokens);
+		cleanup_and_error_exit(vars, "ft_split");
+	vars->map->columns = ft_count_tokens(tokens);
 	col = 0;
 	while (tokens[col])
 	{
@@ -90,22 +90,22 @@ void	fill_map_values(t_list *lines, t_vars *vars)
 	int		row_index;
 
 	map = vars->map;
-	get_map_dimensions(vars->lines, map);
+	get_map_dimensions(vars->lines, vars);
 	map->values = (int **)ft_calloc(map->rows, sizeof(int *));
 	if (!map->values)
-		error_exit("alloc for values");
+		cleanup_and_error_exit(vars, "alloc for values");
 	map->colors = (int **)ft_calloc(map->rows, sizeof(int *));
 	if (!map->colors)
-		error_exit("alloc for colors");
+		cleanup_and_error_exit(vars, "alloc for colors");
 	row_index = 0;
 	while (lines)
 	{
 		map->values[row_index] = (int *)ft_calloc(map->columns, sizeof(int));
 		if (!map->values[row_index])
-			error_exit("alloc for row values");
+			cleanup_and_error_exit(vars, "alloc for row values");
 		map->colors[row_index] = (int *)ft_calloc(map->columns, sizeof(int));
 		if (!map->colors[row_index])
-			error_exit("alloc for row colors");
+			cleanup_and_error_exit(vars, "alloc for row colors");
 		process_line((char *)lines->content, map->values[row_index],
 			map->colors[row_index], vars);
 		row_index++;
