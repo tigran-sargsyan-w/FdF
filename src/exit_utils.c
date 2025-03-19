@@ -6,13 +6,13 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 17:17:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:25:55 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	free_map(t_map *map)
+static void	free_map(t_map *map)
 {
 	int	i;
 
@@ -36,6 +36,24 @@ void	free_map(t_map *map)
 	free(map);
 }
 
+static void	free_all_resources(t_vars *vars)
+{
+	if (!vars)
+		return ;
+	if (vars->data.img)
+		mlx_destroy_image(vars->mlx, vars->data.img);
+	if (vars->win)
+		mlx_destroy_window(vars->mlx, vars->win);
+	if (vars->mlx)
+		mlx_destroy_display(vars->mlx);
+	if (vars->mlx)
+		free(vars->mlx);
+	if (vars->lines)
+		ft_lstclear(&vars->lines, free);
+	if (vars->map)
+		free_map(vars->map);
+}
+
 /**
  * @brief Exit the program with an error message
  * @param msg The error message
@@ -46,18 +64,15 @@ void	error_exit(char *msg)
 	exit(EXIT_FAILURE);
 }
 
+void	cleanup_and_error_exit(t_vars *vars, char *msg)
+{
+	free_all_resources(vars);
+	perror(msg);
+	exit(EXIT_FAILURE);
+}
+
 void	cleanup_and_exit(t_vars *vars)
 {
-	if (!vars || !vars->mlx)
-		return ;
-	if (vars->data.img)
-		mlx_destroy_image(vars->mlx, vars->data.img);
-	if (vars->win)
-		mlx_destroy_window(vars->mlx, vars->win);
-	mlx_destroy_display(vars->mlx);
-	free(vars->mlx);
-	if (vars->lines)
-		ft_lstclear(&vars->lines, free);
-	free_map(vars->map);
+	free_all_resources(vars);
 	exit(EXIT_SUCCESS);
 }
