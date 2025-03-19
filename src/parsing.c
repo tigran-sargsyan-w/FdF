@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 19:43:49 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:54:46 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,33 @@ static t_list	*read_file_lines(const char *filename)
 	}
 	close(fd);
 	return (lines);
+}
+
+static void	init_map(t_vars *vars)
+{
+	int		i;
+	t_map	*map;
+
+	map = vars->map;
+	i = 0;
+	fill_map_values(vars->lines, vars);
+	map->rot_x = 0;
+	map->rot_y = 0;
+	map->rot_z = 0;
+	map->trans_x = 0;
+	map->trans_y = 0;
+	map->flatten_factor = 1.0;
+	map->projection_mode = ISO;
+	map->render_points = ft_calloc(map->rows, sizeof(t_point2d *));
+	if (!map->render_points)
+		error_exit("alloc failed");
+	while (i < map->rows)
+	{
+		map->render_points[i] = ft_calloc(map->columns, sizeof(t_point2d));
+		if (!map->render_points[i])
+			error_exit("alloc failed");
+		i++;
+	}
 }
 
 // Main parse_file function that uses helper functions

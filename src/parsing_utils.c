@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 19:53:36 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:54:04 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,41 @@ static void	get_map_dimensions(t_list *lines, t_map *map)
 	free(tokens);
 }
 
-// Process one line: split and convert to integer array
+static int	parse_int_value(char **pos, t_vars *vars)
+{
+	char	*line;
+	int		value;
+
+	line = *pos;
+	if (!ft_isvalid_int(line))
+		cleanup_and_exit(vars);
+	value = ft_atoi(line);
+	while (*line && *line != ' ' && *line != ',')
+		line++;
+	*pos = line;
+	return (value);
+}
+
+static int	parse_optional_color(char **pos, t_vars *vars)
+{
+	char	*line;
+	int		color;
+
+	line = *pos;
+	color = DEFAULT_COLOR;
+	if (*line == ',')
+	{
+		line++;
+		if (!ft_isvalid_hex(line))
+			cleanup_and_exit(vars);
+		color = ft_atoi_hex(line);
+		while (*line && *line != ' ')
+			line++;
+	}
+	*pos = line;
+	return (color);
+}
+
 static void	process_line(char *line, int *row_values, int *row_colors,
 		t_vars *vars)
 {
@@ -43,39 +77,20 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 	{
 		while (*line == ' ')
 			line++;
-		if (*line)
-		{
-			if (!ft_isvalid_int(line))
-			{
-				cleanup_and_exit(vars);
-			}
-			row_values[column_index] = ft_atoi(line);
-		}
-		row_colors[column_index] = DEFAULT_COLOR;
-		while (*line && *line != ' ' && *line != ',')
-			line++;
-		if (*line == ',')
-		{
-			line++;
-			if (!ft_isvalid_hex(line))
-			{
-				cleanup_and_exit(vars);
-			}
-			row_colors[column_index] = ft_atoi_hex(line);
-			while (*line && *line != ' ')
-				line++;
-		}
+		row_values[column_index] = parse_int_value(&line, vars);
+		row_colors[column_index] = parse_optional_color(&line, vars);
 		column_index++;
 	}
 }
 
 // Fill the 2D array with map values from the linked list
-static void	fill_map_values(t_list *lines, t_vars *vars)
+void	fill_map_values(t_list *lines, t_vars *vars)
 {
 	t_map	*map;
 	int		row_index;
 
 	map = vars->map;
+	get_map_dimensions(vars->lines, map);
 	map->values = (int **)ft_calloc(map->rows, sizeof(int *));
 	if (!map->values)
 		error_exit("alloc for values");
@@ -95,33 +110,5 @@ static void	fill_map_values(t_list *lines, t_vars *vars)
 			map->colors[row_index], vars);
 		row_index++;
 		lines = lines->next;
-	}
-}
-
-void	init_map(t_vars *vars)
-{
-	int		i;
-	t_map	*map;
-
-	map = vars->map;
-	i = 0;
-	get_map_dimensions(vars->lines, map);
-	fill_map_values(vars->lines, vars);
-	map->rot_x = 0;
-	map->rot_y = 0;
-	map->rot_z = 0;
-	map->trans_x = 0;
-	map->trans_y = 0;
-	map->flatten_factor = 1.0;
-	map->projection_mode = ISO;
-	map->render_points = ft_calloc(map->rows, sizeof(t_point2d *));
-	if (!map->render_points)
-		error_exit("alloc failed");
-	while (i < map->rows)
-	{
-		map->render_points[i] = ft_calloc(map->columns, sizeof(t_point2d));
-		if (!map->render_points[i])
-			error_exit("alloc failed");
-		i++;
 	}
 }

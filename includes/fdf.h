@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 13:35:08 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/19 21:10:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_vars
 
 // Parsing Functions
 void		parse_file(t_vars *vars, const char *filename);
-void		init_map(t_vars *vars);
+void		fill_map_values(t_list *lines, t_vars *vars);
 
 // Drawing Functions
 void		draw_pixel(t_vars *vars, t_point2d point, int color);
