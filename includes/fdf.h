@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 11:26:02 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:27:31 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void		draw_menu(t_vars *vars);
 
 // Projection & Transformation Functions
 float		deg_to_rad(float angle);
-t_point2d	to_isometric(t_point pt, float flattern_factor);
-t_point2d	to_orthographic(t_point pt);
-t_point2d	to_parallel(t_point pt);
+t_point2d	to_isometric(t_point point, float flattern_factor);
+t_point2d	to_orthographic(t_point point);
+t_point2d	to_parallel(t_point point);
 t_point		rotate_point(t_point point, t_map *map);
 void		compute_bounding_box(t_vars *vars);
 
