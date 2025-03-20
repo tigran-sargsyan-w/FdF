@@ -6,52 +6,52 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:00:30 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 12:36:20 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:10:51 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Function to rotate a point around the X axis
-static t_point	rotate_x(t_point p, float angle)
+static t_point	rotate_x(t_point point, float angle)
 {
 	t_point	rotated;
 	float	temp_y;
 	float	temp_z;
 
-	rotated = p;
-	temp_y = p.y * cos(angle) - p.z * sin(angle);
-	temp_z = p.y * sin(angle) + p.z * cos(angle);
+	rotated = point;
+	temp_y = point.y * cos(angle) - point.z * sin(angle);
+	temp_z = point.y * sin(angle) + point.z * cos(angle);
 	rotated.y = temp_y;
 	rotated.z = temp_z;
 	return (rotated);
 }
 
 // Function to rotate a point around the Y axis
-static t_point	rotate_y(t_point p, float angle)
+static t_point	rotate_y(t_point point, float angle)
 {
 	t_point	rotated;
 	float	temp_x;
 	float	temp_z;
 
-	rotated = p;
-	temp_x = p.x * cos(angle) + p.z * sin(angle);
-	temp_z = -p.x * sin(angle) + p.z * cos(angle);
+	rotated = point;
+	temp_x = point.x * cos(angle) + point.z * sin(angle);
+	temp_z = -point.x * sin(angle) + point.z * cos(angle);
 	rotated.x = temp_x;
 	rotated.z = temp_z;
 	return (rotated);
 }
 
 // Function to rotate a point around the Z axis
-static t_point	rotate_z(t_point p, float angle)
+static t_point	rotate_z(t_point point, float angle)
 {
 	t_point	rotated;
 	float	temp_x;
 	float	temp_y;
 
-	rotated = p;
-	temp_x = p.x * cos(angle) - p.y * sin(angle);
-	temp_y = p.x * sin(angle) + p.y * cos(angle);
+	rotated = point;
+	temp_x = point.x * cos(angle) - point.y * sin(angle);
+	temp_y = point.x * sin(angle) + point.y * cos(angle);
 	rotated.x = temp_x;
 	rotated.y = temp_y;
 	return (rotated);
