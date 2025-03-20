@@ -6,12 +6,16 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 11:25:48 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:03:55 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Frees the map structure and its associated data.
+ * @param map Structure to the map data.
+ */
 static void	free_map(t_map *map)
 {
 	int	i;
@@ -36,6 +40,10 @@ static void	free_map(t_map *map)
 	free(map);
 }
 
+/**
+ * @brief Frees all resources allocated for the program.
+ * @param vars Structure containing main variables.
+ */
 static void	free_all_resources(t_vars *vars)
 {
 	if (!vars)
@@ -54,6 +62,11 @@ static void	free_all_resources(t_vars *vars)
 		free_map(vars->map);
 }
 
+/**
+ * @brief Cleans up resources and exits the program with an error message.
+ * @param vars Structure containing main variables.
+ * @param msg Error message to be displayed.
+ */
 void	cleanup_and_error_exit(t_vars *vars, char *msg)
 {
 	free_all_resources(vars);
@@ -61,6 +74,10 @@ void	cleanup_and_error_exit(t_vars *vars, char *msg)
 	exit(EXIT_FAILURE);
 }
 
+/**
+ * @brief Cleans up resources and exits the program successfully.
+ * @param vars Structure containing main variables.
+ */
 void	cleanup_and_exit(t_vars *vars)
 {
 	free_all_resources(vars);

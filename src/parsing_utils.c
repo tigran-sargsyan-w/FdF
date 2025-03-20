@@ -6,13 +6,17 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 14:57:31 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:51:45 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Determine map dimensions from the first line of the list
+/**
+ * @brief Get the dimensions of the map from the first line of the list.
+ * @param lines The linked list of lines.
+ * @param vars Structure containing main variables.
+ */
 static void	get_map_dimensions(t_list *lines, t_vars *vars)
 {
 	char	**tokens;
@@ -32,6 +36,12 @@ static void	get_map_dimensions(t_list *lines, t_vars *vars)
 	free(tokens);
 }
 
+/**
+ * @brief Parse an integer value from the string.
+ * @param pos Pointer to the position in the string.
+ * @param vars Structure containing main variables.
+ * @return The parsed integer value.
+ */
 static int	parse_int_value(char **pos, t_vars *vars)
 {
 	char	*line;
@@ -51,6 +61,12 @@ static int	parse_int_value(char **pos, t_vars *vars)
 	return (value);
 }
 
+/**
+ * @brief Parse an optional color value from the string.
+ * @param pos Pointer to the position in the string.
+ * @param vars Structure containing main variables.
+ * @return The parsed color value or DEFAULT_COLOR if not specified.
+ */
 static int	parse_optional_color(char **pos, t_vars *vars)
 {
 	char	*line;
@@ -71,6 +87,14 @@ static int	parse_optional_color(char **pos, t_vars *vars)
 	return (color);
 }
 
+/**
+ * @brief Process a line of the map and fill the corresponding row values 
+ * and colors.
+ * @param line The line to process.
+ * @param row_values The array to store the parsed integer values.
+ * @param row_colors The array to store the parsed color values.
+ * @param vars Structure containing main variables.
+ */
 static void	process_line(char *line, int *row_values, int *row_colors,
 		t_vars *vars)
 {
@@ -87,7 +111,11 @@ static void	process_line(char *line, int *row_values, int *row_colors,
 	}
 }
 
-// Fill the 2D array with map values from the linked list
+/**
+ * @brief Fill the map values and colors from the linked list of lines.
+ * @param lines The linked list of lines.
+ * @param vars Structure containing main variables.
+ */
 void	fill_map_values(t_list *lines, t_vars *vars)
 {
 	t_map	*map;

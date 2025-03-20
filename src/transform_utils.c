@@ -6,13 +6,18 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:00:30 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 14:10:51 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 23:10:05 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Function to rotate a point around the X axis
+/**
+ * @brief Rotates a point around the X axis by a given angle.
+ * @param point Point to be rotated.
+ * @param angle Angle of rotation in radians.
+ * @return Rotated point.
+ */
 static t_point	rotate_x(t_point point, float angle)
 {
 	t_point	rotated;
@@ -27,7 +32,12 @@ static t_point	rotate_x(t_point point, float angle)
 	return (rotated);
 }
 
-// Function to rotate a point around the Y axis
+/**
+ * @brief Rotates a point around the Y axis by a given angle.
+ * @param point Point to be rotated.
+ * @param angle Angle of rotation in radians.
+ * @return Rotated point.
+ */
 static t_point	rotate_y(t_point point, float angle)
 {
 	t_point	rotated;
@@ -42,7 +52,12 @@ static t_point	rotate_y(t_point point, float angle)
 	return (rotated);
 }
 
-// Function to rotate a point around the Z axis
+/**
+ * @brief Rotates a point around the Z axis by a given angle.
+ * @param point Point to be rotated.
+ * @param angle Angle of rotation in radians.
+ * @return Rotated point.
+ */
 static t_point	rotate_z(t_point point, float angle)
 {
 	t_point	rotated;
@@ -57,7 +72,12 @@ static t_point	rotate_z(t_point point, float angle)
 	return (rotated);
 }
 
-// The main function to rotate a point
+/**
+ * @brief Rotates a point in 3D space based on the map's rotation angles.
+ * @param point Point to be rotated.
+ * @param map Structure of the map containing rotation angles.
+ * @return Rotated point.
+ */
 t_point	rotate_point(t_point point, t_map *map)
 {
 	t_point	center;

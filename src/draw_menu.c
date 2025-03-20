@@ -6,12 +6,19 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 13:20:58 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:02:35 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Prints a string on the screen at the specified coordinates.
+ * @param vars Structure containing main variables.
+ * @param start Starting point of the string.
+ * @param offset Offset for the string.
+ * @param str String to be printed.
+ */
 static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
 		char *str)
 {
@@ -22,6 +29,12 @@ static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
 	offset->x = 0;
 }
 
+/**
+ * @brief Prints the transformation menu on the screen.
+ * @param vars Structure containing main variables.
+ * @param start Starting point of the menu.
+ * @param offset Offset for the menu.
+ */
 static void	print_transform_menu(t_vars *vars, t_point2d *start,
 		t_point2d *offset)
 {
@@ -47,6 +60,12 @@ static void	print_transform_menu(t_vars *vars, t_point2d *start,
 	print_string(vars, start, offset, "Shift + Q/E (Z)");
 }
 
+/**
+ * @brief Prints the miscellaneous menu on the screen.
+ * @param vars Structure containing main variables.
+ * @param start Starting point of the menu.
+ * @param offset Offset for the menu.
+ */
 static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
 {
 	char	*projection_name[3];
@@ -71,6 +90,10 @@ static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset)
 		projection_name[vars->map->projection_mode]);
 }
 
+/**
+ * @brief Draws the menu on the screen.
+ * @param vars Structure containing main variables.
+ */
 void	draw_menu(t_vars *vars)
 {
 	t_point2d	start;

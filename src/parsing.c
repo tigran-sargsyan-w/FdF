@@ -6,13 +6,18 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 11:25:25 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:50:40 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Read file and return linked list of lines
+/**
+ * @brief Read the file and return a linked list of lines.
+ * @param vars Structure containing main variables.
+ * @param filename Name of the file to be read.
+ * @return A linked list of lines read from the file.
+ */
 static t_list	*read_file_lines(t_vars *vars, const char *filename)
 {
 	int		fd;
@@ -41,6 +46,10 @@ static t_list	*read_file_lines(t_vars *vars, const char *filename)
 	return (lines);
 }
 
+/**
+ * @brief Initialize the map structure.
+ * @param vars Structure containing main variables.
+ */
 static void	init_map(t_vars *vars)
 {
 	int		i;
@@ -68,7 +77,11 @@ static void	init_map(t_vars *vars)
 	}
 }
 
-// Main parse_file function that uses helper functions
+/**
+ * @brief Parse the file.
+ * @param vars Structure containing main variables.
+ * @param filename Name of the file to be parsed.
+ */
 void	parse_file(t_vars *vars, const char *filename)
 {
 	vars->lines = read_file_lines(vars, filename);

@@ -6,12 +6,18 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:49:55 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 21:48:01 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 21:13:18 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Handles the rotation of the map to the left.
+ * @brief Shifting the rotation by 90 degrees or rotating by a small amount.
+ * @param vars Structure containing main variables.
+ * @param axis Axis of rotation.
+ */
 static void	handle_rotation_left(t_vars *vars, float *axis)
 {
 	if (vars->shift_pressed)
@@ -22,6 +28,12 @@ static void	handle_rotation_left(t_vars *vars, float *axis)
 		*axis = 0;
 }
 
+/**
+ * @brief Handles the rotation of the map to the right.
+ * @brief Shifting the rotation by 90 degrees or rotating by a small amount.
+ * @param vars Structure containing main variables.
+ * @param axis Axis of rotation.
+ */
 static void	handle_rotation_right(t_vars *vars, float *axis)
 {
 	if (vars->shift_pressed)
@@ -32,6 +44,11 @@ static void	handle_rotation_right(t_vars *vars, float *axis)
 		*axis = 0;
 }
 
+/**
+ * @brief Handles the translation of the map.
+ * @param vars Structure containing main variables.
+ * @param keycode Pressed key code.
+ */
 void	handle_translation(t_vars *vars, int keycode)
 {
 	if (keycode == XK_w)
@@ -44,6 +61,11 @@ void	handle_translation(t_vars *vars, int keycode)
 		vars->map->trans_x += MOVE_SPEED;
 }
 
+/**
+ * @brief Handles the rotation of the map.
+ * @param vars Structure containing main variables.
+ * @param keycode Pressed key code.
+ */
 void	handle_rotation(t_vars *vars, int keycode)
 {
 	if (keycode == XK_Up)

@@ -6,12 +6,18 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/18 22:03:37 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:01:00 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Handles on key press events.
+ * @param keycode Pressed key code.
+ * @param vars Structure containing main variables.
+ * @return 0 on success.
+ */
 static int	on_keydown(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Shift_L)
@@ -27,6 +33,12 @@ static int	on_keydown(int keycode, t_vars *vars)
 	return (0);
 }
 
+/**
+ * @brief Handles on key release events.
+ * @param keycode Released key code.
+ * @param vars Structure containing main variables.
+ * @return 0 on success.
+ */
 static int	on_keyup(int keycode, t_vars *vars)
 {
 	if (keycode == XK_Shift_L)
@@ -34,6 +46,14 @@ static int	on_keyup(int keycode, t_vars *vars)
 	return (0);
 }
 
+/**
+ * @brief Handles mouse button press events.
+ * @param button Pressed button code.
+ * @param x X coordinate of the mouse.
+ * @param y Y coordinate of the mouse.
+ * @param vars Structure containing main variables.
+ * @return 0 on success.
+ */
 static int	on_mousedown(int button, int x, int y, t_vars *vars)
 {
 	(void)x;
@@ -43,12 +63,21 @@ static int	on_mousedown(int button, int x, int y, t_vars *vars)
 	return (0);
 }
 
+/**
+ * @brief Handles window close events.
+ * @param vars Structure containing main variables.
+ * @return 0 on success.
+ */
 static int	on_close_window(t_vars *vars)
 {
 	cleanup_and_exit(vars);
 	return (0);
 }
 
+/**
+ * @brief Subscribes to events in the window.
+ * @param vars Structure containing main variables.
+ */
 void	subscribe_to_events(t_vars *vars)
 {
 	mlx_hook(vars->win, KeyPress, KeyPressMask, on_keydown, vars);

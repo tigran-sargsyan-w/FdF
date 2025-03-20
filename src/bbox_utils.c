@@ -6,13 +6,16 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/16 12:34:40 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:52:22 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Function to create border box for the map
+/**
+ * @brief Initializes the bounding box with extreme values.
+ * @param box Bounding box structure.
+ */
 static void	init_bbox(t_bbox *box)
 {
 	box->min_x = INT_MAX;
@@ -21,7 +24,11 @@ static void	init_bbox(t_bbox *box)
 	box->max_y = INT_MIN;
 }
 
-// Function to update bounding box with a new point
+/**
+ * @brief Updates the bounding box with a new projected point.
+ * @param box Bounding box structure.
+ * @param proj Projected point to update the bounding box with.
+ */
 static void	update_bbox(t_bbox *box, t_point2d proj)
 {
 	if (proj.x < box->min_x)
@@ -34,7 +41,10 @@ static void	update_bbox(t_bbox *box, t_point2d proj)
 		box->max_y = proj.y;
 }
 
-// Function to compute bounding box for the map
+/**
+ * @brief Computes the bounding box for the map based on the projected points.
+ * @param vars Structure containing main variables.
+ */
 void	compute_bounding_box(t_vars *vars)
 {
 	int			i;

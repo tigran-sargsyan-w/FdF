@@ -6,13 +6,18 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 12:57:33 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 20:51:55 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Initialize line drawing parameters using Bresenham's algorithm
+/**
+ * @brief Initializes the line drawing parameters using Bresenham's algorithm.
+ * @param start Starting point of the line.
+ * @param end Ending point of the line.
+ * @return Structure containing the line drawing parameters.
+ */
 static t_line_params	init_line_params(t_point2d start, t_point2d end)
 {
 	t_line_params	params;
@@ -31,7 +36,13 @@ static t_line_params	init_line_params(t_point2d start, t_point2d end)
 	return (params);
 }
 
-// Draw line between two points with a specified color
+/**
+ * @brief Draws a line between two points using Bresenham's algorithm.
+ * @param vars Structure containing main variables.
+ * @param start Starting point of the line.
+ * @param end Ending point of the line.
+ * @param color Color of the line.
+ */
 static void	draw_line(t_vars *vars, t_point2d start, t_point2d end, int color)
 {
 	t_line_params	line_params;
@@ -57,29 +68,50 @@ static void	draw_line(t_vars *vars, t_point2d start, t_point2d end, int color)
 	}
 }
 
-static void	draw_horizontal_line(int i, int j, t_vars *vars, t_point2d current)
+/**
+ * @brief Draws a horizontal line from the current point to the next point.
+ * @param row_index Current row index.
+ * @param column_index Current column index.
+ * @param vars Structure containing main variables.
+ * @param current Current point.
+ */
+static void	draw_horizontal_line(int row_index, int column_index, t_vars *vars,
+		t_point2d current)
 {
 	t_point2d	next;
 
-	if (j < vars->map->columns - 1)
+	if (column_index < vars->map->columns - 1)
 	{
-		next = vars->map->render_points[i][j + 1];
-		draw_line(vars, current, next, vars->map->colors[i][j]);
+		next = vars->map->render_points[row_index][column_index + 1];
+		draw_line(vars, current, next,
+			vars->map->colors[row_index][column_index]);
 	}
 }
 
-static void	draw_vertical_line(int i, int j, t_vars *vars, t_point2d current)
+/**
+ * @brief Draws a vertical line from the current point to the next point.
+ * @param row_index Current row index.
+ * @param column_index Current column index.
+ * @param vars Structure containing main variables.
+ * @param current Current point.
+ */
+static void	draw_vertical_line(int row_index, int column_index, t_vars *vars,
+		t_point2d current)
 {
 	t_point2d	next;
 
-	if (i < vars->map->rows - 1)
+	if (row_index < vars->map->rows - 1)
 	{
-		next = vars->map->render_points[i + 1][j];
-		draw_line(vars, current, next, vars->map->colors[i][j]);
+		next = vars->map->render_points[row_index + 1][column_index];
+		draw_line(vars, current, next,
+			vars->map->colors[row_index][column_index]);
 	}
 }
 
-// Function to draw grid
+/**
+ * @brief Draws the grid on the window.
+ * @param vars Structure containing main variables.
+ */
 void	draw_grid(t_vars *vars)
 {
 	int			i;

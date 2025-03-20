@@ -6,12 +6,16 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 12:03:48 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 22:13:18 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Adjusts the initial scale of the map based on the screen size.
+ * @param vars Structure containing main variables.
+ */
 static void	adjust_initial_scale(t_vars *vars)
 {
 	int		max_width;
@@ -29,6 +33,11 @@ static void	adjust_initial_scale(t_vars *vars)
 	vars->map->zoom_factor = 1.0;
 }
 
+/**
+ * @brief Initializes the main variables.
+ * @param vars Structure containing main variables.
+ * @param filename Name of the file to be parsed.
+ */
 static void	init_vars(t_vars *vars, char *filename)
 {
 	vars->mlx = mlx_init();
@@ -58,6 +67,11 @@ static void	init_vars(t_vars *vars, char *filename)
 	adjust_initial_scale(vars);
 }
 
+/**
+ * @brief Checks the command line arguments.
+ * @param argc Number of arguments.
+ * @param argv Array of argument strings.
+ */
 static void	check_args(int argc, char **argv)
 {
 	char	*file_extension;
@@ -75,6 +89,12 @@ static void	check_args(int argc, char **argv)
 	}
 }
 
+/**
+ * @brief Main function of the program.
+ * @param argc Number of command line arguments.
+ * @param argv Array of command line argument strings.
+ * @return 0 on success.
+ */
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
