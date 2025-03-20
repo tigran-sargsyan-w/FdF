@@ -3,7 +3,6 @@
 # **************************************************************************** #
 
 NAME        = fdf
-NAME_BONUS  = fdf_bonus
 
 # -------------------------------
 #   Compiler and Flags
@@ -49,8 +48,6 @@ SRCS        = $(SRC_DIR)/fdf.c \
 			  $(SRC_DIR)/rendering.c \
 			  $(SRC_DIR)/transform_utils.c
 
-BONUS_SRCS  = $(SRC_DIR)/bonus.c
-
 # -------------------------------
 #   Header Files
 # -------------------------------
@@ -62,7 +59,6 @@ HEADERS     = $(INC_DIR)/fdf.h \
 #   Object Files (Mandatory + Bonus)
 # -------------------------------
 OBJS        = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRCS))
-BONUS_OBJS  = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(BONUS_SRCS))
 
 # **************************************************************************** #
 #                                 Build Rules                                  #
@@ -75,11 +71,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJS)
 	@$(CC) $(OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) -o $(NAME)
 	@echo "✅ $(NAME) compiled."
 
-bonus: $(NAME_BONUS)
-	@echo "🎉 Bonus executable $(NAME_BONUS) compiled!"
-
-$(NAME_BONUS): $(LIBFT) $(MLX) $(OBJS) $(BONUS_OBJS)
-	@$(CC) $(OBJS) $(BONUS_OBJS) $(LIBFT_FLAGS) $(MLX_FLAGS) $(MATH_FLAGS) $(LD_FLAGS) -o $(NAME_BONUS)
+bonus: all
 
 $(LIBFT):
 	@$(MAKE) -s -C $(LIBFT_DIR)
@@ -103,7 +95,7 @@ fclean:
 	@$(MAKE) -s fclean -C $(LIBFT_DIR)
 	@$(MAKE) -s clean -C $(MLX_DIR)
 	@rm -rf $(OBJ_DIR)
-	@rm -f $(NAME) $(NAME_BONUS)
+	@rm -f $(NAME) 
 	@echo "😒 $(NAME) and $(NAME) object files removed."
 
 re: fclean all
