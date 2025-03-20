@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 22:37:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 13:34:28 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	parse_int_value(char **pos, t_vars *vars)
 
 	line = *pos;
 	if (!ft_isvalid_int(line))
-		cleanup_and_exit(vars);
+		cleanup_and_error_exit(vars, "invalid int");
 	value = ft_atoi(line);
 	while (*line && *line != ' ' && *line != ',')
 		line++;
@@ -58,7 +58,7 @@ static int	parse_optional_color(char **pos, t_vars *vars)
 	{
 		line++;
 		if (!ft_isvalid_hex(line))
-			cleanup_and_exit(vars);
+			cleanup_and_error_exit(vars, "invalid color");
 		color = ft_atoi_hex(line);
 		while (*line && *line != ' ')
 			line++;
