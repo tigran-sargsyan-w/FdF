@@ -6,14 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 20:54:46 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:25:25 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 // Read file and return linked list of lines
-static t_list	*read_file_lines(const char *filename)
+static t_list	*read_file_lines(t_vars *vars, const char *filename)
 {
 	int		fd;
 	char	*line;
@@ -23,7 +23,7 @@ static t_list	*read_file_lines(const char *filename)
 	lines = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("open");
+		cleanup_and_error_exit(vars, "open");
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
@@ -32,7 +32,7 @@ static t_list	*read_file_lines(const char *filename)
 		{
 			free(line);
 			close(fd);
-			error_exit("ft_lstnew");
+			cleanup_and_error_exit(vars, "ft_lstnew");
 		}
 		ft_lstadd_back(&lines, node);
 		line = get_next_line(fd);
@@ -58,12 +58,12 @@ static void	init_map(t_vars *vars)
 	map->projection_mode = ISO;
 	map->render_points = ft_calloc(map->rows, sizeof(t_point2d *));
 	if (!map->render_points)
-		error_exit("alloc failed");
+		cleanup_and_error_exit(vars, "alloc");
 	while (i < map->rows)
 	{
 		map->render_points[i] = ft_calloc(map->columns, sizeof(t_point2d));
 		if (!map->render_points[i])
-			error_exit("alloc failed");
+			cleanup_and_error_exit(vars, "alloc");
 		i++;
 	}
 }
@@ -71,14 +71,14 @@ static void	init_map(t_vars *vars)
 // Main parse_file function that uses helper functions
 void	parse_file(t_vars *vars, const char *filename)
 {
-	vars->lines = read_file_lines(filename);
+	vars->lines = read_file_lines(vars, filename);
 	if (!vars->lines)
-		error_exit("empty file");
+		cleanup_and_error_exit(vars, "empty file");
 	vars->map = (t_map *)ft_calloc(1, sizeof(t_map));
 	if (!vars->map)
 	{
 		ft_lstclear(&vars->lines, free);
-		error_exit("alloc");
+		cleanup_and_error_exit(vars, "alloc");
 	}
 	init_map(vars);
 	ft_lstclear(&vars->lines, free);

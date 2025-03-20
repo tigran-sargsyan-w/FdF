@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:05:38 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 22:27:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:26:02 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void		apply_zoom(t_map *map, float factor);
 void		apply_flatten(t_map *map, float factor);
 
 // Exiting Functions
-void		error_exit(char *msg);
 void		cleanup_and_exit(t_vars *vars);
 void		cleanup_and_error_exit(t_vars *vars, char *msg);
 

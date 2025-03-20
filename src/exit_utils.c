@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 22:25:55 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:25:48 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,6 @@ static void	free_all_resources(t_vars *vars)
 		ft_lstclear(&vars->lines, free);
 	if (vars->map)
 		free_map(vars->map);
-}
-
-/**
- * @brief Exit the program with an error message
- * @param msg The error message
- */
-void	error_exit(char *msg)
-{
-	perror(msg);
-	exit(EXIT_FAILURE);
 }
 
 void	cleanup_and_error_exit(t_vars *vars, char *msg)
