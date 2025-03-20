@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 12:38:21 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 12:40:14 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:58:37 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define MENU_WIDTH 250
 # define MENU_BG_COLOR 0x222222
 # define TEXT_COLOR 0xFFFFFF
-
+# define CLAMP_LIMIT 10000
 # define MOUSE_SCROLL_UP Button4
 # define MOUSE_SCROLL_DOWN Button5
 

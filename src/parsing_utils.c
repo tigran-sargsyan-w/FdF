@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 13:34:28 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:57:31 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ static int	parse_int_value(char **pos, t_vars *vars)
 	if (!ft_isvalid_int(line))
 		cleanup_and_error_exit(vars, "invalid int");
 	value = ft_atoi(line);
+	if (value > CLAMP_LIMIT)
+		value = CLAMP_LIMIT;
+	else if (value < -CLAMP_LIMIT)
+		value = -CLAMP_LIMIT;
 	while (*line && *line != ' ' && *line != ',')
 		line++;
 	*pos = line;
