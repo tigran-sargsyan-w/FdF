@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/19 22:32:26 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:03:48 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	main(int argc, char **argv)
 
 	start = clock();
 	check_args(argc, argv);
+	ft_bzero(&vars, sizeof(t_vars));
 	init_vars(&vars, argv[1]);
 	update_scene(&vars);
 	end = clock();
