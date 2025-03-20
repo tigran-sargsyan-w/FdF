@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/17 15:15:07 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:57:33 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,44 @@
 // Initialize line drawing parameters using Bresenham's algorithm
 static t_line_params	init_line_params(t_point2d start, t_point2d end)
 {
-	t_line_params	lp;
+	t_line_params	params;
 
-	lp.delta_x = abs(end.x - start.x);
-	lp.delta_y = -abs(end.y - start.y);
+	params.delta_x = abs(end.x - start.x);
+	params.delta_y = -abs(end.y - start.y);
 	if (start.x < end.x)
-		lp.step_x = 1;
+		params.step_x = 1;
 	else
-		lp.step_x = -1;
+		params.step_x = -1;
 	if (start.y < end.y)
-		lp.step_y = 1;
+		params.step_y = 1;
 	else
-		lp.step_y = -1;
-	lp.error = lp.delta_x + lp.delta_y;
-	return (lp);
+		params.step_y = -1;
+	params.error = params.delta_x + params.delta_y;
+	return (params);
 }
 
 // Draw line between two points with a specified color
 static void	draw_line(t_vars *vars, t_point2d start, t_point2d end, int color)
 {
-	t_line_params	lp;
+	t_line_params	line_params;
 	int				double_error;
 
-	lp = init_line_params(start, end);
+	line_params = init_line_params(start, end);
 	while (1)
 	{
 		draw_pixel(vars, start, color);
 		if (start.x == end.x && start.y == end.y)
 			break ;
-		double_error = 2 * lp.error;
-		if (double_error >= lp.delta_y)
+		double_error = 2 * line_params.error;
+		if (double_error >= line_params.delta_y)
 		{
-			lp.error += lp.delta_y;
-			start.x += lp.step_x;
+			line_params.error += line_params.delta_y;
+			start.x += line_params.step_x;
 		}
-		if (double_error <= lp.delta_x)
+		if (double_error <= line_params.delta_x)
 		{
-			lp.error += lp.delta_x;
-			start.y += lp.step_y;
+			line_params.error += line_params.delta_x;
+			start.y += line_params.step_y;
 		}
 	}
 }
