@@ -6,11 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/15 16:49:55 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 21:13:18 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:28:28 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	handle_rotation_left(t_vars *vars, float *axis);
+static void	handle_rotation_right(t_vars *vars, float *axis);
 
 /**
  * @brief Handles the rotation of the map to the left.

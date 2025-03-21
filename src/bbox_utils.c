@@ -6,11 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 11:51:40 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 20:52:22 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:14:54 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	init_bbox(t_bbox *box);
+static void	update_bbox(t_bbox *box, t_point2d proj);
 
 /**
  * @brief Initializes the bounding box with extreme values.

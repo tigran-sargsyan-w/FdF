@@ -6,11 +6,17 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/16 11:43:02 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 22:51:45 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:21:58 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	get_map_dimensions(t_list *lines, t_vars *vars);
+static int	parse_int_value(char **pos, t_vars *vars);
+static int	parse_optional_color(char **pos, t_vars *vars);
+static void	process_line(char *line, int *row_values, int *row_colors,
+				t_vars *vars);
 
 /**
  * @brief Get the dimensions of the map from the first line of the list.

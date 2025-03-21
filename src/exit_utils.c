@@ -6,11 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:49:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 22:03:55 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:33:12 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	free_map(t_map *map);
+static void	free_all_resources(t_vars *vars);
 
 /**
  * @brief Frees the map structure and its associated data.

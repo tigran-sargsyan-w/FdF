@@ -6,11 +6,17 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 20:55:25 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 21:02:35 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:25:06 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	print_string(t_vars *vars, t_point2d *start, t_point2d *offset,
+				char *str);
+static void	print_transform_menu(t_vars *vars, t_point2d *start,
+				t_point2d *offset);
+static void	print_misc_menu(t_vars *vars, t_point2d *start, t_point2d *offset);
 
 /**
  * @brief Prints a string on the screen at the specified coordinates.

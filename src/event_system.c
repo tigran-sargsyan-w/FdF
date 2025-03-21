@@ -6,11 +6,16 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 16:15:24 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 22:01:00 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:31:35 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static int	on_keydown(int keycode, t_vars *vars);
+static int	on_keyup(int keycode, t_vars *vars);
+static int	on_mousedown(int button, int x, int y, t_vars *vars);
+static int	on_close_window(t_vars *vars);
 
 /**
  * @brief Handles on key press events.

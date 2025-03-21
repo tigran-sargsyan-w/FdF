@@ -6,11 +6,16 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:31:36 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 23:07:56 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:24:45 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	compute_projected_point(t_map *map, int row_index, int column_index,
+				t_point2d offset);
+static void	draw_background(t_vars *vars);
+static void	update_projected_points(t_vars *vars);
 
 /**
  * @brief Computes the projected point based on the map's projection mode and

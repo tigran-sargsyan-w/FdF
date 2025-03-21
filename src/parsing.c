@@ -6,11 +6,14 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 12:35:00 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 22:50:40 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:25:20 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static t_list	*read_file_lines(t_vars *vars, const char *filename);
+static void		init_map(t_vars *vars);
 
 /**
  * @brief Read the file and return a linked list of lines.

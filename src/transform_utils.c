@@ -6,11 +6,15 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 19:00:30 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 23:10:05 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:25:54 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static t_point	rotate_x(t_point point, float angle);
+static t_point	rotate_y(t_point point, float angle);
+static t_point	rotate_z(t_point point, float angle);
 
 /**
  * @brief Rotates a point around the X axis by a given angle.

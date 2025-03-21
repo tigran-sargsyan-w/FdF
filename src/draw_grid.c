@@ -6,11 +6,19 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 12:03:19 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 20:51:55 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:20:23 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static t_line_params	init_line_params(t_point2d start, t_point2d end);
+static void				draw_line(t_vars *vars, t_point2d start, t_point2d end,
+							int color);
+static void				draw_horizontal_line(int row_index, int column_index,
+							t_vars *vars, t_point2d current);
+static void				draw_vertical_line(int row_index, int column_index,
+							t_vars *vars, t_point2d current);
 
 /**
  * @brief Initializes the line drawing parameters using Bresenham's algorithm.

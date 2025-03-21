@@ -6,11 +6,15 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/20 22:13:18 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/22 00:19:38 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	adjust_initial_scale(t_vars *vars);
+static void	init_vars(t_vars *vars, char *filename);
+static void	check_args(int argc, char **argv);
 
 /**
  * @brief Adjusts the initial scale of the map based on the screen size.
