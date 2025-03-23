@@ -6,7 +6,7 @@
 /*   By: tsargsya <tsargsya@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 19:17:32 by tsargsya          #+#    #+#             */
-/*   Updated: 2025/03/22 00:19:38 by tsargsya         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:33:53 by tsargsya         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,16 +102,11 @@ static void	check_args(int argc, char **argv)
 int	main(int argc, char **argv)
 {
 	t_vars	vars;
-	clock_t	start;
-	clock_t	end;
 
-	start = clock();
 	check_args(argc, argv);
 	ft_bzero(&vars, sizeof(t_vars));
 	init_vars(&vars, argv[1]);
 	update_scene(&vars);
-	end = clock();
-	printf("Time taken: %f\n", (double)(end - start) / CLOCKS_PER_SEC);
 	subscribe_to_events(&vars);
 	mlx_loop(vars.mlx);
 	cleanup_and_exit(&vars);
