@@ -4,6 +4,8 @@
 
 **FdF** is a project from 42 School that challenges you to create a 3D wireframe visualization of a landscape based on elevation data. This project will help you delve into graphics programming, matrix transformations, and interactive user input handling.
 
+![Program Screenshot](https://ibb.co/1t8bnyvn)
+
 ## Table of Contents
 
 - [Description](#description)
@@ -37,11 +39,11 @@ The **fdf** project involves reading a map file containing elevation data and di
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/fdf.git
+    git clone https://github.com/tigran-sargsyan-w/FdF.git
     ```
 2. **Navigate to the project directory:**
     ```bash
-    cd fdf
+    cd FdF
     ```
 3. **Compile the project using Make:**
     ```bash
@@ -53,7 +55,7 @@ The **fdf** project involves reading a map file containing elevation data and di
 
 Run the program by providing a map file as an argument:
 ```bash
-./fdf maps/example.fdf
+./fdf maps/42.fdf
 ```
 The program will open a window displaying the 3D wireframe of the provided map. Use the keyboard and mouse to navigate through the landscape.
 
