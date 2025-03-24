@@ -98,6 +98,3 @@ The script will validate:
 - **Map File Format:** Verify that your map files follow the expected format.
 - **Memory Leaks:** Use tools such as Valgrind to detect any memory leaks or errors.
 
-```
-
-Feel free to modify and expand this README as needed for your implementation details or additional features.
