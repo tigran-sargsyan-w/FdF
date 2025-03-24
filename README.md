@@ -4,7 +4,7 @@
 
 **FdF** is a project from 42 School that challenges you to create a 3D wireframe visualization of a landscape based on elevation data. This project will help you delve into graphics programming, matrix transformations, and interactive user input handling.
 
-![Program Screenshot](https://ibb.co/1t8bnyvn)
+![Program Screenshot](https://i.ibb.co/S4RJxYsx/Screenshot-2025-03-24-130214.png)
 
 ## Table of Contents
 
