@@ -1,5 +1,8 @@
 # FdF
 
+✅ **Completed**: Mandatory + Bonus  
+🏅 **Score**: 125/100
+
 ![42 Logo](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXfAZMOWHDQ3DKE63A9jWhIqQaKcKqUIXvzg&s)
 
 **FdF** is a project from 42 School that challenges you to create a 3D wireframe visualization of a landscape based on elevation data. This project will help you delve into graphics programming, matrix transformations, and interactive user input handling.
